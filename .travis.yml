@@ -1,0 +1,24 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: r
+sudo: require
+cache: packages
+
+r_binary_packages:
+  - tibble
+  - dplyr
+  - stringr
+  - stringi
+  - glue
+  - purrr
+  - readr
+  - readxl
+  - crayon
+  - devtools
+  - testthat
+  - covr
+bioc_packages:
+  - Biostrings
+
+after_success:
+  - Rscript -e 'covr::codecov()'

@@ -1,0 +1,54 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# bstringr
+
+[![Travis build status](https://travis-ci.org/araezopsis/bstringr.svg?branch=master)](https://travis-ci.org/araezopsis/bstringr)
+[![Coverage status](https://codecov.io/gh/araezopsis/bstringr/branch/master/graph/badge.svg)](https://codecov.io/github/araezopsis/bstringr?branch=master)
+
+The goal of bstringr is to ...
+
+## Installation
+
+```{r, eval = FALSE, echo = TRUE}
+devtools::install_github("araezopsis/bstringr")
+```
+
+## Usage
+
+```{r}
+library(bstringr)
+```
+
+```{r}
+# bstr object
+temp <- bstr(letters[1:5])
+print.default(temp)
+
+# print method for bstr
+print(temp)
+
+# c method for bstr
+c(temp, temp)
+
+# [ method for bstr
+temp[c(1,2,4)]
+rev(temp)
+head(temp)
+tail(temp)
+```
+
+```{r}
+dstr("ATGC")
+```
