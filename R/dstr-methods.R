@@ -1,19 +1,6 @@
 
 # MW = (numA * 313.2) + (numC * 289.2 ) + (numG * 329.2 )+ (numT * 304.2) - 61.9
 
-#' dstr_remove_all
-#' @importFrom stringr str_remove_all
-#' @param dstrobj dstr class object or character vector
-#' @param pattern regex pattern
-#' @export
-dstr_remove_all <-
-  function(dstrobj, pattern){
-    dstrobj <- as_dstr(dstrobj)
-    n <- names(dstrobj)
-    stringr::str_remove_all(string = dstrobj, pattern = pattern) %>%
-      dstr(n)
-  }
-
 #' Remove stop codon from DNA sequence
 #' @importFrom stringr str_remove_all
 #' @param dstrobj dstr class object or character vector
@@ -21,7 +8,14 @@ dstr_remove_all <-
 #' @export
 dstr_trim_stop <-
   function(dstrobj, stop_codon = "(TAA|TGA|TAG)$"){
-    dstr_remove_all(dstrobj = dstrobj, pattern = stop_codon)
+    dstrobj <- as_dstr(dstrobj)
+    at <- attributes(dstrobj)
+
+    dstrobj <- str_remove_all(dstrobj, pattern = stop_codon)
+
+    attributes(dstrobj) <- at
+    dstrobj
+  }
   }
 
 #' Return the reverse complement sequence
