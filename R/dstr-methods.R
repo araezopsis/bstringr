@@ -43,20 +43,24 @@ dstr_complement <-
 #' @importFrom stringr str_to_lower
 #' @importFrom stringr str_replace_all
 #' @importFrom stringi stri_reverse
-#' @param x x
+#' @param dstrobj dstr object
 #' @export
 dstr_rc <-
-  function(x){
-    dstrobj <- as_dstr(x)
-    n <- names(dstrobj)
-    dstrobj %>%
+  function(dstrobj){
+    dstrobj <- as_dstr(dstrobj)
+    at <- attributes(dstrobj)
+
+    dstrobj <-
+      dstrobj %>%
       str_to_lower() %>%
       str_replace_all("t", "A") %>%
       str_replace_all("a", "T") %>%
       str_replace_all("c", "G") %>%
       str_replace_all("g", "C") %>%
-      stri_reverse() %>%
-      dstr(n)
+      stri_reverse()
+
+    attributes(dstrobj) <- at
+    dstrobj
   }
 
 #' Translate dna -> protein
