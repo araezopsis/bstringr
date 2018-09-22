@@ -92,13 +92,13 @@ dstr_translate <-
 #' @importFrom stringr str_extract
 #' @importFrom purrr map_chr
 #' @importFrom purrr imap
-#' @param x a sequence you want to find orfs
+#' @param dstrobj a sequence you want to find orfs
 #' @param search_none_stop A logical. If TRUE, only search orfs with a stop codon. defalut is FALSE
 #' @export
 dstr_find_orf <-
-  function(x, search_none_stop = F){
+  function(dstrobj, search_none_stop = F){
     . <- NULL
-    dstrobj <- as_dstr(x)
+    dstrobj <- as_dstr(dstrobj)
     n <- names(dstrobj)
 
     search_pattern <-
