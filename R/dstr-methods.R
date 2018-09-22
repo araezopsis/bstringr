@@ -69,19 +69,20 @@ dstr_rc <-
 #' @importFrom stringr str_c
 #' @importFrom purrr map
 #' @importFrom purrr map_chr
-#' @param x sequence you want to translate
+#' @param dstrobj sequence you want to translate
 #' @export
 dstr_translate <-
-  function(x){
-    dstrobj <- as_dstr(x)
-    n <- names(dstrobj)
+  function(dstrobj){
+    dstrobj <- as_dstr(dstrobj)
+    at <- attributes(dstrobj)
+
     pro <-
       str_extract_all(dstrobj, "...") %>%
       map(~ CODONS[.x]) %>%
       map_chr(~ str_c(.x, collapse = ""))
 
     if(any(is.na(pro))) warning("The sequence contained codon miss match.")
-    bstr(pro, n)
+    bstr(pro, at$names)
   }
 
 
