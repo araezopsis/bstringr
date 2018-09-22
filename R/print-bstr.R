@@ -24,12 +24,12 @@ cat_string <-
 #' @param l_seq max length of sequence
 #' @export
 print.bstr <-
-  function(x, ..., n = 6, l_name = 30, l_seq = 50){
+  function(x, ..., n = 6, l_name = 20, l_seq = 60){
     lx <- length(x)
     n <- ifelse(n > lx, lx, n)
 
     cat("class:", paste0(class(x), collapse = ","), "\n")
-    cat("length:", lx, "\n")
+    cat("number of sequences:", lx, "\n")
 
     purrr::walk(
       format_row(x = x, n = n, l_name = l_name, l_seq = l_seq),
@@ -45,8 +45,7 @@ print.bstr <-
 #' @importFrom stringr str_count
 #' @importFrom stringr str_sub
 #' @importFrom stringr str_pad
-#' @param x x
-#' @param l_name l_name
+#' @inheritParams print.bstr
 format_name <-
   function(x, l_name){
     x <- as.character(x)
@@ -64,13 +63,12 @@ format_name <-
 #' @importFrom stringr str_count
 #' @importFrom stringr str_sub
 #' @importFrom stringr str_pad
-#' @param x x
-#' @param l_seq max length of sequence
+#' @inheritParams print.bstr
 format_seq <-
   function(x, l_seq){
     l_seq_half <- (l_seq %/% 2) - 2
 
-    x <- as.character(x)
+    class(x) <- "character"
     x[is.na(x)] <- "<NA>"
     x <-
       ifelse(
@@ -86,16 +84,14 @@ format_seq <-
   }
 
 #' format bstr
-#' @param x x
-#' @param n number of printing elements
-#' @param l_name max length of name
-#' @param l_seq max length of sequence
+#' @inheritParams print.bstr
 format_row <-
   function(x, n, l_name, l_seq){
     x <- x[seq_len(n)]
     paste0(
-      seq_along(x),
-      " ",
+      "[",
+      seq_along(x) %>% {str_pad(., max(nchar(.)), "right")},
+      "] ",
       format_name(names(x), l_name),
       ": ",
       format_seq(x, l_seq)
