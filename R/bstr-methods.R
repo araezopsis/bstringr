@@ -8,12 +8,10 @@
 bstr_sub <-
   function(bstrobj, start = 1L, end = -1L){
     bstrobj <- as_bstr(bstrobj)
-    cl <- class(bstrobj)
-    n <- names(bstrobj)
+    at <- attributes(bstrobj)
 
     bstrobj <- str_sub(bstrobj, start = start, end = end)
-    names(bstrobj) <- n
-    class(bstrobj) <- cl
+
     bstrobj
   }
 
