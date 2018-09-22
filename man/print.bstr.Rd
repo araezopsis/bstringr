@@ -4,7 +4,7 @@
 \alias{print.bstr}
 \title{print biostrings class object}
 \usage{
-\method{print}{bstr}(x, ..., n = 6, l_name = 30, l_seq = 50)
+\method{print}{bstr}(x, ..., n = 6, l_name = 20, l_seq = 60)
 }
 \arguments{
 \item{x}{x}

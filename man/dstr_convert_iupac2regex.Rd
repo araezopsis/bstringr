@@ -4,10 +4,10 @@
 \alias{dstr_convert_iupac2regex}
 \title{convert IUPAC CODE to regular expression}
 \usage{
-dstr_convert_iupac2regex(dna)
+dstr_convert_iupac2regex(dstrobj)
 }
 \arguments{
-\item{dna}{A character}
+\item{dstrobj}{A character}
 }
 \description{
 convert IUPAC CODE to regular expression

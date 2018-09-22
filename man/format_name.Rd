@@ -9,7 +9,7 @@ format_name(x, l_name)
 \arguments{
 \item{x}{x}
 
-\item{l_name}{l_name}
+\item{l_name}{max length of name}
 }
 \description{
 format bstr name

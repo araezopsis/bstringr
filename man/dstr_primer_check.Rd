@@ -4,10 +4,10 @@
 \alias{dstr_primer_check}
 \title{Primer check}
 \usage{
-dstr_primer_check(dna)
+dstr_primer_check(dstrobj)
 }
 \arguments{
-\item{dna}{A primer sequence}
+\item{dstrobj}{A primer sequence}
 }
 \description{
 Primer check

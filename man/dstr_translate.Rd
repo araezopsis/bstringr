@@ -4,10 +4,10 @@
 \alias{dstr_translate}
 \title{Translate dna -> protein}
 \usage{
-dstr_translate(x)
+dstr_translate(dstrobj)
 }
 \arguments{
-\item{x}{sequence you want to translate}
+\item{dstrobj}{sequence you want to translate}
 }
 \description{
 Translate dna -> protein
