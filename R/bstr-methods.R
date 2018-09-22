@@ -57,9 +57,12 @@ bstr_sub_true <-
 bstr_remove_all <-
   function(bstrobj, pattern){
     bstrobj <- as_bstr(bstrobj)
-    n <- names(bstrobj)
-    stringr::str_remove_all(string = bstrobj, pattern = pattern) %>%
-      bstr(n)
+    at <- attributes(bstrobj)
+
+    bstrobj <- str_remove_all(string = bstrobj, pattern = pattern)
+
+    attributes(bstrobj) <- at
+    bstrobj
   }
 
 
