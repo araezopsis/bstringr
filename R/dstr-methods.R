@@ -150,12 +150,12 @@ dstr_find_orf <-
 
 #' convert IUPAC CODE to regular expression
 #' @importFrom stringr str_replace_all
-#' @param dna A character
+#' @param dstrobj A character
 dstr_convert_iupac2regex <-
-  function(dna){
-    dna <- as_dstr(dna)
+  function(dstrobj){
+    dstrobj <- as_dstr(dstrobj)
 
-    dna %>%
+    dstrobj %>%
       str_replace_all("M", "[AC]") %>%
       str_replace_all("R", "[AG]") %>%
       str_replace_all("W", "[AT]") %>%
