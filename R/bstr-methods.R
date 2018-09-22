@@ -40,3 +40,19 @@ bstr_degap <-
   function(bstrobj, gap_chr = "-"){
     bstr_remove_all(bstrobj = bstrobj, pattern = gap_chr)
   }
+
+
+#' bstr_reverse
+#' @importFrom stringi stri_reverse
+#' @param bstrobj bstr class object or character vector
+#' @export
+bstr_reverse <-
+  function(bstrobj){
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    bstrobj <- stri_reverse(bstrobj)
+
+    attributes(bstrobj) <- at
+    bstrobj
+  }
