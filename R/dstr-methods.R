@@ -175,28 +175,25 @@ dstr_convert_iupac2regex <-
 #' @importFrom stringr str_sub
 #' @importFrom stringr str_extract
 #' @importFrom stringr str_detect
-#' @param dna A primer sequence
+#' @param dstrobj A primer sequence
 #' @export
 dstr_primer_check <-
-  function(dna){
-    dna <- as_dstr(dna)
+  function(dstrobj){
+    dstrobj <- as_dstr(dstrobj)
 
     result_list <- list()
-    result_list$primer_seq <- dna
-    result_list$primer_length <- str_count(dna)
+    result_list$primer_seq <- dstrobj
+    result_list$primer_length <- str_count(dstrobj)
 
     # GC%
-    result_list$GC_total <- calc_GCper(dna)
-    half_pos <- (str_count(dna) %/% 2)
-    result_list$GC_firsthalf <-
-      str_sub(dna, 1, half_pos) %>% calc_GCper
-    result_list$GC_secondhalf <-
-      str_sub(dna, half_pos + 1) %>% calc_GCper
+    result_list$GC_total <- calc_GCper(dstrobj)
+    half_pos <- (str_count(dstrobj) %/% 2)
+    result_list$GC_firsthalf <- str_sub(dstrobj, 1, half_pos) %>% calc_GCper
+    result_list$GC_secondhalf <- str_sub(dstrobj, half_pos + 1) %>% calc_GCper
 
-    result_list$is_last_GorC <-
-      str_extract(dna, ".$") %>% str_detect("[GC]")
+    result_list$is_last_GorC <- str_extract(dstrobj, ".$") %>% str_detect("[GC]")
 
-    result_list$Tm <- calc_oligoDNATm(dna)
+    result_list$Tm <- calc_oligoDNATm(dstrobj)
 
     data.frame(result_list, stringsAsFactors = F)
   }
