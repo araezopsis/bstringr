@@ -16,6 +16,27 @@ dstr_trim_stop <-
     attributes(dstrobj) <- at
     dstrobj
   }
+
+#' Return complement sequence
+#' @importFrom stringr str_to_lower
+#' @importFrom stringr str_replace_all
+#' @param dstrobj dstr object
+#' @export
+dstr_complement <-
+  function(dstrobj){
+    dstrobj <- as_dstr(dstrobj)
+    at <- attributes(dstrobj)
+
+    dstrobj <-
+      dstrobj %>%
+      str_to_lower() %>%
+      str_replace_all("t", "A") %>%
+      str_replace_all("a", "T") %>%
+      str_replace_all("c", "G") %>%
+      str_replace_all("g", "C")
+
+    attributes(dstrobj) <- at
+    dstrobj
   }
 
 #' Return the reverse complement sequence
