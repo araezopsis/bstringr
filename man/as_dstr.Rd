@@ -7,9 +7,9 @@
 as_dstr(x, n)
 }
 \arguments{
-\item{x}{Character vector}
+\item{x}{A character vector which convert to a bstr object.}
 
-\item{n}{Character vector}
+\item{n}{A character vector which is name of x.}
 }
 \description{
 Convert character vector to dstr class
