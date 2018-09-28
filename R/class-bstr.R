@@ -30,7 +30,7 @@ bstr <-
 #' @export
 is_bstr <- function(x) inherits(x, "bstr")
 
-#' Convert character vector to biostring class
+#' Convert character vector to bstr class
 #' @inheritParams bstr
 #' @export
 as_bstr <-
