@@ -1,13 +1,13 @@
 
 AA_ALPHABET <-
   c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K",
-    "M", "F", "P", "S", "T", "W", "Y", "V")
+    "M", "F", "P", "S", "T", "W", "Y", "V", "X")
 
 # AA_ALPHABET %>% stringr::str_c(collapse = "") %>% paste0("[", ., "]")
 AA_ALPHABET_REGEX <-
-  "[ARNDCQEGHILKMFPSTWYV\\-\\+\\.\\*]"
+  "[ARNDCQEGHILKMFPSTWYVX\\-\\+\\.\\*]"
 AA_ALPHABET_REGEX_not <-
-  "[^ARNDCQEGHILKMFPSTWYV\\-\\+\\.\\*]"
+  "[^ARNDCQEGHILKMFPSTWYVX\\-\\+\\.\\*]"
 
 #' Constructing astr class object
 #' @importFrom stringr str_detect
