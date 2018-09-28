@@ -5,13 +5,10 @@ bs_c <- c("bstr", "character")
 test_that("bstr()", {
   expect_identical(
     bstr("hoge", ucase = T),
-    structure("HOGE", names = "No name sequence", class = bs_c)
+    structure("HOGE", names = "no name 1", class = bs_c)
   )
 
-  expect_identical(
-    bstr(letters[1:5], c(NA, NULL, "Z")) %>% names,
-    c(NA, "Z", NA, NA, NA)
-  )
+  expect_error(bstr(letters[1:5], c(NA, NULL, "Z")))
 
   # bstr("", "")
   # bstr(letters[1:3], c("", NULL, NA))
@@ -33,10 +30,4 @@ test_that("as_bstr()", {
     as_bstr("HOGE"),
     bstr("hoge")
   )
-  expect_identical(
-    structure("HOGE", class = bs_c) %>%
-      as_bstr(),
-    bstr("hoge", NULL)
-  )
-
 })

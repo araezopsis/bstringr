@@ -9,7 +9,7 @@ DNA_ALPHABET_REGEX <-
 DNA_ALPHABET_REGEX_not <-
   "[^ACGTMRWSYKVHDBN\\-\\+\\.]"
 
-#' Constructing dstr class object
+#' Constructer of the dstr class object
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_to_upper
 #' @param x Character vector

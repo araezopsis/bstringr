@@ -2,17 +2,17 @@
 % Please edit documentation in R/class-bstr.R
 \name{bstr}
 \alias{bstr}
-\title{Constructing bstr class object}
+\title{Constructer of the bstr class object}
 \usage{
 bstr(x, n, ucase = T)
 }
 \arguments{
-\item{x}{Character vector}
+\item{x}{A character vector which convert to a bstr object.}
 
-\item{n}{Character vector}
+\item{n}{A character vector which is name of x.}
 
-\item{ucase}{Character vector}
+\item{ucase}{A logical. If TRUE the x is converted to upper case. (default: TRUE)}
 }
 \description{
-Constructing bstr class object
+Constructer of the bstr class object
 }

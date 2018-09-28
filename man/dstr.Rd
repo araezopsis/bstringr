@@ -2,7 +2,7 @@
 % Please edit documentation in R/class-dstr.R
 \name{dstr}
 \alias{dstr}
-\title{Constructing dstr class object}
+\title{Constructer of the dstr class object}
 \usage{
 dstr(x, n, ucase = T)
 }
@@ -14,5 +14,5 @@ dstr(x, n, ucase = T)
 \item{ucase}{Character vector}
 }
 \description{
-Constructing dstr class object
+Constructer of the dstr class object
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/class-bstr.R
 \name{as_bstr}
 \alias{as_bstr}
-\title{Convert character vector to biostring class}
+\title{Convert character vector to bstr class}
 \usage{
 as_bstr(x, n)
 }
 \arguments{
-\item{x}{Character vector}
+\item{x}{A character vector which convert to a bstr object.}
 
-\item{n}{Character vector}
+\item{n}{A character vector which is name of x.}
 }
 \description{
-Convert character vector to biostring class
+Convert character vector to bstr class
 }

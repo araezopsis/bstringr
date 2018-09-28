@@ -7,7 +7,7 @@ str2 <- c("ATGZ")
 test_that("dstr()", {
   expect_identical(
     dstr(str1, ucase = T),
-    structure(str1, names = "No name sequence", class = ds_c)
+    structure(str1, names = "no name 1", class = ds_c)
   )
 
   expect_error(dstr(str2))
