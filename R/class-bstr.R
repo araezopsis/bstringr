@@ -42,6 +42,11 @@ as_bstr <-
     }
   }
 
+#' Add object attribute
+#' @Params bstrobj bstring object
+#' @Params attr_name A character. attribute names
+#' @Params attrs attrs
+#' @export
 bstr_add_attr_for_object <-
   function(bstrobj, attr_name, attrs){
     bstrobj <- as_bstr(bstrobj)
@@ -57,6 +62,11 @@ bstr_add_attr_for_object <-
     return(bstrobj)
   }
 
+#' Add sequence attribute
+#' @Params bstrobj bstring object
+#' @Params attr_name A character. attribute names
+#' @Params attrs attrs
+#' @export
 bstr_add_attr_for_seq <-
   function(bstrobj, attr_name, attrs){
     bstrobj <- as_bstr(bstrobj)
