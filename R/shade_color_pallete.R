@@ -25,7 +25,7 @@ aa_color  <-
     "P" = "#DC9682",
     "-" = "#00000000", "NA" = "#00000000"
   )
-scales::show_col(aa_color)
+# scales::show_col(aa_color)
 
 dna_color <-
   c(
