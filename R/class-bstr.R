@@ -41,3 +41,35 @@ as_bstr <-
       x
     }
   }
+
+bstr_add_attr_for_object <-
+  function(bstrobj, attr_name, attrs){
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    if(!any(names(at) %in% "attr_obj")){
+      at[["attr_obj"]] <- list()
+    }
+
+    at[["attr_obj"]][[attr_name]] <- attrs
+
+    attributes(bstrobj) <- at
+    return(bstrobj)
+  }
+
+bstr_add_attr_for_seq <-
+  function(bstrobj, attr_name, attrs){
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    if(length(attrs) != length(bstrobj)) stop()
+
+    if(!any(names(at) %in% "attr_seq")){
+      at[["attr_seq"]] <- list()
+    }
+
+    at[["attr_seq"]][[attr_name]] <- attrs
+
+    attributes(bstrobj) <- at
+    return(bstrobj)
+  }
