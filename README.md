@@ -21,74 +21,75 @@ Usage
 library(bstringr)
 ```
 
+### bstr-class object
+
 ``` r
 # bstr object
-temp <- bstr(letters[1:5])
-print.default(temp)
-#> No name sequence No name sequence No name sequence No name sequence 
-#>              "A"              "B"              "C"              "D" 
-#> No name sequence 
-#>              "E" 
-#> attr(,"class")
+(temp <- bstr(letters[1:5]))
+#> class: bstr,character 
+#> number of sequences: 5 
+#> [1]   No name sequence  : A                                                            
+#> [2]   No name sequence  : B                                                            
+#> [3]   No name sequence  : C                                                            
+#> [4]   No name sequence  : D                                                            
+#> [5]   No name sequence  : E
+
+class(temp)
 #> [1] "bstr"      "character"
 
-# print method for bstr
-print(temp)
-#> class: bstr,character 
-#> length: 5 
-#> 1        No name sequence       : A                                                  
-#> 2        No name sequence       : B                                                  
-#> 3        No name sequence       : C                                                  
-#> 4        No name sequence       : D                                                  
-#> 5        No name sequence       : E
-
-# c method for bstr
-c(temp, temp)
-#> class: bstr,character 
-#> length: 10 
-#> 1        No name sequence       : A                                                  
-#> 2        No name sequence       : B                                                  
-#> 3        No name sequence       : C                                                  
-#> 4        No name sequence       : D                                                  
-#> 5        No name sequence       : E                                                  
-#> 6        No name sequence       : A
-
-# [ method for bstr
-temp[c(1,2,4)]
-#> class: bstr,character 
-#> length: 3 
-#> 1        No name sequence       : A                                                  
-#> 2        No name sequence       : B                                                  
-#> 3        No name sequence       : D
-rev(temp)
-#> class: bstr,character 
-#> length: 5 
-#> 1        No name sequence       : E                                                  
-#> 2        No name sequence       : D                                                  
-#> 3        No name sequence       : C                                                  
-#> 4        No name sequence       : B                                                  
-#> 5        No name sequence       : A
-head(temp)
-#> class: bstr,character 
-#> length: 5 
-#> 1        No name sequence       : A                                                  
-#> 2        No name sequence       : B                                                  
-#> 3        No name sequence       : C                                                  
-#> 4        No name sequence       : D                                                  
-#> 5        No name sequence       : E
-tail(temp)
-#> class: bstr,character 
-#> length: 5 
-#> 1        No name sequence       : A                                                  
-#> 2        No name sequence       : B                                                  
-#> 3        No name sequence       : C                                                  
-#> 4        No name sequence       : D                                                  
-#> 5        No name sequence       : E
-```
-
-``` r
+# dstr-class
 dstr("ATGC")
 #> class: dstr,bstr,character 
-#> length: 1 
-#> 1        No name sequence       : ATGC
+#> number of sequences: 1 
+#> [1]   No name sequence  : ATGC
+
+# dstr("E")
+# Error in dstr("E") : input contains NOT DNA character
+```
+
+### FASTA file IO
+
+``` r
+inf <- system.file("extdata", package = "bstringr") %>% list.files(full.names = T)
+readLines(inf)
+#> [1] ">TEST1"        "This is test."
+
+# Read fasta file
+(test_fa <- read_fasta(inf))
+#> class: bstr,character 
+#> number of sequences: 1 
+#> [1]        TEST1        : This is test.
+
+# Write fasta file
+test_fa %>% write_fasta(width = 5) %>% paste(collapse = "\n") %>% cat
+#> >TEST1
+#> This 
+#> is te
+#> st.
+```
+
+### Functions for bstr
+
+``` r
+# Degapping
+test_fa %>% bstr_degap(gap_chr = " ")
+#> class: bstr,character 
+#> number of sequences: 1 
+#> [1]        TEST1        : Thisistest.
+```
+
+### Interface to the Biostrings::BStringSet-class
+
+``` r
+# bstr-class -> BioStringSet-class
+test_fa %>% bstr2BioString()
+#>   A BStringSet instance of length 1
+#>     width seq                                          names               
+#> [1]    13 This is test.                                TEST1
+
+# BioStringSet -> bstr-class
+test_fa %>% bstr2BioString() %>% Bio2bstr()
+#> class: bstr,character 
+#> number of sequences: 1 
+#> [1]        TEST1        : This is test.
 ```

@@ -31,24 +31,44 @@ devtools::install_github("araezopsis/bstringr")
 library(bstringr)
 ```
 
+### bstr-class object
 ```{r}
 # bstr object
-temp <- bstr(letters[1:5])
-print.default(temp)
+(temp <- bstr(letters[1:5]))
 
-# print method for bstr
-print(temp)
+class(temp)
 
-# c method for bstr
-c(temp, temp)
-
-# [ method for bstr
-temp[c(1,2,4)]
-rev(temp)
-head(temp)
-tail(temp)
-```
-
-```{r}
+# dstr-class
 dstr("ATGC")
+
+# dstr("E")
+# Error in dstr("E") : input contains NOT DNA character
 ```
+
+### FASTA file IO
+```{r}
+inf <- system.file("extdata", package = "bstringr") %>% list.files(full.names = T)
+readLines(inf)
+
+# Read fasta file
+(test_fa <- read_fasta(inf))
+
+# Write fasta file
+test_fa %>% write_fasta(width = 5) %>% paste(collapse = "\n") %>% cat
+```
+
+### Functions for bstr
+```{r}
+# Degapping
+test_fa %>% bstr_degap(gap_chr = " ")
+```
+
+### Interface to the Biostrings::BStringSet-class
+```{r Biostrings package}
+# bstr-class -> BioStringSet-class
+test_fa %>% bstr2BioString()
+
+# BioStringSet -> bstr-class
+test_fa %>% bstr2BioString() %>% Bio2bstr()
+```
+
