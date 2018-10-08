@@ -16,7 +16,6 @@ cat_string <-
 
 
 #' print biostrings class object
-#' @importFrom purrr map
 #' @param x x
 #' @param ... ...
 #' @param n number of printing elements
@@ -24,7 +23,7 @@ cat_string <-
 #' @param l_seq max length of sequence
 #' @export
 print.bstr <-
-  function(x, ..., n = 6, l_name = 20, l_seq = 60){
+  function(x, ..., n = 6, l_name = 20, l_seq = 55){
     lx <- length(x)
     n <- ifelse(n > lx, lx, n)
 
@@ -33,7 +32,7 @@ print.bstr <-
 
     purrr::walk(
       format_row(x = x, n = n, l_name = l_name, l_seq = l_seq),
-      ~ cat(., "\n")
+      ~ cat(.x, "\n")
     )
 
     invisible(x)
@@ -46,9 +45,9 @@ print.bstr <-
 #' @importFrom stringr str_sub
 #' @importFrom stringr str_pad
 #' @inheritParams print.bstr
-format_name <-
+format_parts_name <-
   function(x, l_name){
-    x <- as.character(x)
+    class(x) <- "character"
     x[is.na(x)] <- "<NA>"
     x <- ifelse(
       test = str_count(x) > l_name,
@@ -64,7 +63,7 @@ format_name <-
 #' @importFrom stringr str_sub
 #' @importFrom stringr str_pad
 #' @inheritParams print.bstr
-format_seq <-
+format_parts_seq <-
   function(x, l_seq){
     l_seq_half <- (l_seq %/% 2) - 2
 
@@ -83,17 +82,32 @@ format_seq <-
     str_pad(x, l_seq, side = "right")
   }
 
+#' format bstr sequence length
+#' @importFrom stringr str_count
+#' @importFrom stringr str_pad
+#' @inheritParams print.bstr
+format_parts_length <-
+  function(x){
+    class(x) <- "character"
+    x <- str_count(x)
+    x_maxn <- max(str_count(x))
+    str_pad(x, width = x_maxn)
+  }
+
 #' format bstr
 #' @inheritParams print.bstr
 format_row <-
   function(x, n, l_name, l_seq){
+    . <- NULL
     x <- x[seq_len(n)]
     paste0(
       "[",
       seq_along(x) %>% {str_pad(., max(nchar(.)), "right")},
       "] ",
-      format_name(names(x), l_name),
+      format_parts_name(names(x), l_name),
       ": ",
-      format_seq(x, l_seq)
+      format_parts_seq(x, l_seq),
+      " ",
+      format_parts_length(x)
     )
   }
