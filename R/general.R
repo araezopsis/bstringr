@@ -76,15 +76,3 @@ Bio2bstr <-
   }
 # Biostrings::DNAStringSet(c(hoge = "AGAG", hige = "atg")) %>% Bio2bstr()
 
-#' Align dna sequence
-#' @importFrom Biostrings pairwiseAlignment
-#' @param seq1 sequence
-#' @param seq2 sequence
-#' @param rc logical value. if TRUE, the seq2 is aligned after reverse complemented. default is FALSE.
-#' @export
-dstr_align <-
-  function(seq1, seq2, rc = F){
-    seq1 <- as_dstr(seq1) %>% bstr2BioString
-    seq2 <- ifelse(rc, dstr_rc(seq2), as_dstr(seq2)) %>% bstr2BioString
-    pairwiseAlignment(subject = seq1, pattern = seq2, type = "local")
-  }
