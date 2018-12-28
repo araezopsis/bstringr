@@ -43,9 +43,9 @@ as_bstr <-
   }
 
 #' Add object attribute
-#' @Params bstrobj bstring object
-#' @Params attr_name A character. attribute names
-#' @Params attrs attrs
+#' @param bstrobj bstring object
+#' @param attr_name A character. attribute names
+#' @param attrs attrs
 #' @export
 bstr_add_attr_for_object <-
   function(bstrobj, attr_name, attrs){
@@ -63,23 +63,26 @@ bstr_add_attr_for_object <-
   }
 
 #' Add sequence attribute
-#' @Params bstrobj bstring object
-#' @Params attr_name A character. attribute names
-#' @Params attrs attrs
+#' @param bstrobj bstring object
+#' @param attr_name A character. attribute names
+#' @param attrs attrs
 #' @export
 bstr_add_attr_for_seq <-
   function(bstrobj, attr_name, attrs){
     bstrobj <- as_bstr(bstrobj)
     at <- attributes(bstrobj)
 
-    if(length(attrs) != length(bstrobj)) stop()
-
-    if(!any(names(at) %in% "attr_seq")){
-      at[["attr_seq"]] <- list()
-    }
+    if(check_attr_seq(bstrobj, attrs)) stop()
+    if(!any(names(at) %in% "attr_seq")) at[["attr_seq"]] <- list()
 
     at[["attr_seq"]][[attr_name]] <- attrs
-
     attributes(bstrobj) <- at
     return(bstrobj)
+  }
+
+check_attr_seq <-
+  function(bstrobj, attrs){
+    return(!any(
+      (length(bstrobj) != length(attrs))
+    ))
   }

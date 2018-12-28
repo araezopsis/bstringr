@@ -2,9 +2,10 @@
 #' subsetting biostrings class object
 #' @param x x
 #' @param ... ...
+#' @param drop drop
 #' @export
 "[.bstr" <-
-  function(x, ...){
+  function(x, ..., drop = F){
     y <- NextMethod("[", "character")
     class(y) <- class(x)
     y
@@ -17,8 +18,7 @@
   function(...){
     if(all(unlist(lapply(list(...), is_bstr)))){
       y <- c(unlist(lapply(list(...), unclass)))
-      class(y) <- c("bstr", "character")
-      y
+      y <- as_bstr(y)
     }else{
       stop("input contains not bstr class object")
     }
