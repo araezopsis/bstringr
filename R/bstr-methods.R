@@ -1,3 +1,10 @@
+#' bstr_length
+#' @param bstrobj bstr class object or character vector
+#' @export
+bstr_length <-
+  function(bstrobj){
+    nchar(x = bstrobj)
+  }
 
 #' bstr_sub
 #' @importFrom stringr str_sub
