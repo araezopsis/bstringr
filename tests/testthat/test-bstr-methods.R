@@ -14,9 +14,9 @@ test_that("bstr_sub_true()",{
   )
 })
 
-test_that("bstr_remove_all()",{
+test_that("bstr_remove()",{
   expect_equal(
-    bstr_remove_all(c("-ABC--DE-F", "ABCDEFGH"), "[-GH]"),
+    bstr_remove(c("-ABC--DE-F", "ABCDEFGH"), "[-GH]"),
     bstr(c("ABCDEF", "ABCDEF"))
   )
 })

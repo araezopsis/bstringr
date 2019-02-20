@@ -1,14 +1,123 @@
-#' bstr_length
+
+#' Common bstr class augments
 #' @param bstrobj bstr class object or character vector
+#' @param pattern regex pattern
+class_bstr_arg <- function(bstrobj, pattern){}
+
+#' bstr_length
+#' @inheritParams class_bstr_arg
 #' @export
-bstr_length <-
+bstr_length <- function(bstrobj) nchar(x = bstrobj)
+
+#' bstr_to_lower
+#' @importFrom stringr str_to_lower
+#' @inheritParams class_bstr_arg
+#' @export
+bstr_to_lower <-
   function(bstrobj){
-    nchar(x = bstrobj)
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    bstrobj <- str_to_lower(bstrobj)
+
+    attributes(bstrobj) <- at
+    bstrobj
   }
+
+#' bstr_to_upper
+#' @importFrom stringr str_to_upper
+#' @inheritParams class_bstr_arg
+#' @export
+bstr_to_upper <-
+  function(bstrobj){
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    bstrobj <- str_to_upper(bstrobj)
+
+    attributes(bstrobj) <- at
+    bstrobj
+  }
+
+#' bstr_reverse
+#' @importFrom stringi stri_reverse
+#' @inheritParams class_bstr_arg
+#' @export
+bstr_reverse <-
+  function(bstrobj){
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    bstrobj <- stri_reverse(bstrobj)
+
+    attributes(bstrobj) <- at
+    bstrobj
+  }
+
+#' bstr_remove
+#' @importFrom stringr str_remove_all
+#' @inheritParams class_bstr_arg
+#' @export
+bstr_remove <-
+  function(bstrobj, pattern){
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    bstrobj <- str_remove_all(string = bstrobj, pattern = pattern)
+
+    attributes(bstrobj) <- at
+    bstrobj
+  }
+
+#' bstr_remove_num
+#' @inheritParams class_bstr_arg
+#' @export
+bstr_remove_num <-
+  function(bstrobj){
+    bstr_remove(bstrobj = bstrobj, pattern = "[[:digit:]]")
+  }
+
+#' bstr_remove_notalpha
+#' @inheritParams class_bstr_arg
+#' @export
+bstr_remove_notalpha <-
+  function(bstrobj){
+    bstr_remove(bstrobj = bstrobj, pattern = "[^[:alpha:]]")
+  }
+
+#' Remove all gap character
+#' @inheritParams class_bstr_arg
+#' @param gap_chr a gap character
+#' @export
+bstr_degap <-
+  function(bstrobj, gap_chr = "-"){
+    bstr_remove(bstrobj = bstrobj, pattern = gap_chr)
+  }
+
+#' bstr_replace
+#' @importFrom stringr str_replace_all
+#' @inheritParams class_bstr_arg
+#' @param replacement a character vector
+#' @export
+bstr_replace <-
+  function(bstrobj, pattern, replacement){
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    bstrobj <- str_replace_all(
+      string = bstrobj,
+      pattern = pattern,
+      replacement = replacement
+    )
+
+    attributes(bstrobj) <- at
+    bstrobj
+  }
+
 
 #' bstr_sub
 #' @importFrom stringr str_sub
-#' @param bstrobj bstr class object or character vector
+#' @inheritParams class_bstr_arg
 #' @param start start
 #' @param end end
 #' @export
@@ -56,45 +165,5 @@ bstr_sub_true <-
     bstrobj
   }
 
-#' bstr_remove_all
-#' @importFrom stringr str_remove_all
-#' @param bstrobj bstr class object or character vector
-#' @param pattern regex pattern
-#' @export
-bstr_remove_all <-
-  function(bstrobj, pattern){
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
-
-    bstrobj <- str_remove_all(string = bstrobj, pattern = pattern)
-
-    attributes(bstrobj) <- at
-    bstrobj
-  }
 
 
-#' Remove gap character
-#' @importFrom stringr str_remove_all
-#' @param bstrobj bstr class object or character vector
-#' @param gap_chr a gap character
-#' @export
-bstr_degap <-
-  function(bstrobj, gap_chr = "-"){
-    bstr_remove_all(bstrobj = bstrobj, pattern = gap_chr)
-  }
-
-
-#' bstr_reverse
-#' @importFrom stringi stri_reverse
-#' @param bstrobj bstr class object or character vector
-#' @export
-bstr_reverse <-
-  function(bstrobj){
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
-
-    bstrobj <- stri_reverse(bstrobj)
-
-    attributes(bstrobj) <- at
-    bstrobj
-  }
