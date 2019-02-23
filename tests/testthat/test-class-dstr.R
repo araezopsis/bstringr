@@ -1,12 +1,12 @@
 context("test-class-dstr")
 
 ds_c <- c("dstr", "bstr", "character")
-str1 <- c("ATGC")
-str2 <- c("ATGZ")
+str1 <- c("ATgC")
+str2 <- c("ATGz")
 
 test_that("dstr()", {
   expect_identical(
-    dstr(str1, ucase = T),
+    dstr(str1),
     structure(str1, names = "no name 1", class = ds_c)
   )
 

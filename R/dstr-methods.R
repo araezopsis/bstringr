@@ -6,20 +6,26 @@
 #' @param dstrobj dstr class object or character vector
 #' @param stop_codon stop codon pattern
 #' @export
-dstr_trim_stop <-
-  function(dstrobj, stop_codon = "(TAA|TGA|TAG)$"){
+dstr_remove_stop <-
+  function(dstrobj, stop_codon = "(?i)(TAA|TGA|TAG)$"){
     dstrobj <- as_dstr(dstrobj)
     at <- attributes(dstrobj)
 
-    dstrobj <- str_remove_all(dstrobj, pattern = stop_codon)
+    dstrobj <- bstr_remove(dstrobj, pattern = stop_codon)
 
     attributes(dstrobj) <- at
     dstrobj
   }
 
 #' Return complement sequence
+#' @importFrom stringr str_extract_all
+#' @importFrom stringr str_detect
 #' @importFrom stringr str_to_lower
+#' @importFrom stringr str_to_upper
 #' @importFrom stringr str_replace_all
+#' @importFrom purrr map
+#' @importFrom purrr map2
+#' @importFrom purrr map_chr
 #' @param dstrobj dstr object
 #' @export
 dstr_complement <-
@@ -27,40 +33,54 @@ dstr_complement <-
     dstrobj <- as_dstr(dstrobj)
     at <- attributes(dstrobj)
 
+    dstrobj_l <- dstrobj %>% str_extract_all(".")
+    lower_c <- dstrobj_l %>% map(~ str_detect(.x, "[[:lower:]]"))
+    upper_c <- dstrobj_l %>% map(~ str_detect(.x, "[[:upper:]]"))
+
+    comp_map <- c("a" = "T", "t" = "A", "g" = "C", "c" = "G")
+    dstrobj <-
+      str_to_lower(dstrobj) %>%
+      str_replace_all(comp_map)
+
     dstrobj <-
       dstrobj %>%
-      str_to_lower() %>%
-      str_replace_all("t", "A") %>%
-      str_replace_all("a", "T") %>%
-      str_replace_all("c", "G") %>%
-      str_replace_all("g", "C")
+      str_extract_all(".") %>%
+      map2(lower_c, ~ ifelse(.y, str_to_lower(.x), .x)) %>%
+      map2(upper_c, ~ ifelse(.y, str_to_upper(.x), .x)) %>%
+      map_chr(~ paste0(.x, collapse = ""))
+
+    attributes(dstrobj) <- at
+    dstrobj
+  }
+
+#' Fast version of dstr_complement with no case conservation
+#' @importFrom stringr str_to_lower
+#' @importFrom stringr str_to_upper
+#' @importFrom stringr str_replace_all
+#' @param dstrobj dstr object
+#' @export
+dstr_complement_fast <-
+  function(dstrobj){
+    dstrobj <- as_dstr(dstrobj)
+    at <- attributes(dstrobj)
+
+    comp_map <- c("a" = "T", "t" = "A", "g" = "C", "c" = "G")
+    dstrobj <-
+      str_to_lower(dstrobj) %>%
+      str_replace_all(comp_map) %>%
+      str_to_upper()
 
     attributes(dstrobj) <- at
     dstrobj
   }
 
 #' Return the reverse complement sequence
-#' @importFrom stringr str_to_lower
-#' @importFrom stringr str_replace_all
-#' @importFrom stringi stri_reverse
 #' @param dstrobj dstr object
 #' @export
-dstr_rc <-
+dstr_rev_comp <-
   function(dstrobj){
-    dstrobj <- as_dstr(dstrobj)
-    at <- attributes(dstrobj)
-
-    dstrobj <-
-      dstrobj %>%
-      str_to_lower() %>%
-      str_replace_all("t", "A") %>%
-      str_replace_all("a", "T") %>%
-      str_replace_all("c", "G") %>%
-      str_replace_all("g", "C") %>%
-      stri_reverse()
-
-    attributes(dstrobj) <- at
-    dstrobj
+    dstr_complement(dstrobj) %>%
+      bstr_reverse()
   }
 
 #' Translate dna -> protein
@@ -73,16 +93,17 @@ dstr_rc <-
 #' @export
 dstr_translate <-
   function(dstrobj){
-    dstrobj <- as_dstr(dstrobj)
+    dstrobj <- as_dstr(dstrobj) %>% bstr_to_upper()
     at <- attributes(dstrobj)
 
-    pro <-
+    pep <-
       str_extract_all(dstrobj, "...") %>%
       map(~ CODONS[.x]) %>%
       map_chr(~ str_c(.x, collapse = ""))
+    if(any(is.na(pep))) warning("The sequence contained codon miss match.")
 
-    if(any(is.na(pro))) warning("The sequence contained codon miss match.")
-    bstr(pro, at$names)
+    attributes(pep) <- at
+    as_astr(pep)
   }
 
 

@@ -4,14 +4,14 @@
 \alias{bstr}
 \title{Constructer of the bstr class object}
 \usage{
-bstr(x, n, ucase = T)
+bstr(x, n, ucase = F)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
 
 \item{n}{A character vector which is name of x.}
 
-\item{ucase}{A logical. If TRUE the x is converted to upper case. (default: TRUE)}
+\item{ucase}{A logical. If TRUE the x is converted to upper case. (default: FALSE)}
 }
 \description{
 Constructer of the bstr class object

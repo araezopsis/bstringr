@@ -7,7 +7,7 @@
 is_dstr(x)
 }
 \arguments{
-\item{x}{x}
+\item{x}{A character vector which convert to a bstr object.}
 }
 \description{
 check class

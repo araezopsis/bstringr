@@ -18,7 +18,7 @@ bstr_align <-
 dstr_align <-
   function(seq1, seq2, rc = F){
     seq1 <- as_dstr(seq1) %>% bstr2BioString
-    seq2 <- ifelse(rc, dstr_rc(seq2), as_dstr(seq2)) %>% bstr2BioString
+    seq2 <- ifelse(rc, dstr_rev_comp(seq2), as_dstr(seq2)) %>% bstr2BioString
     Biostrings::pairwiseAlignment(subject = seq1, pattern = seq2, type = "local")
   }
 
@@ -53,7 +53,7 @@ dstr_multi_align <-
     li <- list()
     for(i in names(queries)){
       align_f <- bstr_align(subject, queries[i])
-      align_r <- bstr_align(subject, dstr_rc(queries[i]))
+      align_r <- bstr_align(subject, dstr_rev_comp(queries[i]))
       score_f <- Biostrings::score(align_f) %>% as.integer()
       score_r <- Biostrings::score(align_r) %>% as.integer()
 

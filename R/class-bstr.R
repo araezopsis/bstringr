@@ -1,12 +1,20 @@
 
-#' Constructer of the bstr class object
-#' @importFrom stringr str_to_upper
+#' Common bstr class augments
 #' @param x A character vector which convert to a bstr object.
 #' @param n A character vector which is name of x.
-#' @param ucase A logical. If TRUE the x is converted to upper case. (default: TRUE)
+#' @param ucase A logical. If TRUE the x is converted to upper case. (default: FALSE)
+#'
+#' @param bstrobj bstr class object or character vector
+#' @param pattern regex pattern
+#' @param case_sensitive sensitive to case in pattern (default:FALSE)
+class_bstr_arg <- function(x, n, ucase, bstrobj, pattern, case_sensitive){}
+
+#' Constructer of the bstr class object
+#' @importFrom stringr str_to_upper
+#' @inheritParams class_bstr_arg
 #' @export
 bstr <-
-  function(x, n, ucase = T){
+  function(x, n, ucase = F){
     if(!is.character(x)) stop("x must be a character vector.")
 
     if(missing(n)){
@@ -26,17 +34,17 @@ bstr <-
   }
 
 #' check class
-#' @param x x
+#' @inheritParams class_bstr_arg
 #' @export
 is_bstr <- function(x) inherits(x, "bstr")
 
 #' Convert character vector to bstr class
-#' @inheritParams bstr
+#' @inheritParams class_bstr_arg
 #' @export
 as_bstr <-
-  function(x, n){
+  function(x, n, ucase = FALSE){
     if(!is_bstr(x)){
-      bstr(x, n)
+      bstr(x, n, ucase)
     }else{
       x
     }

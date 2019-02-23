@@ -19,18 +19,17 @@ test_that("bstr_remove()",{
     bstr_remove(c("-ABC--DE-F", "ABCDEFGH"), "[-GH]"),
     bstr(c("ABCDEF", "ABCDEF"))
   )
+
+  expect_equal(
+    bstr_remove("AaBb", "[Ab]", case_sensitive = T),
+    bstr("aB")
+  )
 })
 
-test_that("bstr_degap()",{
+test_that("bstr_remove_gap()",{
   expect_equal(
-    bstr_degap(c("-ABC--DE-F", "ABCDEFGH")),
+    bstr_remove_gap(c("-ABC--DE-F", "ABCDEFGH")),
     bstr(c("ABCDEF", "ABCDEFGH"))
   )
 })
 
-test_that("bstr_reverse()",{
-  expect_equal(
-    bstr_reverse(dstr(c("ATG-C", "GT--C"))),
-    dstr(c("C-GTA", "C--TG"))
-  )
-})
