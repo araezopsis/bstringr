@@ -3,7 +3,7 @@
 bstringr
 ========
 
-[![Travis build status](https://travis-ci.org/araezopsis/bstringr.svg?branch=master)](https://travis-ci.org/araezopsis/bstringr) [![Coverage status](https://codecov.io/gh/araezopsis/bstringr/branch/master/graph/badge.svg)](https://codecov.io/github/araezopsis/bstringr?branch=master)
+[![Travis build status](https://travis-ci.org/t-arae/bstringr.svg?branch=master)](https://travis-ci.org/t-arae/bstringr) [![Coverage status](https://codecov.io/gh/t-arae/bstringr/branch/master/graph/badge.svg)](https://codecov.io/github/t-arae/bstringr?branch=master)
 
 The goal of bstringr is to ...
 
