@@ -1,7 +1,12 @@
 
+#' bstr_length
+#' @inheritParams class_bstr_arg
+#' @export
+bstr_length <- function(bstrobj) nchar(x = bstrobj)
+
 #' bstr_sub
 #' @importFrom stringr str_sub
-#' @param bstrobj bstr class object or character vector
+#' @inheritParams class_bstr_arg
 #' @param start start
 #' @param end end
 #' @export
@@ -19,7 +24,7 @@ bstr_sub <-
 #' bstr_sub_true
 #' @importFrom stringr str_sub
 #' @inheritParams bstr_sub
-#' @param i index
+#' @param i sequence index
 #' @param gap_chr gap character
 #' @export
 bstr_sub_true <-
@@ -49,45 +54,5 @@ bstr_sub_true <-
     bstrobj
   }
 
-#' bstr_remove_all
-#' @importFrom stringr str_remove_all
-#' @param bstrobj bstr class object or character vector
-#' @param pattern regex pattern
-#' @export
-bstr_remove_all <-
-  function(bstrobj, pattern){
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
-
-    bstrobj <- str_remove_all(string = bstrobj, pattern = pattern)
-
-    attributes(bstrobj) <- at
-    bstrobj
-  }
 
 
-#' Remove gap character
-#' @importFrom stringr str_remove_all
-#' @param bstrobj bstr class object or character vector
-#' @param gap_chr a gap character
-#' @export
-bstr_degap <-
-  function(bstrobj, gap_chr = "-"){
-    bstr_remove_all(bstrobj = bstrobj, pattern = gap_chr)
-  }
-
-
-#' bstr_reverse
-#' @importFrom stringi stri_reverse
-#' @param bstrobj bstr class object or character vector
-#' @export
-bstr_reverse <-
-  function(bstrobj){
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
-
-    bstrobj <- stri_reverse(bstrobj)
-
-    attributes(bstrobj) <- at
-    bstrobj
-  }

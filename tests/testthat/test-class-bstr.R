@@ -27,7 +27,7 @@ test_that("is_bstr()", {
 
 test_that("as_bstr()", {
   expect_identical(
-    as_bstr("HOGE"),
+    as_bstr("hoge"),
     bstr("hoge")
   )
 })

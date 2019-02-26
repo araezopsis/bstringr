@@ -2,9 +2,10 @@
 #' subsetting biostrings class object
 #' @param x x
 #' @param ... ...
+#' @param drop drop
 #' @export
 "[.bstr" <-
-  function(x, ...){
+  function(x, ..., drop = F){
     y <- NextMethod("[", "character")
     class(y) <- class(x)
     y
@@ -17,8 +18,7 @@
   function(...){
     if(all(unlist(lapply(list(...), is_bstr)))){
       y <- c(unlist(lapply(list(...), unclass)))
-      class(y) <- c("bstr", "character")
-      y
+      y <- as_bstr(y)
     }else{
       stop("input contains not bstr class object")
     }
@@ -76,15 +76,3 @@ Bio2bstr <-
   }
 # Biostrings::DNAStringSet(c(hoge = "AGAG", hige = "atg")) %>% Bio2bstr()
 
-#' Align dna sequence
-#' @importFrom Biostrings pairwiseAlignment
-#' @param seq1 sequence
-#' @param seq2 sequence
-#' @param rc logical value. if TRUE, the seq2 is aligned after reverse complemented. default is FALSE.
-#' @export
-dstr_align <-
-  function(seq1, seq2, rc = F){
-    seq1 <- as_dstr(seq1) %>% bstr2BioString
-    seq2 <- ifelse(rc, dstr_rc(seq2), as_dstr(seq2)) %>% bstr2BioString
-    pairwiseAlignment(subject = seq1, pattern = seq2, type = "local")
-  }

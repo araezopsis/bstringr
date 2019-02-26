@@ -6,20 +6,26 @@
 #' @param dstrobj dstr class object or character vector
 #' @param stop_codon stop codon pattern
 #' @export
-dstr_trim_stop <-
-  function(dstrobj, stop_codon = "(TAA|TGA|TAG)$"){
+dstr_remove_stop <-
+  function(dstrobj, stop_codon = "(?i)(TAA|TGA|TAG)$"){
     dstrobj <- as_dstr(dstrobj)
     at <- attributes(dstrobj)
 
-    dstrobj <- str_remove_all(dstrobj, pattern = stop_codon)
+    dstrobj <- bstr_remove(dstrobj, pattern = stop_codon)
 
     attributes(dstrobj) <- at
     dstrobj
   }
 
 #' Return complement sequence
+#' @importFrom stringr str_extract_all
+#' @importFrom stringr str_detect
 #' @importFrom stringr str_to_lower
+#' @importFrom stringr str_to_upper
 #' @importFrom stringr str_replace_all
+#' @importFrom purrr map
+#' @importFrom purrr map2
+#' @importFrom purrr map_chr
 #' @param dstrobj dstr object
 #' @export
 dstr_complement <-
@@ -27,40 +33,54 @@ dstr_complement <-
     dstrobj <- as_dstr(dstrobj)
     at <- attributes(dstrobj)
 
+    dstrobj_l <- dstrobj %>% str_extract_all(".")
+    lower_c <- dstrobj_l %>% map(~ str_detect(.x, "[[:lower:]]"))
+    upper_c <- dstrobj_l %>% map(~ str_detect(.x, "[[:upper:]]"))
+
+    comp_map <- c("a" = "T", "t" = "A", "g" = "C", "c" = "G")
+    dstrobj <-
+      str_to_lower(dstrobj) %>%
+      str_replace_all(comp_map)
+
     dstrobj <-
       dstrobj %>%
-      str_to_lower() %>%
-      str_replace_all("t", "A") %>%
-      str_replace_all("a", "T") %>%
-      str_replace_all("c", "G") %>%
-      str_replace_all("g", "C")
+      str_extract_all(".") %>%
+      map2(lower_c, ~ ifelse(.y, str_to_lower(.x), .x)) %>%
+      map2(upper_c, ~ ifelse(.y, str_to_upper(.x), .x)) %>%
+      map_chr(~ paste0(.x, collapse = ""))
+
+    attributes(dstrobj) <- at
+    dstrobj
+  }
+
+#' Fast version of dstr_complement with no case conservation
+#' @importFrom stringr str_to_lower
+#' @importFrom stringr str_to_upper
+#' @importFrom stringr str_replace_all
+#' @param dstrobj dstr object
+#' @export
+dstr_complement_fast <-
+  function(dstrobj){
+    dstrobj <- as_dstr(dstrobj)
+    at <- attributes(dstrobj)
+
+    comp_map <- c("a" = "T", "t" = "A", "g" = "C", "c" = "G")
+    dstrobj <-
+      str_to_lower(dstrobj) %>%
+      str_replace_all(comp_map) %>%
+      str_to_upper()
 
     attributes(dstrobj) <- at
     dstrobj
   }
 
 #' Return the reverse complement sequence
-#' @importFrom stringr str_to_lower
-#' @importFrom stringr str_replace_all
-#' @importFrom stringi stri_reverse
 #' @param dstrobj dstr object
 #' @export
-dstr_rc <-
+dstr_rev_comp <-
   function(dstrobj){
-    dstrobj <- as_dstr(dstrobj)
-    at <- attributes(dstrobj)
-
-    dstrobj <-
-      dstrobj %>%
-      str_to_lower() %>%
-      str_replace_all("t", "A") %>%
-      str_replace_all("a", "T") %>%
-      str_replace_all("c", "G") %>%
-      str_replace_all("g", "C") %>%
-      stri_reverse()
-
-    attributes(dstrobj) <- at
-    dstrobj
+    dstr_complement(dstrobj) %>%
+      bstr_reverse()
   }
 
 #' Translate dna -> protein
@@ -73,21 +93,23 @@ dstr_rc <-
 #' @export
 dstr_translate <-
   function(dstrobj){
-    dstrobj <- as_dstr(dstrobj)
+    dstrobj <- as_dstr(dstrobj) %>% bstr_to_upper()
     at <- attributes(dstrobj)
 
-    pro <-
+    pep <-
       str_extract_all(dstrobj, "...") %>%
       map(~ CODONS[.x]) %>%
       map_chr(~ str_c(.x, collapse = ""))
+    if(any(is.na(pep))) warning("The sequence contained codon miss match.")
 
-    if(any(is.na(pro))) warning("The sequence contained codon miss match.")
-    bstr(pro, at$names)
+    attributes(pep) <- at
+    as_astr(pep)
   }
 
 
 #' Find open reading frames from DNA
 #' @importFrom stringr str_locate_all
+#' @importFrom stringr str_locate
 #' @importFrom stringr str_sub
 #' @importFrom stringr str_extract
 #' @importFrom purrr map_chr
@@ -96,7 +118,7 @@ dstr_translate <-
 #' @param search_none_stop A logical. If TRUE, only search orfs with a stop codon. defalut is FALSE
 #' @export
 dstr_find_orf <-
-  function(dstrobj, search_none_stop = F){
+  function(dstrobj, search_none_stop = T){
     . <- NULL
     dstrobj <- as_dstr(dstrobj)
     n <- names(dstrobj)
@@ -109,35 +131,38 @@ dstr_find_orf <-
       )
 
     start_pos_li <-
-      str_locate_all(dstrobj, "ATG") %>%
+      str_locate_all(dstrobj, "ATG(.{3})*?((.{1,2})$|TAG|TGA|TAA)") %>%
       map(~ .x[,1])
 
     orf_li <- list()
     for(i in seq_along(start_pos_li)){
       if(length(start_pos_li[[i]]) > 0){
-        orf <-
-          map_chr(.x = start_pos_li[[i]],
+        orf_end <-
+          map_int(.x = start_pos_li[[i]],
                   .f = function(pos){
                     str_sub(dstrobj[i], pos) %>%
                       str_extract("ATG(.{3})*") %>%
-                      str_extract(search_pattern)
+                      str_locate(search_pattern) %>%
+                      .[1L, 2L]
                   })
 
         # Exclude NA character from orf
-        orf <- orf[!is.na(orf)]
+        not_na_orf_end <- !is.na(orf_end)
 
         # Naming orf
-        lorf <- length(orf)
+        lorf <- length(orf_end)
         if(lorf > 1L){
-          names(orf) <- str_c(" ORF", seq_len(lorf))
+          names(orf_end) <- str_c("ORF", seq_len(lorf))
         } else if(lorf == 1L){
-          names(orf) <- "ORF"
+          names(orf_end) <- "ORF"
         }
 
         orf_li[[i]] <-
           list(
             "seq_name" = n[i],
-            "orf" = dstr(orf)
+            "orf_name" = names(orf_end)[not_na_orf_end],
+            "orf_start" = start_pos_li[[i]][not_na_orf_end],
+            "orf_end" = start_pos_li[[i]][not_na_orf_end] + orf_end[not_na_orf_end] - 1L
           )
       }
     }
