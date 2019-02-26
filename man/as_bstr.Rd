@@ -4,12 +4,14 @@
 \alias{as_bstr}
 \title{Convert character vector to bstr class}
 \usage{
-as_bstr(x, n)
+as_bstr(x, n, ucase = FALSE)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
 
 \item{n}{A character vector which is name of x.}
+
+\item{ucase}{A logical. If TRUE the x is converted to upper case. (default: FALSE)}
 }
 \description{
 Convert character vector to bstr class
