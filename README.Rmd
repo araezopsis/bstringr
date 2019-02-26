@@ -60,7 +60,7 @@ test_fa %>% write_fasta(width = 5) %>% paste(collapse = "\n") %>% cat
 ### Functions for bstr
 ```{r}
 # Degapping
-test_fa %>% bstr_degap(gap_chr = " ")
+test_fa %>% bstr_remove_gap(gap_chr = " ")
 ```
 
 ### Interface to the Biostrings::BStringSet-class
@@ -72,3 +72,90 @@ test_fa %>% bstr2BioString()
 test_fa %>% bstr2BioString() %>% Bio2bstr()
 ```
 
+
+```{r, echo=F}
+# ### 関数対応状況
+# 
+# 第一引数は文字列ベクトル型のオブジェクト。複数の文字列に対応
+# bstr(), dstr(), astr()
+# as_bstr(), as_dstr(), as_astr()
+# 
+# 第一引数は任意のオブジェクト。
+# is_bstr(), is_dstr(), is_astr()
+# 
+# 
+# ### IO
+# 
+# 
+# ### bstr-class
+# calculate property
+# * bstr_length() [OK] 文字数をカウント
+# * bstr_composition | base_composition | residue_composition
+# * bstr_info
+# * bstr_detect() detect pattern from strings
+# * bstr_count() count pattern from strings
+# * bstr_locate() locate pattern from strings
+# * bstr_extract() extract pattern from strings
+# 
+# transform
+# * bstr_to_lower [OK] 小文字に変換
+# * bstr_to_upper [OK] 大文字に変換
+# * bstr_switch_case [OK] 大文字を小文字に，小文字を大文字に変換
+# * bstr_reverse [OK] 逆順
+# 
+# remove / replace
+# * bstr_remove [OK] 文字列から任意の文字(列)を除く
+# * bstr_remove_num [OK] 文字列から数字を除く
+# * bstr_remove_notalpha [OK] 文字列からアルファベット以外を除く
+# * bstr_remove_gap [OK] gap文字を除く
+# * replace [OK] 文字列内の文字(列)を置換する
+# * trim_left
+# * trim_right
+# 
+# subsequence
+# * sub
+# * sub_truepos
+# 
+# * bstr_sort() sort bstr strings
+# 
+# * align
+# * calc_identity
+# * calc_conservation
+# * calc_consensus | calc_PSSM
+# * calc_occupancy
+# 
+# * bstr2BString
+# * BString2bstr
+# 
+# ### dstr-class
+# * to_rna
+# * to_dna
+# 
+# * dstr_complement [OK]
+# * dstr_complement_fast [OK]
+# * dstr_rev_comp [OK]
+# * dstr_remove_stop [OK]
+# * dstr_translate [OK]
+# 
+# * detect_orf
+# * count_orf
+# * locate_orf
+# * extract_orf
+# 
+# * calc_molweight
+# * calc_Tm
+# 
+# * restriction_map
+# * digest
+# * ligate
+# 
+# * pcr
+# * calc_gcper
+# * primer_check
+# * topo
+# * lr
+# * topo_lr
+# 
+# ### astr-class
+# * calc_molweight
+```

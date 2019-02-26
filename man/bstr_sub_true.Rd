@@ -9,7 +9,7 @@ bstr_sub_true(bstrobj, i, start, end, gap_chr = "-")
 \arguments{
 \item{bstrobj}{bstr class object or character vector}
 
-\item{i}{index}
+\item{i}{sequence index}
 
 \item{start}{start}
 

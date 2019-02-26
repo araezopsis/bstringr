@@ -4,7 +4,7 @@
 \alias{dstr_find_orf}
 \title{Find open reading frames from DNA}
 \usage{
-dstr_find_orf(dstrobj, search_none_stop = F)
+dstr_find_orf(dstrobj, search_none_stop = T)
 }
 \arguments{
 \item{dstrobj}{a sequence you want to find orfs}

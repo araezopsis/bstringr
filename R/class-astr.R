@@ -20,7 +20,7 @@ astr <-
   function(x, n, ucase = T){
     a <- bstr(x, n, ucase)
     if(any(str_detect(str_to_upper(a), AA_ALPHABET_REGEX_not)))
-      stop("input contains NOT Amino Acid character")
+      stop("input contains invalid Amino Acid character")
     class(a) <- c("astr", class(a))
     a
   }

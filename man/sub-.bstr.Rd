@@ -4,12 +4,14 @@
 \alias{[.bstr}
 \title{subsetting biostrings class object}
 \usage{
-\method{[}{bstr}(x, ...)
+\method{[}{bstr}(x, ..., drop = F)
 }
 \arguments{
 \item{x}{x}
 
 \item{...}{...}
+
+\item{drop}{drop}
 }
 \description{
 subsetting biostrings class object
