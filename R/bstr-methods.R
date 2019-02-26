@@ -1,8 +1,9 @@
 
 #' bstr_length
+#' @importFrom stringr str_count
 #' @inheritParams class_bstr_arg
 #' @export
-bstr_length <- function(bstrobj) nchar(x = bstrobj)
+bstr_length <- function(bstrobj) str_count(bstrobj, ".")
 
 #' bstr_sub
 #' @importFrom stringr str_sub

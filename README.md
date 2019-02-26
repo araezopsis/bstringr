@@ -28,11 +28,11 @@ library(bstringr)
 (temp <- bstr(letters[1:5]))
 #> class: bstr,character 
 #> number of sequences: 5 
-#> [1]      no name 1      : A                                                       1 
-#> [2]      no name 2      : B                                                       1 
-#> [3]      no name 3      : C                                                       1 
-#> [4]      no name 4      : D                                                       1 
-#> [5]      no name 5      : E                                                       1
+#> [1]      no name 1      : a                                                       1 
+#> [2]      no name 2      : b                                                       1 
+#> [3]      no name 3      : c                                                       1 
+#> [4]      no name 4      : d                                                       1 
+#> [5]      no name 5      : e                                                       1
 
 class(temp)
 #> [1] "bstr"      "character"
@@ -52,30 +52,71 @@ dstr("ATGC")
 ``` r
 inf <- system.file("extdata", package = "bstringr") %>% list.files(full.names = T)
 readLines(inf)
-#> [1] ">TEST1"        "This is test."
+#>  [1] ">TEST"                                                                       
+#>  [2] "This is test."                                                               
+#>  [3] ""                                                                            
+#>  [4] ">test1"                                                                      
+#>  [5] "AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA"
+#>  [6] ""                                                                            
+#>  [7] ">test2"                                                                      
+#>  [8] "AAAAAAAAAA"                                                                  
+#>  [9] "AAAAAAAAAA"                                                                  
+#> [10] ""                                                                            
+#> [11] ">test3"                                                                      
+#> [12] "ATGC"
 
 # Read fasta file
 (test_fa <- read_fasta(inf))
 #> class: bstr,character 
-#> number of sequences: 1 
-#> [1]        TEST1        : This is test.                                           13
+#> number of sequences: 4 
+#> [1]         TEST        : This is test.                                           13 
+#> [2]        test1        : AAAAAAAAAA AAAAAAAAAA AAA....AAA AAAAAAAAAA AAAAAAAAAA  76 
+#> [3]        test2        : AAAAAAAAAAAAAAAAAAAA                                    20 
+#> [4]        test3        : ATGC                                                     4
 
 # Write fasta file
 test_fa %>% write_fasta(width = 5) %>% paste(collapse = "\n") %>% cat
-#> >TEST1
+#> >TEST
 #> This 
 #> is te
 #> st.
+#> >test1
+#> AAAAA
+#> AAAAA
+#>  AAAA
+#> AAAAA
+#> A AAA
+#> AAAAA
+#> AA AA
+#> AAAAA
+#> AAA A
+#> AAAAA
+#> AAAA 
+#> AAAAA
+#> AAAAA
+#>  AAAA
+#> AAAAA
+#> A
+#> >test2
+#> AAAAA
+#> AAAAA
+#> AAAAA
+#> AAAAA
+#> >test3
+#> ATGC
 ```
 
 ### Functions for bstr
 
 ``` r
 # Degapping
-test_fa %>% bstr_degap(gap_chr = " ")
+test_fa %>% bstr_remove_gap(gap_chr = " ")
 #> class: bstr,character 
-#> number of sequences: 1 
-#> [1]        TEST1        : Thisistest.                                             11
+#> number of sequences: 4 
+#> [1]         TEST        : Thisistest.                                             11 
+#> [2]        test1        : AAAAAAAAAAAAAAAAAAAAAAAAA....AAAAAAAAAAAAAAAAAAAAAAAAA  70 
+#> [3]        test2        : AAAAAAAAAAAAAAAAAAAA                                    20 
+#> [4]        test3        : ATGC                                                     4
 ```
 
 ### Interface to the Biostrings::BStringSet-class
@@ -83,85 +124,19 @@ test_fa %>% bstr_degap(gap_chr = " ")
 ``` r
 # bstr-class -> BioStringSet-class
 test_fa %>% bstr2BioString()
-#>   A BStringSet instance of length 1
+#>   A BStringSet instance of length 4
 #>     width seq                                          names               
-#> [1]    13 This is test.                                TEST1
+#> [1]    13 This is test.                                TEST
+#> [2]    76 AAAAAAAAAA AAAAAAAAAA...AAAAAAAAA AAAAAAAAAA test1
+#> [3]    20 AAAAAAAAAAAAAAAAAAAA                         test2
+#> [4]     4 ATGC                                         test3
 
 # BioStringSet -> bstr-class
 test_fa %>% bstr2BioString() %>% Bio2bstr()
 #> class: bstr,character 
-#> number of sequences: 1 
-#> [1]        TEST1        : This is test.                                           13
+#> number of sequences: 4 
+#> [1]         TEST        : This is test.                                           13 
+#> [2]        test1        : AAAAAAAAAA AAAAAAAAAA AAA....AAA AAAAAAAAAA AAAAAAAAAA  76 
+#> [3]        test2        : AAAAAAAAAAAAAAAAAAAA                                    20 
+#> [4]        test3        : ATGC                                                     4
 ```
-
-### 関数対応状況
-
-第一引数は文字列ベクトル型のオブジェクト。複数の文字列に対応 bstr(), dstr(), astr() as\_bstr(), as\_dstr(), as\_astr()
-
-第一引数は任意のオブジェクト。 is\_bstr(), is\_dstr(), is\_astr()
-
--   \[ \] hage
--   \[x\] hige
-
-### IO
-
-### bstr-class
-
--   bstr\_length() \[OK\]
--   bstr\_sort() sort bstr strings
--   bstr\_detect() detect pattern from strings
--   bstr\_count() count pattern from strings
--   bstr\_locate() locate pattern from strings
--   bstr\_extract() extract pattern from strings
--   info
--   to\_lower小文字
--   to\_upper 大文字
--   toggle\_case
--   reverse 逆順
--   remove 文字列から任意の文字(列)を除く
--   remove\_number 文字列から数字を除く
--   remove\_notalpha 文字列からアルファベット以外を除く
--   replace 文字列から任意の文字(列)を除く
--   composition | base\_composition | residue\_composition
--   sub
--   trim\_left
--   trim\_right
-
--   align
--   sub\_aligned
--   degap | remove\_gap
--   calc\_identity
--   calc\_conservation
--   calc\_consensus | calc\_PSSM
--   calc\_occupancy
-
--   bstr2BString
--   BString2bstr
-
-### dstr-class
-
--   to\_rna
--   to\_dna
--   complement
--   reverse\_complement
--   translate
--   trim\_stop
--   find\_orf
-
--   calc\_molweight
--   calc\_Tm
-
--   restriction\_map
--   digest
--   ligate
-
--   pcr
--   calc\_gcper
--   primer\_check
--   topo
--   lr
--   topo\_lr
-
-### astr-class
-
--   calc\_molweight
