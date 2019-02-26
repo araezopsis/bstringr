@@ -11,7 +11,8 @@ Installation
 ------------
 
 ``` r
-devtools::install_github("araezopsis/bstringr")
+# install.packages("devtools")
+devtools::install_github("t-arae/bstringr")
 ```
 
 Usage
