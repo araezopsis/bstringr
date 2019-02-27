@@ -14,15 +14,16 @@ knitr::opts_chunk$set(
 ```
 # bstringr
 
-[![Travis build status](https://travis-ci.org/araezopsis/bstringr.svg?branch=master)](https://travis-ci.org/araezopsis/bstringr)
-[![Coverage status](https://codecov.io/gh/araezopsis/bstringr/branch/master/graph/badge.svg)](https://codecov.io/github/araezopsis/bstringr?branch=master)
+[![Travis build status](https://travis-ci.org/t-arae/bstringr.svg?branch=master)](https://travis-ci.org/t-arae/bstringr)
+[![Coverage status](https://codecov.io/gh/t-arae/bstringr/branch/master/graph/badge.svg)](https://codecov.io/github/t-arae/bstringr?branch=master)
 
 The goal of bstringr is to ...
 
 ## Installation
 
 ```{r, eval = FALSE, echo = TRUE}
-devtools::install_github("araezopsis/bstringr")
+# library(devtools)
+devtools::install_github("t-arae/bstringr")
 ```
 
 ## Usage

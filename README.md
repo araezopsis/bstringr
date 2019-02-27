@@ -11,7 +11,7 @@ Installation
 ------------
 
 ``` r
-# install.packages("devtools")
+# library(devtools)
 devtools::install_github("t-arae/bstringr")
 ```
 
