@@ -1,18 +1,18 @@
-
-# library(crayon)
-# temp <- c("abc", "ABC", "AbCd") %>% bstr(ucase = F)
-# temp %>% stringr::str_replace_all("[[:upper:]]+", crayon::bgRed)
-
-
-#' print biostrings class object
-#' @importFrom stringr str_replace_all
-#' @importFrom crayon bgRed
-#' @param x x
-#' @export
-cat_string <-
-  function(x){
-    cat(str_replace_all(x, "[[:upper:]]", crayon::bgRed))
-  }
+#
+# # library(crayon)
+# # temp <- c("abc", "ABC", "AbCd") %>% bstr(ucase = F)
+# # temp %>% stringr::str_replace_all("[[:upper:]]+", crayon::bgRed)
+#
+#
+# #' print biostrings class object
+# #' @importFrom stringr str_replace_all
+# #' @importFrom crayon bgRed
+# #' @param x x
+# #' @export
+# cat_string <-
+#   function(x){
+#     cat(str_replace_all(x, "[[:upper:]]", crayon::bgRed))
+#   }
 
 
 #' print biostrings class object

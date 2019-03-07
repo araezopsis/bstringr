@@ -7,7 +7,7 @@
 compare(x, gap_chr)
 }
 \arguments{
-\item{x}{x}
+\item{x}{character}
 
 \item{gap_chr}{gap character}
 }

@@ -1,9 +1,10 @@
 Package: bstringr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A package to use a character vector as a biological strings
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: person(given = "Toshihiro", family = "Arae", 
+                 email = "aroearue@gmail.com", 
+                 role = c("aut", "cre"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: GPL-3
@@ -12,7 +13,6 @@ LazyData: true
 RoxygenNote: 6.1.1
 Imports: 
     Biostrings,
-    crayon,
     devtools,
     dplyr,
     stringr,

@@ -23,6 +23,8 @@ bstr_sub <-
   }
 
 #' bstr_sub_true
+#' @importFrom stringr str_extract_all
+#' @importFrom stringr str_detect
 #' @importFrom stringr str_sub
 #' @inheritParams bstr_sub
 #' @param i sequence index

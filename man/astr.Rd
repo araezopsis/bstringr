@@ -4,14 +4,14 @@
 \alias{astr}
 \title{Constructing astr class object}
 \usage{
-astr(x, n, ucase = T)
+astr(x, n, ucase = F)
 }
 \arguments{
-\item{x}{Character vector}
+\item{x}{A character vector which convert to a bstr object.}
 
-\item{n}{Character vector}
+\item{n}{A character vector which is name of x.}
 
-\item{ucase}{Character vector}
+\item{ucase}{A logical. If TRUE the x is converted to upper case. (default: FALSE)}
 }
 \description{
 Constructing astr class object

@@ -5,36 +5,33 @@ AA_ALPHABET <-
 
 # AA_ALPHABET %>% stringr::str_c(collapse = "") %>% paste0("[", ., "]")
 AA_ALPHABET_REGEX <-
-  "[ARNDCQEGHILKMFPSTWYVX\\-\\+\\.\\*]"
+  "(?i)[ARNDCQEGHILKMFPSTWYVX\\-\\+\\.\\*]"
 AA_ALPHABET_REGEX_not <-
-  "[^ARNDCQEGHILKMFPSTWYVX\\-\\+\\.\\*]"
+  "(?i)[^ARNDCQEGHILKMFPSTWYVX\\-\\+\\.\\*]"
 
 #' Constructing astr class object
 #' @importFrom stringr str_detect
-#' @importFrom stringr str_to_upper
-#' @param x Character vector
-#' @param n Character vector
-#' @param ucase Character vector
+#' @inheritParams class_bstr_arg
 #' @export
 astr <-
-  function(x, n, ucase = T){
+  function(x, n, ucase = F){
     a <- bstr(x, n, ucase)
-    if(any(str_detect(str_to_upper(a), AA_ALPHABET_REGEX_not)))
+    if(any(str_detect(x, AA_ALPHABET_REGEX_not)))
       stop("input contains invalid Amino Acid character")
     class(a) <- c("astr", class(a))
     a
   }
 
 #' check class
-#' @param x x
+#' @inheritParams class_bstr_arg
 #' @export
 is_astr <- function(x) inherits(x, "astr")
 
 #' Convert character vector to dstr class
-#' @inheritParams bstr
+#' @inheritParams class_bstr_arg
 #' @export
 as_astr <-
-  function(x, n){
+  function(x, n, ucase = F){
     if(!is_astr(x)){
       return(astr(x, n))
     }else{

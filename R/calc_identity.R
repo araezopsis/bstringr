@@ -1,8 +1,10 @@
 
 #' Compare 2 residues
-#' @param x x
 #' @inheritParams calc_ident_mat
-compare <- function(x, gap_chr) if(any(x != gap_chr)) x[1] == x[2]
+#' @param x character
+compare <- function(x, gap_chr){
+  if(any(x != gap_chr)) x[1] == x[2]
+}
 
 #' calculate \% of identical residues
 #' @importFrom purrr partial
