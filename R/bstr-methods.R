@@ -162,13 +162,12 @@ bstr_sub_all_replace <- bstr_sub_replace_all
 
 
 #' bstr_sub_true
-#' @importFrom stringr str_sub
-#' @inheritParams bstr_sub
+#' @inheritParams sub
 #' @param i sequence index
 #' @param gap_chr gap character
 #' @export
 bstr_sub_true <-
-  function(bstrobj, i, start, end, gap_chr = "-"){
+  function(bstrobj, i, start, end, gap_chr = "-") {
     bstrobj <- as_bstr(bstrobj)
     at <- attributes(bstrobj)
 
@@ -176,15 +175,15 @@ bstr_sub_true <-
     if(length(tosub) != 1) stop("index i is wrong.")
 
     tosub <-
-      str_extract_all(tosub, ".")[[1]] %>%
-      str_detect(paste0("[^", gap_chr, "]")) %>%
+      stringr::str_extract_all(tosub, ".")[[1]] %>%
+      stringr::str_detect(paste0("[^", gap_chr, "]")) %>%
       cumsum
 
     if(missing(start)) start <- 1
     if(missing(end)) end <- max(tosub)
 
     bstrobj <-
-      str_sub(
+      stringr::str_sub(
         bstrobj,
         start = which(tosub == start)[1],
         end = which(tosub == end)[1]
@@ -193,6 +192,4 @@ bstr_sub_true <-
     attributes(bstrobj) <- at
     bstrobj
   }
-
-
 
