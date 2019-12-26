@@ -234,25 +234,29 @@ dstr_find_orf <-
 #############################################
 
 
-#' convert IUPAC CODE to regular expression
-#' @importFrom stringr str_replace_all
+#' Convert IUPAC CODE to regular expression
 #' @param dstrobj A character
-dstr_convert_iupac2regex <-
+#' @export
+#' @examples
+#' dstr_iupac2regex("MRWSYKVHDBNNN")
+#'
+dstr_iupac2regex <-
   function(dstrobj){
-    dstrobj <- as_dstr(dstrobj)
+    dstrobj <- as_dstr(dstrobj) %>% bstr_to_upper()
 
     dstrobj %>%
-      str_replace_all("M", "[AC]") %>%
-      str_replace_all("R", "[AG]") %>%
-      str_replace_all("W", "[AT]") %>%
-      str_replace_all("S", "[CG]") %>%
-      str_replace_all("Y", "[CT]") %>%
-      str_replace_all("K", "[GT]") %>%
-      str_replace_all("V", "[ACG]") %>%
-      str_replace_all("H", "[ACT]") %>%
-      str_replace_all("D", "[AGT]") %>%
-      str_replace_all("B", "[CGT]") %>%
-      str_replace_all("N", "[ACGT]")
+      stringr::str_replace_all("M", "[AC]") %>%
+      stringr::str_replace_all("R", "[AG]") %>%
+      stringr::str_replace_all("W", "[AT]") %>%
+      stringr::str_replace_all("S", "[CG]") %>%
+      stringr::str_replace_all("Y", "[CT]") %>%
+      stringr::str_replace_all("K", "[GT]") %>%
+      stringr::str_replace_all("V", "[ACG]") %>%
+      stringr::str_replace_all("H", "[ACT]") %>%
+      stringr::str_replace_all("D", "[AGT]") %>%
+      stringr::str_replace_all("B", "[CGT]") %>%
+      stringr::str_replace_all("N", "[ACGT]") %>%
+      as.character()
   }
 
 
