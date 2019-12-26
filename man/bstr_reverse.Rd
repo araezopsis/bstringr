@@ -2,7 +2,7 @@
 % Please edit documentation in R/bstr-methods-trans.R
 \name{bstr_reverse}
 \alias{bstr_reverse}
-\title{bstr_reverse}
+\title{Reverse bstr sequence}
 \usage{
 bstr_reverse(bstrobj)
 }
@@ -10,5 +10,10 @@ bstr_reverse(bstrobj)
 \item{bstrobj}{bstr class object or character vector}
 }
 \description{
-bstr_reverse
+Reverse bstr sequence
+}
+\examples{
+temp <- bstr_rand_seq(2, 6)
+c(temp, reverse = bstr_reverse(temp))
+
 }
