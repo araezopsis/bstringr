@@ -1,8 +1,14 @@
 
-#' bstr_length
+#' Sequence length in the bstr sequences.
 #' @inheritParams class_bstr_arg
 #' @export
-bstr_length <- function(bstrobj) nchar(x = bstrobj)
+#' @examples
+#' bstr_length(c("ATG", "cc tgAGT2--"))
+#' bstr_length(NA_character_)
+#'
+bstr_length <- function(bstrobj) {
+  as_bstr(bstrobj) %>% stringr::str_length()
+}
 
 #' bstr_sub
 #' @importFrom stringr str_sub
