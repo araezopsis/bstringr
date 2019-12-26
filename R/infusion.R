@@ -8,6 +8,13 @@
 #' @param ratio_i Molecular ratio of insertion
 #' @param ratio_v Molecular ratio of vector
 #' @export
+#' @examples
+#' calc_InFusion_vector_volume(
+#'   seq_i = dstr_rand_seq(1, 1000),
+#'   seq_v = dstr_rand_seq(1, 5000),
+#'   conc_i = 5, conc_v = 30,
+#'   uL_i = 3
+#' )
 #'
 calc_InFusion_vector_volume <-
   function(seq_i, seq_v, conc_i, conc_v, uL_i, ratio_i = 2, ratio_v = 1) {
@@ -33,12 +40,17 @@ calc_InFusion_vector_volume <-
       dplyr::select(-seq)
   }
 
-# calc_InFusion_vector_volume(insert, vector, 4.37, 25.1, 5)
-
 #' Calculate the insert volume for In-Fusion reaction
 #' @inheritParams calc_InFusion_vector_volume
 #' @param uL_v Supplied volume (uL) of purified insertion
 #' @export
+#' @examples
+#' calc_InFusion_insert_volume(
+#'   seq_i = dstr_rand_seq(1, 1000),
+#'   seq_v = dstr_rand_seq(1, 5000),
+#'   conc_i = 5, conc_v = 30,
+#'   uL_v = 1.25
+#' )
 #'
 calc_InFusion_insert_volume <-
   function(seq_i, seq_v, conc_i, conc_v, uL_v, ratio_i = 2, ratio_v = 1) {
@@ -63,6 +75,3 @@ calc_InFusion_insert_volume <-
     ) %>%
       dplyr::select(-seq)
   }
-
-# calc_InFusion_insert_volume(insert, vector, 4.37, 25.1, 3.16)
-

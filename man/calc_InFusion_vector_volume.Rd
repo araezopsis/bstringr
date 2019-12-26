@@ -32,3 +32,12 @@ calc_InFusion_vector_volume(
 \description{
 Calculate the vector volume for In-Fusion reaction
 }
+\examples{
+calc_InFusion_vector_volume(
+  seq_i = dstr_rand_seq(1, 1000),
+  seq_v = dstr_rand_seq(1, 5000),
+  conc_i = 5, conc_v = 30,
+  uL_i = 3
+)
+
+}
