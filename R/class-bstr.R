@@ -5,12 +5,14 @@
 #' @param ucase A logical. If TRUE the x is converted to upper case. (default: FALSE)
 #'
 #' @param bstrobj bstr class object or character vector
+#' @param dstrobj dstr class object or character vector
+#' @param astrobj astr class object or character vector
+#'
 #' @param pattern regex pattern
 #' @param case_sensitive sensitive to case in pattern (default:FALSE)
-class_bstr_arg <- function(x, n, ucase, bstrobj, pattern, case_sensitive){}
+class_bstr_arg <- function(x, n, ucase, bstrobj, dstrobj, astrobj, pattern, case_sensitive){}
 
 #' Constructer of the bstr class object
-#' @importFrom stringr str_to_upper
 #' @inheritParams class_bstr_arg
 #' @export
 bstr <-
@@ -26,7 +28,7 @@ bstr <-
       if(length(x) != length(n)) stop("The length of x and n are different.")
     }
 
-    if(ucase) x <- str_to_upper(x)
+    if(ucase) x <- stringr::str_to_upper(x)
 
     names(x) <- n
     class(x) <- c("bstr", "character")

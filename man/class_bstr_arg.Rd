@@ -4,7 +4,7 @@
 \alias{class_bstr_arg}
 \title{Common bstr class augments}
 \usage{
-class_bstr_arg(x, n, ucase, bstrobj, pattern, case_sensitive)
+class_bstr_arg(x, n, ucase, bstrobj, dstrobj, astrobj, pattern, case_sensitive)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
@@ -14,6 +14,10 @@ class_bstr_arg(x, n, ucase, bstrobj, pattern, case_sensitive)
 \item{ucase}{A logical. If TRUE the x is converted to upper case. (default: FALSE)}
 
 \item{bstrobj}{bstr class object or character vector}
+
+\item{dstrobj}{dstr class object or character vector}
+
+\item{astrobj}{astr class object or character vector}
 
 \item{pattern}{regex pattern}
 
