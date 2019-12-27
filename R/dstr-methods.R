@@ -2,7 +2,6 @@
 # MW = (numA * 313.2) + (numC * 289.2 ) + (numG * 329.2 )+ (numT * 304.2) - 61.9
 
 #' Remove stop codon from DNA sequence
-#' @importFrom stringr str_remove_all
 #' @param dstrobj dstr class object or character vector
 #' @param stop_codon stop codon pattern
 #' @export
@@ -145,11 +144,6 @@ dstr_rev_comp_fast <-
 
 
 #' Translate dna -> protein
-#' @importFrom stringr str_to_upper
-#' @importFrom stringr str_extract_all
-#' @importFrom stringr str_c
-#' @importFrom purrr map
-#' @importFrom purrr map_chr
 #' @param dstrobj sequence you want to translate
 #' @export
 dstr_translate <-
@@ -158,9 +152,9 @@ dstr_translate <-
     at <- attributes(dstrobj)
 
     pep <-
-      str_extract_all(dstrobj, "...") %>%
-      map(~ CODONS[.x]) %>%
-      map_chr(~ str_c(.x, collapse = ""))
+      stringr::str_extract_all(dstrobj, "...") %>%
+      purrr::map(~ CODONS[.x]) %>%
+      purrr::map_chr(~ paste0(.x, collapse = ""))
     if(any(is.na(pep))) warning("The sequence contained codon miss match.")
 
     attributes(pep) <- at
@@ -169,14 +163,9 @@ dstr_translate <-
 
 
 #' Find open reading frames from DNA
-#' @importFrom stringr str_locate_all
-#' @importFrom stringr str_locate
-#' @importFrom stringr str_sub
-#' @importFrom stringr str_extract
-#' @importFrom purrr map_chr
-#' @importFrom purrr imap
 #' @param dstrobj a sequence you want to find orfs
-#' @param search_none_stop A logical. If TRUE, only search orfs with a stop codon. defalut is FALSE
+#' @param search_none_stop A logical. If TRUE, only search orfs with
+#'   a stop codon. defalut is FALSE
 #' @export
 dstr_find_orf <-
   function(dstrobj, search_none_stop = T){
@@ -192,20 +181,20 @@ dstr_find_orf <-
       )
 
     start_pos_li <-
-      str_locate_all(dstrobj, "ATG(.{3})*?((.{1,2})$|TAG|TGA|TAA)") %>%
-      map(~ .x[,1])
+      stringr::str_locate_all(dstrobj, "ATG(.{3})*?((.{1,2})$|TAG|TGA|TAA)") %>%
+      purrr::map(~ .x[,1])
 
     orf_li <- list()
     for(i in seq_along(start_pos_li)){
       if(length(start_pos_li[[i]]) > 0){
         orf_end <-
-          map_int(.x = start_pos_li[[i]],
-                  .f = function(pos){
-                    str_sub(dstrobj[i], pos) %>%
-                      str_extract("ATG(.{3})*") %>%
-                      str_locate(search_pattern) %>%
-                      .[1L, 2L]
-                  })
+          purrr::map_int(.x = start_pos_li[[i]],
+                         .f = function(pos){
+                           stringr::str_sub(dstrobj[i], pos) %>%
+                             stringr::str_extract("ATG(.{3})*") %>%
+                             stringr::str_locate(search_pattern) %>%
+                             .[1L, 2L]
+                         })
 
         # Exclude NA character from orf
         not_na_orf_end <- !is.na(orf_end)
@@ -213,7 +202,7 @@ dstr_find_orf <-
         # Naming orf
         lorf <- length(orf_end)
         if(lorf > 1L){
-          names(orf_end) <- str_c("ORF", seq_len(lorf))
+          names(orf_end) <- stringr::str_c("ORF", seq_len(lorf))
         } else if(lorf == 1L){
           names(orf_end) <- "ORF"
         }
@@ -223,7 +212,8 @@ dstr_find_orf <-
             "seq_name" = n[i],
             "orf_name" = names(orf_end)[not_na_orf_end],
             "orf_start" = start_pos_li[[i]][not_na_orf_end],
-            "orf_end" = start_pos_li[[i]][not_na_orf_end] + orf_end[not_na_orf_end] - 1L
+            "orf_end" = start_pos_li[[i]][not_na_orf_end] +
+              orf_end[not_na_orf_end] - 1L
           )
       }
     }
@@ -261,10 +251,6 @@ dstr_iupac2regex <-
 
 
 #' Primer check
-#' @importFrom stringr str_count
-#' @importFrom stringr str_sub
-#' @importFrom stringr str_extract
-#' @importFrom stringr str_detect
 #' @param dstrobj A primer sequence
 #' @export
 dstr_primer_check <-
@@ -273,18 +259,20 @@ dstr_primer_check <-
 
     result_list <- list()
     result_list$primer_seq <- dstrobj
-    result_list$primer_length <- str_count(dstrobj)
+    result_list$primer_length <- stringr::str_count(dstrobj)
 
     # GC%
     result_list$GC_total <- calc_GCper(dstrobj)
-    half_pos <- (str_count(dstrobj) %/% 2)
-    result_list$GC_firsthalf <- str_sub(dstrobj, 1, half_pos) %>% calc_GCper
-    result_list$GC_secondhalf <- str_sub(dstrobj, half_pos + 1) %>% calc_GCper
+    half_pos <- (stringr::str_count(dstrobj) %/% 2)
+    result_list$GC_firsthalf <-
+      stringr::str_sub(dstrobj, 1, half_pos) %>% calc_GCper
+    result_list$GC_secondhalf <-
+      stringr::str_sub(dstrobj, half_pos + 1) %>% calc_GCper
 
-    result_list$is_last_GorC <- str_extract(dstrobj, ".$") %>% str_detect("[GC]")
+    result_list$is_last_GorC <-
+      stringr::str_extract(dstrobj, ".$") %>% stringr::str_detect("[GC]")
 
     result_list$Tm <- calc_oligoDNATm(dstrobj)
-
     data.frame(result_list, stringsAsFactors = F)
   }
 
@@ -336,7 +324,7 @@ dstr_pcr <-
     )
 
     with(pcr_result,
-         glue("
+         glue::glue("
 template: '{format_seq(template, 40)}'
 template length: {nchar(template)} bp
 
