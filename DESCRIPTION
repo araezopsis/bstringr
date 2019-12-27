@@ -22,7 +22,8 @@ Imports:
     readxl,
     stringi,
     magrittr,
-    tibble
+    tibble,
+    tidyr
 Suggests: 
     testthat,
     covr
