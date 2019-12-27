@@ -16,3 +16,8 @@ as_bstr(x, n, ucase = FALSE)
 \description{
 Convert character vector to bstr class
 }
+\examples{
+as_bstr(c("apple", "egg"))
+as_bstr("apple", "egg", TRUE)
+
+}

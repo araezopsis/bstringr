@@ -12,3 +12,8 @@ is_bstr(x)
 \description{
 check class
 }
+\examples{
+is_bstr(bstr("apple"))
+is_bstr(c("apple", "orange"))
+
+}

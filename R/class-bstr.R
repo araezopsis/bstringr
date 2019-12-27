@@ -15,8 +15,12 @@ class_bstr_arg <- function(x, n, ucase, bstrobj, dstrobj, astrobj, pattern, case
 #' Constructer of the bstr class object
 #' @inheritParams class_bstr_arg
 #' @export
+#' @examples
+#' bstr("Apple", "apple")
+#' bstr(c("Apple", "potato"), c("apple", "imo"), ucase = TRUE)
+#'
 bstr <-
-  function(x, n, ucase = F){
+  function(x, n, ucase = FALSE){
     if(!is.character(x)) stop("x must be a character vector.")
 
     if(missing(n)){
@@ -38,11 +42,19 @@ bstr <-
 #' check class
 #' @inheritParams class_bstr_arg
 #' @export
+#' @examples
+#' is_bstr(bstr("apple"))
+#' is_bstr(c("apple", "orange"))
+#'
 is_bstr <- function(x) inherits(x, "bstr")
 
 #' Convert character vector to bstr class
 #' @inheritParams class_bstr_arg
 #' @export
+#' @examples
+#' as_bstr(c("apple", "egg"))
+#' as_bstr("apple", "egg", TRUE)
+#'
 as_bstr <-
   function(x, n, ucase = FALSE){
     if(!is_bstr(x)){

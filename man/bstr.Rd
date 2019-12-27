@@ -4,7 +4,7 @@
 \alias{bstr}
 \title{Constructer of the bstr class object}
 \usage{
-bstr(x, n, ucase = F)
+bstr(x, n, ucase = FALSE)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
@@ -15,4 +15,9 @@ bstr(x, n, ucase = F)
 }
 \description{
 Constructer of the bstr class object
+}
+\examples{
+bstr("Apple", "apple")
+bstr(c("Apple", "potato"), c("apple", "imo"), ucase = TRUE)
+
 }
