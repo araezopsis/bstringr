@@ -4,13 +4,15 @@
 \alias{calc_MW_peptide}
 \title{Calculate protein molecular weight}
 \usage{
-calc_MW_peptide(pro, needinf = c("Sequence", "MW"))
+calc_MW_peptide(astrobj)
 }
 \arguments{
-\item{pro}{Amino acids sequence you want to calculate molecular weight}
-
-\item{needinf}{information "Sequence", "AAComposition", "AAFrequency", "MW"}
+\item{astrobj}{astr object.}
 }
 \description{
 Calculate protein molecular weight
+}
+\examples{
+astr_rand_seq(3, 100) \%>\% calc_MW_peptide()
+
 }

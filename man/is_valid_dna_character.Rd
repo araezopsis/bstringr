@@ -8,6 +8,8 @@ is_valid_dna_character(x, negate = FALSE)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
+
+\item{negate}{If TRUE, return non-matching elements.}
 }
 \description{
 Detect invalid IUPAC DNA characters

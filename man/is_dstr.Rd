@@ -2,7 +2,7 @@
 % Please edit documentation in R/class-dstr.R
 \name{is_dstr}
 \alias{is_dstr}
-\title{check class}
+\title{check dstr class}
 \usage{
 is_dstr(x)
 }
@@ -10,5 +10,5 @@ is_dstr(x)
 \item{x}{A character vector which convert to a bstr object.}
 }
 \description{
-check class
+check dstr class
 }

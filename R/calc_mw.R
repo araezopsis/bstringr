@@ -1,31 +1,33 @@
 
 #' Calculate protein molecular weight
-#' @importFrom stringr str_count
-#' @importFrom purrr map
-#' @importFrom purrr transpose
-#' @importFrom purrr set_names
-#' @param pro Amino acids sequence you want to calculate molecular weight
-#' @param needinf information "Sequence", "AAComposition", "AAFrequency", "MW"
+#' @param astrobj astr object.
 #' @export
+#' @examples
+#' astr_rand_seq(3, 100) %>% calc_MW_peptide()
+#'
 calc_MW_peptide <-
-  function(pro, needinf = c("Sequence", "MW")){
-    pro <- as_bstr(pro)
-    n <- names(pro)
-    p_comp <- map(as.list(AMINO_ACID), ~ str_count(pro, .))
-    names(p_comp) <- AMINO_ACID
-
-    p_comp <- p_comp %>% transpose()
-    names(p_comp) <- n
-
-    p_comp <- p_comp %>% map(~ set_names(as.integer(.), AMINO_ACID))
-    p_freq <- p_comp %>% map(~ round(.x/sum(.x) * 100, 2))
-    p_MW <- p_comp %>% map(~ (.x * AA_WEIGHT[AMINO_ACID]) %>% sum)
-    list(
-      "Sequence" = pro,
-      "AAComposition" = p_comp,
-      "AAFrequency" = p_freq,
-      "MW" = p_MW
-    )[needinf]
+  function(astrobj){
+    . <- len <- name <- count <- aa <- aa_mw <- aa_mw_sum <- NULL
+    astrobj <- as_bstr(astrobj)
+    purrr::map(names(AMINO_ACID), ~ stringr::str_count(astrobj, .x)) %>%
+      purrr::set_names(names(AMINO_ACID)) %>%
+      tibble::as_tibble() %>%
+      dplyr::mutate(
+        len = rowSums(.),
+        name = names(astrobj)
+      ) %>%
+      tidyr::pivot_longer(
+        cols = -c(len:name),
+        names_to = "aa", values_to = "count"
+      ) %>%
+      dplyr::mutate(
+        percent = count / len * 100,
+        aa_mw = AA_WEIGHT[aa],
+        aa_mw_sum = count * aa_mw
+      ) %>%
+      dplyr::group_by(name) %>%
+      dplyr::mutate(pep_mw = sum(aa_mw_sum)) %>%
+      dplyr::ungroup()
   }
 
 #' Calculate double strand DNA molecular weight

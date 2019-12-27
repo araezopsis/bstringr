@@ -13,6 +13,7 @@ dstr <-
 
 #' Detect invalid IUPAC DNA characters
 #' @inheritParams class_bstr_arg
+#' @param negate If TRUE, return non-matching elements.
 #' @export
 is_valid_dna_character <-
   function(x, negate = FALSE) {
