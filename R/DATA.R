@@ -70,3 +70,46 @@ AMINO_ACID <-
     "V" = "Val"
   )
 
+
+# "https://en.wikipedia.org/wiki/Nucleic_acid_notation"
+# | symbol | bases_represented | complement |          description          |
+# |:------:|:-----------------:|:----------:|:-----------------------------:|
+# |   A    |         A         |     T      |            Adenine            |
+# |   C    |         C         |     G      |           Cytosine            |
+# |   G    |         G         |     C      |            Guanine            |
+# |   T    |         T         |     A      |            Thymine            |
+# |   U    |         U         |     A      |            Uracil             |
+# |   W    |        AT         |     W      |             Weak              |
+# |   S    |        CG         |     S      |            Strong             |
+# |   M    |        AC         |     K      |             aMino             |
+# |   K    |        GT         |     M      |             Keto              |
+# |   R    |        AG         |     Y      |            puRine             |
+# |   Y    |        CT         |     R      |          pYrimidine           |
+# |   B    |        CGT        |     V      |    not A (B comes after A)    |
+# |   D    |        AGT        |     H      |    not C (D comes after C)    |
+# |   H    |        ACT        |     D      |    not G (H comes after G)    |
+# |   V    |        ACG        |     B      | not T (V comes after T and U) |
+# |   N    |       ACGT        |     N      |  any Nucleotide (not a gap)   |
+# |   Z    |                   |     Z      |             Zero              |
+
+
+DNA_ALPHABET <-
+  c("A", "C", "G", "T", "N", "-", "+", ".")
+DNA_IUPAC_ALPHABET <-
+  c("A", "C", "G", "T", "M", "R", "W", "S", "Y", "K",
+    "V", "H", "D", "B", "N", "-", "+", ".")
+
+# DNA_ALPHABET %>% stringr::str_c(collapse = "") %>% paste0("[", ., "]")
+REGEX_DNA_ALPHABET <- "(?i)[ACGTN\\-\\+\\.]"
+REGEX_DNA_IUPAC_ALPHABET <- "(?i)[ACGTMRWSYKVHDBN\\-\\+\\.]"
+REGEX_NOT_DNA_IUPAC_ALPHABET <- "(?i)[^ACGTMRWSYKVHDBN\\-\\+\\.]"
+
+RNA_ALPHABET <-
+  c("A", "C", "G", "U", "N", "-", "+", ".")
+RNA_IUPAC_ALPHABET <-
+  c("A", "C", "G", "U", "M", "R", "W", "S", "Y", "K",
+    "V", "H", "D", "B", "N", "-", "+", ".")
+REGEX_RNA_ALPHABET <- "(?i)[ACGUN\\-\\+\\.]"
+REGEX_RNA_IUPAC_ALPHABET <- "(?i)[ACGUMRWSYKVHDBN\\-\\+\\.]"
+REGEX_NOT_RNA_IUPAC_ALPHABET <- "(?i)[^ACGUMRWSYKVHDBN\\-\\+\\.]"
+
