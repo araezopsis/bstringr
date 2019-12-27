@@ -70,6 +70,17 @@ AMINO_ACID <-
     "V" = "Val"
   )
 
+AA_ALPHABET <-
+  c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K",
+    "M", "F", "P", "S", "T", "W", "Y", "V", "X")
+
+# AA_ALPHABET %>% stringr::str_c(collapse = "") %>% paste0("[", ., "]")
+REGEX_AA_ALPHABET <-
+  "(?i)[ARNDCQEGHILKMFPSTWYVX\\-\\+\\.\\*]"
+REGEX_NOT_AA_ALPHABET <-
+  "(?i)[^ARNDCQEGHILKMFPSTWYVX\\-\\+\\.\\*]"
+
+
 
 # "https://en.wikipedia.org/wiki/Nucleic_acid_notation"
 # | symbol | bases_represented | complement |          description          |
