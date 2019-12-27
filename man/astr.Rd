@@ -16,3 +16,7 @@ astr(x, n, ucase = F)
 \description{
 Constructing astr class object
 }
+\examples{
+astr("Wqrld", "HELLQ", ucase = TRUE)
+
+}

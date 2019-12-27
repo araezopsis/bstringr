@@ -2,9 +2,9 @@
 % Please edit documentation in R/class-astr.R
 \name{as_astr}
 \alias{as_astr}
-\title{Convert character vector to dstr class}
+\title{Convert character vector to astr class}
 \usage{
-as_astr(x, n, ucase = F)
+as_astr(x, n, ucase = FALSE)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
@@ -14,5 +14,9 @@ as_astr(x, n, ucase = F)
 \item{ucase}{A logical. If TRUE the x is converted to upper case. (default: FALSE)}
 }
 \description{
-Convert character vector to dstr class
+Convert character vector to astr class
+}
+\examples{
+as_astr("Wqrld", "HELLQ", ucase = TRUE)
+
 }

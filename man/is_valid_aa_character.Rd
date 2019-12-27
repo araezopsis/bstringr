@@ -14,3 +14,12 @@ is_valid_aa_character(x, negate = FALSE)
 \description{
 Detect invalid IUPAC Amino Acid characters
 }
+\examples{
+test <- c(letters[1:10])
+test2 <-
+  c(paste(test[1:5], collapse = ""), paste(test[6:10], collapse = ""))
+is_valid_aa_character(test) \%>\% table
+is_valid_aa_character(test, negate = TRUE) \%>\% test[.]
+is_valid_aa_character(test2)
+
+}

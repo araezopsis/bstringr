@@ -12,3 +12,7 @@ is_astr(x)
 \description{
 check class
 }
+\examples{
+is_astr(astr("I.am.a.geek"))
+
+}
