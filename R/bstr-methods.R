@@ -97,6 +97,15 @@ bstr_sub <-
     bstrobj
   }
 
+
+# temp <- dstr_rand_seq(3, 20, "[AT]")
+#
+# temp
+# bstr_sub_all(temp, stringr::str_locate_all(temp, "A{2,}"))
+# bstr_sub_all(temp, stringr::str_locate_all(temp, "A{2,}")) <- "x"
+# temp
+
+
 #' @rdname sub
 #' @export
 bstr_sub_replace <- function(..., replacement, value = replacement)
