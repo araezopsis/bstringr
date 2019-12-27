@@ -14,3 +14,10 @@ is_valid_dna_character(x, negate = FALSE)
 \description{
 Detect invalid IUPAC DNA characters
 }
+\examples{
+test <- c("a", "B", "c", "D", "e")
+is_valid_dna_character(test)
+is_valid_dna_character(test, negate = TRUE) \%>\%
+  test[.]
+
+}

@@ -12,3 +12,7 @@ is_dstr(x)
 \description{
 check dstr class
 }
+\examples{
+is_dstr(dstr("bad"))
+
+}

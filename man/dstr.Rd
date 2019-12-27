@@ -4,7 +4,7 @@
 \alias{dstr}
 \title{Constructer of the dstr class object}
 \usage{
-dstr(x, n, ucase = F)
+dstr(x, n, ucase = FALSE)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
@@ -15,4 +15,9 @@ dstr(x, n, ucase = F)
 }
 \description{
 Constructer of the dstr class object
+}
+\examples{
+dstr("A.Bad.bat", "It is")
+dstr(c("A", "bad", "Bat"), ucase = TRUE)
+
 }

@@ -4,7 +4,7 @@
 \alias{as_dstr}
 \title{Convert character vector to dstr class}
 \usage{
-as_dstr(x, n, ucase = F)
+as_dstr(x, n, ucase = FALSE)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
@@ -15,4 +15,9 @@ as_dstr(x, n, ucase = F)
 }
 \description{
 Convert character vector to dstr class
+}
+\examples{
+as_dstr("bad", "good", ucase = TRUE)
+# as_dstr(c("good", "bad")) # Error
+
 }
