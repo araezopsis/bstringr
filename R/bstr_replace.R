@@ -1,6 +1,6 @@
 
 #' Replace matched patterns in bstr sequences by replacements
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
 #' @param pattern Pattern to look for.
 #' @param replacement A character vector of replacements or a function.
 #' @export

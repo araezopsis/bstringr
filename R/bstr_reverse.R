@@ -1,6 +1,6 @@
 
 #' Reverse bstr sequence
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
 #' @export
 #' @examples
 #' temp <- bstr_rand_seq(2, 6)

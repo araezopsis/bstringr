@@ -1,6 +1,6 @@
 #' Remove all matched patterns in bstr sequences
 #'
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
 #' @return A bstr object.
 #' @examples
 #' temp <- bstr(c("ATGCCCTAG", "aTGCcCtAg"))

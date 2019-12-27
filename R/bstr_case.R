@@ -1,6 +1,6 @@
 #' Convert case of a bstring sequence.
 #'
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
 #' @examples
 #' temp <- dstr_rand_seq(1, 10, "[atgcATGC]")
 #' c(

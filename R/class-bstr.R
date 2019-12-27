@@ -10,14 +10,37 @@
 #'
 #' @param pattern regex pattern
 #' @param case_sensitive sensitive to case in pattern (default:FALSE)
-class_bstr_arg <- function(x, n, ucase, bstrobj, dstrobj, astrobj, pattern, case_sensitive){}
+#' @name class_bstr
+NULL
+
+
+### bstr(), dstr(), astr() ------------------------------------------------
 
 #' Constructer of the bstr class object
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
 #' @export
 #' @examples
 #' bstr("Apple", "apple")
 #' bstr(c("Apple", "potato"), c("apple", "imo"), ucase = TRUE)
+#'
+#' dstr("A.Bad.bat", "It is")
+#' dstr(c("A", "bad", "Bat"), ucase = TRUE)
+#'
+#' astr("Wqrld", "HELLQ", ucase = TRUE)
+#'
+#' ### Check class
+#' is_bstr(bstr("apple"))
+#' is_bstr(c("apple", "orange"))
+#' is_dstr(dstr("bad"))
+#' is_astr(astr("I.am.a.geek"))
+#'
+#'
+#' ### Convert character to bstr object
+#' as_dstr("bad", "good", ucase = TRUE)
+#' # as_dstr(c("good", "bad")) # Error
+#' as_astr("Wqrld", "HELLQ", ucase = TRUE)
+#'
 #'
 bstr <-
   function(x, n, ucase = FALSE){
@@ -39,22 +62,53 @@ bstr <-
     x
   }
 
-#' check class
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
 #' @export
-#' @examples
-#' is_bstr(bstr("apple"))
-#' is_bstr(c("apple", "orange"))
-#'
+dstr <-
+  function(x, n, ucase = FALSE){
+    d <- bstr(x, n, ucase)
+    if(any(is_valid_dna_character(d, negate = TRUE)))
+      stop("input contains invalid DNA character")
+    class(d) <- c("dstr", class(d))
+    d
+  }
+
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
+#' @export
+astr <-
+  function(x, n, ucase = F){
+    a <- bstr(x, n, ucase)
+    if(any(is_valid_aa_character(a, negate = TRUE)))
+      stop("input contains invalid Amino Acid character")
+    class(a) <- c("astr", class(a))
+    a
+  }
+
+
+### is_bstr(), is_dstr(), is_astr() -----------------------------------------
+
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
+#' @export
 is_bstr <- function(x) inherits(x, "bstr")
 
-#' Convert character vector to bstr class
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
 #' @export
-#' @examples
-#' as_bstr(c("apple", "egg"))
-#' as_bstr("apple", "egg", TRUE)
-#'
+is_dstr <- function(x) inherits(x, "dstr")
+
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
+#' @export
+is_astr <- function(x) inherits(x, "astr")
+
+### as_bstr(), as_dstr(), as_astr() -----------------------------------------
+
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
+#' @export
 as_bstr <-
   function(x, n, ucase = FALSE){
     if(!is_bstr(x)){
@@ -63,6 +117,32 @@ as_bstr <-
       x
     }
   }
+
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
+#' @export
+as_astr <-
+  function(x, n, ucase = FALSE){
+    if(!is_astr(x)){
+      return(astr(x, n, ucase))
+    }else{
+      x
+    }
+  }
+
+#' @inheritParams class_bstr
+#' @rdname construct_bstr
+#' @export
+as_dstr <-
+  function(x, n, ucase = FALSE){
+    if(!is_dstr(x)){
+      return(dstr(x, n, ucase))
+    }else{
+      x
+    }
+  }
+
+### Other ----------------------------------------------------------------
 
 #' Add object attribute
 #' @param bstrobj bstring object

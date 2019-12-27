@@ -1,6 +1,6 @@
 
 #' Extract and replace subsequences from a bstr sequences
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
 #' @param start start
 #' @param end end
 #' @param omit_na Single logical value. If `TRUE`, missing values in any of the
@@ -101,7 +101,7 @@ bstr_sub_replace <- function(..., replacement, value = replacement)
   `bstr_sub<-`(..., value=value)
 
 #' Extract and replace all subsequences from a bstr sequences
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
 #' @param from a list of integer vectors giving the start indexes or a
 #'   list of two-column matrices, each of type \code{cbind(from, to)}
 #' @param to a list of integer vectors giving the end indexes
@@ -115,7 +115,7 @@ bstr_sub_replace <- function(..., replacement, value = replacement)
 #'   [replacement function only]
 #' @param ... arguments to be passed to \code{bstr_sub_all<-}
 #' @export
-#' @rdname bstr_sub_all
+#' @rdname sub_all
 #' @examples
 #' temp <- bstr_rand_seq(1, 10)
 #'
@@ -135,7 +135,7 @@ bstr_sub_all <-
     bstrobj
   }
 
-#' @rdname bstr_sub_all
+#' @rdname sub_all
 #' @export
 `bstr_sub_all<-` <-
   function(bstrobj, from=list(1L), to=list(-1L), length, omit_na=FALSE, value) {
@@ -149,12 +149,12 @@ bstr_sub_all <-
     bstrobj
   }
 
-#' @rdname bstr_sub_all
+#' @rdname sub_all
 #' @export
 bstr_sub_replace_all <- function(..., replacement, value = replacement)
   `bstr_sub_all<-`(..., value = value)
 
-#' @rdname bstr_sub_all
+#' @rdname sub_all
 #' @export
 bstr_sub_all_replace <- bstr_sub_replace_all
 

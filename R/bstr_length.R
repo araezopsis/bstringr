@@ -1,6 +1,6 @@
 
 #' Sequence length in the bstr sequences.
-#' @inheritParams class_bstr_arg
+#' @inheritParams class_bstr
 #' @export
 #' @examples
 #' bstr_length(c("ATG", "cc tgAGT2--"))
