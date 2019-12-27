@@ -2,13 +2,25 @@
 % Please edit documentation in R/dstr-methods.R
 \name{dstr_rev_comp}
 \alias{dstr_rev_comp}
-\title{Return the reverse complement sequence}
+\alias{dstr_rev_comp_fast}
+\title{Return reverse complement sequences}
 \usage{
 dstr_rev_comp(dstrobj)
+
+dstr_rev_comp_fast(dstrobj)
 }
 \arguments{
 \item{dstrobj}{dstr object}
 }
 \description{
-Return the reverse complement sequence
+Return reverse complement sequences
+}
+\examples{
+temp <- dstr_rand_seq(3, 10, "[atgcATGC]")
+c(temp, compl = dstr_rev_comp(temp))
+
+# Fast and memory efficient verstion of dstr_rev_comp with
+# case conversion
+c(temp, compl = dstr_rev_comp_fast(temp))
+
 }

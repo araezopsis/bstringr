@@ -9,7 +9,8 @@ dstr_find_orf(dstrobj, search_none_stop = T)
 \arguments{
 \item{dstrobj}{a sequence you want to find orfs}
 
-\item{search_none_stop}{A logical. If TRUE, only search orfs with a stop codon. defalut is FALSE}
+\item{search_none_stop}{A logical. If TRUE, only search orfs with
+a stop codon. defalut is FALSE}
 }
 \description{
 Find open reading frames from DNA

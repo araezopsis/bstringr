@@ -1,72 +1,78 @@
-#' bstr_to_lower
-#' @importFrom stringr str_to_lower
+#' Convert case of a bstring sequence.
+#'
 #' @inheritParams class_bstr_arg
-#' @export
-bstr_to_lower <-
-  function(bstrobj){
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
+#' @examples
+#' temp <- dstr_rand_seq(1, 10, "[atgcATGC]")
+#' c(
+#'   temp,
+#'   upper = bstr_to_upper(temp),
+#'   lower = bstr_to_lower(temp),
+#'   switch = bstr_switch_case(temp)
+#' )
+#'
+#' @name case
+NULL
 
-    bstrobj <- str_to_lower(bstrobj)
-
-    attributes(bstrobj) <- at
-    bstrobj
-  }
-
-#' bstr_to_upper
-#' @importFrom stringr str_to_upper
-#' @inheritParams class_bstr_arg
+#' @rdname case
 #' @export
 bstr_to_upper <-
-  function(bstrobj){
+  function(bstrobj) {
     bstrobj <- as_bstr(bstrobj)
     at <- attributes(bstrobj)
 
-    bstrobj <- str_to_upper(bstrobj)
+    bstrobj <- stringr::str_to_upper(bstrobj)
 
     attributes(bstrobj) <- at
     bstrobj
   }
 
-#' bstr_switch_case
-#' @importFrom stringr str_extract_all
-#' @importFrom stringr str_detect
-#' @importFrom stringr str_to_upper
-#' @importFrom stringr str_to_lower
-#' @importFrom purrr map
-#' @importFrom purrr map2
-#' @importFrom purrr map_chr
-#' @inheritParams class_bstr_arg
+#' @rdname case
 #' @export
-bstr_switch_case <-
-  function(bstrobj){
+bstr_to_lower <-
+  function(bstrobj) {
     bstrobj <- as_bstr(bstrobj)
     at <- attributes(bstrobj)
 
-    bstrobj <- bstrobj %>% str_extract_all(".")
-    lower_c <- bstrobj %>% map(~ str_detect(.x, "[[:lower:]]"))
-    upper_c <- bstrobj %>% map(~ str_detect(.x, "[[:upper:]]"))
+    bstrobj <- stringr::str_to_lower(bstrobj)
+
+    attributes(bstrobj) <- at
+    bstrobj
+  }
+
+#' @rdname case
+#' @export
+bstr_switch_case <-
+  function(bstrobj) {
+    bstrobj <- as_bstr(bstrobj)
+    at <- attributes(bstrobj)
+
+    bstrobj <- bstrobj %>% stringr::str_extract_all(".")
+    lower_c <- bstrobj %>% purrr::map(~ stringr::str_detect(.x, "[[:lower:]]"))
+    upper_c <- bstrobj %>% purrr::map(~ stringr::str_detect(.x, "[[:upper:]]"))
 
     bstrobj <-
       bstrobj %>%
-      map2(lower_c, ~ ifelse(.y, str_to_upper(.x), .x)) %>%
-      map2(upper_c, ~ ifelse(.y, str_to_lower(.x), .x)) %>%
-      map_chr(~ paste0(.x, collapse = ""))
+      purrr::map2(lower_c, ~ ifelse(.y, stringr::str_to_upper(.x), .x)) %>%
+      purrr::map2(upper_c, ~ ifelse(.y, stringr::str_to_lower(.x), .x)) %>%
+      purrr::map_chr(~ paste0(.x, collapse = ""))
 
     attributes(bstrobj) <- at
     bstrobj
   }
 
-#' bstr_reverse
-#' @importFrom stringi stri_reverse
+#' Reverse bstr sequence
 #' @inheritParams class_bstr_arg
 #' @export
+#' @examples
+#' temp <- bstr_rand_seq(2, 6)
+#' c(temp, reverse = bstr_reverse(temp))
+#'
 bstr_reverse <-
   function(bstrobj){
     bstrobj <- as_bstr(bstrobj)
     at <- attributes(bstrobj)
 
-    bstrobj <- stri_reverse(bstrobj)
+    bstrobj <- stringi::stri_reverse(bstrobj)
 
     attributes(bstrobj) <- at
     bstrobj

@@ -2,19 +2,27 @@
 % Please edit documentation in R/bstr-methods-remove.R
 \name{bstr_replace}
 \alias{bstr_replace}
-\title{bstr_replace}
+\title{Replace matched patterns in bstr sequences by replacements}
 \usage{
-bstr_replace(bstrobj, pattern, replacement, case_sensitive = F)
+bstr_replace(bstrobj, pattern, replacement, case_sensitive = FALSE)
 }
 \arguments{
 \item{bstrobj}{bstr class object or character vector}
 
-\item{pattern}{regex pattern}
+\item{pattern}{Pattern to look for.}
 
-\item{replacement}{a character vector}
+\item{replacement}{A character vector of replacements or a function.}
 
 \item{case_sensitive}{sensitive to case in pattern (default:FALSE)}
 }
 \description{
-bstr_replace
+Replace matched patterns in bstr sequences by replacements
+}
+\examples{
+bstr_replace("AtGcTaat", "at", "cc")
+bstr_replace("AtGcTaat", "at", c("cc", "xx"))
+bstr_replace("AtGcTaat", c("at", "gc"), c("cc", "xx"))
+bstr_replace("AtGcTaat", c("at", "gc"), c("cc", "xx"), TRUE)
+bstr_replace("AtGcTaat", c("at", "gc"), bstr_switch_case)
+
 }

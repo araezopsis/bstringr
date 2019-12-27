@@ -4,8 +4,7 @@
 \alias{sort.bstr}
 \title{sort bstr}
 \usage{
-\method{sort}{bstr}(x, decreasing = FALSE, ..., by = c("names",
-  "length"))
+\method{sort}{bstr}(x, decreasing = FALSE, ..., by = c("names", "length"))
 }
 \arguments{
 \item{x}{x}

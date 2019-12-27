@@ -2,7 +2,7 @@
 % Please edit documentation in R/bstr-methods.R
 \name{bstr_length}
 \alias{bstr_length}
-\title{bstr_length}
+\title{Sequence length in the bstr sequences.}
 \usage{
 bstr_length(bstrobj)
 }
@@ -10,5 +10,10 @@ bstr_length(bstrobj)
 \item{bstrobj}{bstr class object or character vector}
 }
 \description{
-bstr_length
+Sequence length in the bstr sequences.
+}
+\examples{
+bstr_length(c("ATG", "cc tgAGT2--"))
+bstr_length(NA_character_)
+
 }

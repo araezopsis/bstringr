@@ -2,13 +2,25 @@
 % Please edit documentation in R/dstr-methods.R
 \name{dstr_complement}
 \alias{dstr_complement}
-\title{Return complement sequence}
+\alias{dstr_complement_fast}
+\title{Return complement sequences}
 \usage{
 dstr_complement(dstrobj)
+
+dstr_complement_fast(dstrobj)
 }
 \arguments{
 \item{dstrobj}{dstr object}
 }
 \description{
-Return complement sequence
+Return complement sequences
+}
+\examples{
+temp <- dstr_rand_seq(3, 10, "[atgcATGC]")
+c(temp, compl = dstr_complement(temp))
+
+# Fast and memory efficient verstion of dstr_complement with
+# case conversion
+c(temp, compl = dstr_complement_fast(temp))
+
 }
