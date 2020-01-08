@@ -115,6 +115,7 @@ bstr_sub_replace <- function(..., replacement, value = replacement)
 #'   [replacement function only]
 #' @param ... arguments to be passed to \code{bstr_sub_all<-}
 #' @export
+#' @name sub_all
 #' @rdname sub_all
 #' @examples
 #' temp <- bstr_rand_seq(1, 10)

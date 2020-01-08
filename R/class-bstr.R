@@ -11,6 +11,7 @@
 #' @param pattern regex pattern
 #' @param case_sensitive sensitive to case in pattern (default:FALSE)
 #' @name class_bstr
+#' @rdname class_bstr
 NULL
 
 
@@ -19,6 +20,7 @@ NULL
 #' Constructer of the bstr class object
 #' @inheritParams class_bstr
 #' @rdname construct_bstr
+#' @name construct_bstr
 #' @export
 #' @examples
 #' bstr("Apple", "apple")
