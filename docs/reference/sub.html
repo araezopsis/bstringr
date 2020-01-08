@@ -160,12 +160,12 @@ arguments provided will result in an unchanged input.</p></td>
   <span class='fu'>bstr_sub</span>(<span class='no'>temp</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>,<span class='fl'>2</span>))
 )</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 6 
-#&gt; [1]      no name 1      : NLaNJadGNl                               10 
-#&gt; [2]      no name 1      : NLaNJ                                     5 
-#&gt; [3]      no name 1      : JadGNl                                    6 
-#&gt; [4]      no name 1      : NLaNJ                                     5 
-#&gt; [5]      no name 1      : NLaNJa                                    6 
-#&gt; [6]         &lt;NA&gt;        : L                                         1 </div><div class='input'>
+#&gt; [1]      no name 1      : ZfZJripFlV                               10 
+#&gt; [2]      no name 1      : ZfZJr                                     5 
+#&gt; [3]      no name 1      : ripFlV                                    6 
+#&gt; [4]      no name 1      : ZfZJr                                     5 
+#&gt; [5]      no name 1      : ZfZJri                                    6 
+#&gt; [6]         &lt;NA&gt;        : f                                         1 </div><div class='input'>
 <span class='co'># Negative indices</span>
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='no'>temp</span>,
@@ -174,10 +174,10 @@ arguments provided will result in an unchanged input.</p></td>
   <span class='fu'>bstr_sub</span>(<span class='no'>temp</span>, <span class='kw'>end</span> <span class='kw'>=</span> -<span class='fl'>7</span>)
 )</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 4 
-#&gt; [1]      no name 1      : NLaNJadGNl                               10 
-#&gt; [2]      no name 1      : l                                         1 
-#&gt; [3]      no name 1      : NJadGNl                                   7 
-#&gt; [4]      no name 1      : NLaN                                      4 </div><div class='input'>
+#&gt; [1]      no name 1      : ZfZJripFlV                               10 
+#&gt; [2]      no name 1      : V                                         1 
+#&gt; [3]      no name 1      : JripFlV                                   7 
+#&gt; [4]      no name 1      : ZfZJ                                      4 </div><div class='input'>
 <span class='co'># Alternatively, you can pass in a two colum matrix, as in the</span>
 <span class='co'># output from stringr::str_locate_all</span>
 <span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='construct_bstr.html'>bstr</a></span>(<span class='st'>"abcde fghij"</span>)

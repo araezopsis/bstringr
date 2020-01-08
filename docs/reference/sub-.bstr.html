@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>subsetting biostrings class object — [.bstr • bstringr</title>
+<title>subsetting bstr class object — [.bstr • bstringr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="subsetting biostrings class object — [.bstr" />
-<meta property="og:description" content="subsetting biostrings class object" />
+<meta property="og:title" content="subsetting bstr class object — [.bstr" />
+<meta property="og:description" content="subsetting bstr class object" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,13 +100,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>subsetting biostrings class object</h1>
+    <h1>subsetting bstr class object</h1>
     
     <div class="hidden name"><code>sub-.bstr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>subsetting biostrings class object</p>
+    <p>subsetting bstr class object</p>
     </div>
 
     <pre class="usage"># S3 method for bstr
@@ -130,11 +130,30 @@
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>(<span class='no'>test</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dstr_rand_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>10</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt; class: dstr,bstr,character 
+#&gt; number of sequences: 3 
+#&gt; [1]      no name 1      : CCGTATTGGA                               10 
+#&gt; [2]      no name 2      : AAGCTCGTCT                               10 
+#&gt; [3]      no name 3      : TAGACCACTC                               10 </div><div class='input'><span class='no'>test</span>[<span class='fl'>1</span>]</div><div class='output co'>#&gt; class: dstr,bstr,character 
+#&gt; number of sequences: 1 
+#&gt; [1]      no name 1      : CCGTATTGGA                               10 </div><div class='input'><span class='no'>test</span>[<span class='fl'>2</span>:<span class='fl'>1</span>]</div><div class='output co'>#&gt; class: dstr,bstr,character 
+#&gt; number of sequences: 2 
+#&gt; [1]      no name 2      : AAGCTCGTCT                               10 
+#&gt; [2]      no name 1      : CCGTATTGGA                               10 </div><div class='input'>
+<span class='no'>test</span>[<span class='fl'>2</span>] <span class='kw'>&lt;-</span> <span class='st'>"mutated"</span>
+<span class='no'>test</span></div><div class='output co'>#&gt; class: dstr,bstr,character 
+#&gt; number of sequences: 3 
+#&gt; [1]      no name 1      : CCGTATTGGA                               10 
+#&gt; [2]      no name 2      : mutated                                   7 
+#&gt; [3]      no name 3      : TAGACCACTC                               10 </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

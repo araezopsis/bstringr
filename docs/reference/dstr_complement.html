@@ -127,22 +127,22 @@
     <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dstr_rand_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>10</span>, <span class='st'>"[atgcATGC]"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>temp</span>, <span class='kw'>compl</span> <span class='kw'>=</span> <span class='fu'>dstr_complement</span>(<span class='no'>temp</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 6 
-#&gt; [1]      no name 1      : aAGctTTcTA                               10 
-#&gt; [2]      no name 2      : gtgCTcggTT                               10 
-#&gt; [3]      no name 3      : ccCCacGgTg                               10 
-#&gt; [4]   compl.no name 1   : tTCgaAAgAT                               10 
-#&gt; [5]   compl.no name 2   : cacGAgccAA                               10 
-#&gt; [6]   compl.no name 3   : ggGGtgCcAc                               10 </div><div class='input'>
+#&gt; [1]      no name 1      : aGtACAGGGa                               10 
+#&gt; [2]      no name 2      : TGgaGgGgGT                               10 
+#&gt; [3]      no name 3      : GgGTTAcGGC                               10 
+#&gt; [4]   compl.no name 1   : tCaTGTCCCt                               10 
+#&gt; [5]   compl.no name 2   : ACctCcCcCA                               10 
+#&gt; [6]   compl.no name 3   : CcCAATgCCG                               10 </div><div class='input'>
 <span class='co'># Fast and memory efficient verstion of dstr_complement with</span>
 <span class='co'># case conversion</span>
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>temp</span>, <span class='kw'>compl</span> <span class='kw'>=</span> <span class='fu'>dstr_complement_fast</span>(<span class='no'>temp</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 6 
-#&gt; [1]      no name 1      : aAGctTTcTA                               10 
-#&gt; [2]      no name 2      : gtgCTcggTT                               10 
-#&gt; [3]      no name 3      : ccCCacGgTg                               10 
-#&gt; [4]   compl.no name 1   : TTCGAAAGAT                               10 
-#&gt; [5]   compl.no name 2   : CACGAGCCAA                               10 
-#&gt; [6]   compl.no name 3   : GGGGTGCCAC                               10 </div><div class='input'>
+#&gt; [1]      no name 1      : aGtACAGGGa                               10 
+#&gt; [2]      no name 2      : TGgaGgGgGT                               10 
+#&gt; [3]      no name 3      : GgGTTAcGGC                               10 
+#&gt; [4]   compl.no name 1   : TCATGTCCCT                               10 
+#&gt; [5]   compl.no name 2   : ACCTCCCCCA                               10 
+#&gt; [6]   compl.no name 3   : CCCAATGCCG                               10 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

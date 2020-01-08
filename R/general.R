@@ -1,9 +1,17 @@
 
-#' subsetting biostrings class object
+#' subsetting bstr class object
 #' @param x x
 #' @param ... ...
 #' @param drop drop
 #' @export
+#' @examples
+#' (test <- dstr_rand_seq(3, 10, seed = 1))
+#' test[1]
+#' test[2:1]
+#'
+#' test[2] <- "mutated"
+#' test
+#'
 "[.bstr" <-
   function(x, ..., drop = F){
     y <- NextMethod("[", "character")
@@ -14,6 +22,14 @@
 #' Combine Values into a bstr class object
 #' @param ... ...
 #' @export
+#' @examples
+#' c(dstr_rand_seq(2, 5, seed = 1), dstr_rand_seq(3, 5, seed = 2))
+#' c(dstr_rand_seq(3, 5, seed = 2), dstr_rand_seq(2, 5, seed = 1))
+#'
+#' c("hoge", dstr_rand_seq(2, 5, seed = 1))
+#' # c(dstr_rand_seq(3, 5, seed = 2), "hoge") # Error
+#' c(dstr_rand_seq(3, 5, seed = 2), as_bstr("hoge"))
+#'
 "c.bstr" <-
   function(...){
     if(all(unlist(lapply(list(...), is_bstr)))){
@@ -30,6 +46,12 @@
 #' @param ... ...
 #' @param by c("names", "length")
 #' @export
+#' @examples
+#' test <- bstr_rand_seq(6, c(10, 5, 10, 12, 13, 3), seed = 1)
+#' test
+#' sort(test, decreasing = TRUE)
+#' sort(test, by = "length")
+#'
 sort.bstr <-
   function(x, decreasing = FALSE, ..., by = c("names", "length")){
     by <- match.arg(by)

@@ -12,3 +12,12 @@
 \description{
 Combine Values into a bstr class object
 }
+\examples{
+c(dstr_rand_seq(2, 5, seed = 1), dstr_rand_seq(3, 5, seed = 2))
+c(dstr_rand_seq(3, 5, seed = 2), dstr_rand_seq(2, 5, seed = 1))
+
+c("hoge", dstr_rand_seq(2, 5, seed = 1))
+# c(dstr_rand_seq(3, 5, seed = 2), "hoge") # Error
+c(dstr_rand_seq(3, 5, seed = 2), as_bstr("hoge"))
+
+}

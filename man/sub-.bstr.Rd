@@ -2,7 +2,7 @@
 % Please edit documentation in R/general.R
 \name{[.bstr}
 \alias{[.bstr}
-\title{subsetting biostrings class object}
+\title{subsetting bstr class object}
 \usage{
 \method{[}{bstr}(x, ..., drop = F)
 }
@@ -14,5 +14,14 @@
 \item{drop}{drop}
 }
 \description{
-subsetting biostrings class object
+subsetting bstr class object
+}
+\examples{
+(test <- dstr_rand_seq(3, 10, seed = 1))
+test[1]
+test[2:1]
+
+test[2] <- "mutated"
+test
+
 }

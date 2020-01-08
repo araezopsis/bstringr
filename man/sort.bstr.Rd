@@ -18,3 +18,10 @@
 \description{
 sort bstr
 }
+\examples{
+test <- bstr_rand_seq(6, c(10, 5, 10, 12, 13, 3), seed = 1)
+test
+sort(test, decreasing = TRUE)
+sort(test, by = "length")
+
+}

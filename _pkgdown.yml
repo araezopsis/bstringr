@@ -10,12 +10,14 @@ reference:
     - bstr_rand_seq
     - dstr_rand_seq
     - astr_rand_seq
-  - title: functions for bstr
+  - title: S3 functions for bstr
     contents:
     - c.bstr
-    - sort.bstr
     - "`[.bstr`"
+    - sort.bstr
     - print.bstr
+  - title: functions for bstr
+    contents:
     - bstr_length
     - bstr_reverse
     - bstr_replace
