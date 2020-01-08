@@ -5,9 +5,16 @@
 #' @param pattern character vector specifying character classes
 #' @param seed a single integer. specify seeds.
 #' @export
+#' @name random_seq
 #' @examples
 #' bstr_rand_seq(3, 20, seed = 1)
 #' bstr_rand_seq(3, 5:7, c("[a-c]", "[A-C]", "[1-3]"), seed = 1)
+#'
+#' dstr_rand_seq(3, 20, seed = 1)
+#' dstr_rand_seq(3, 5:7, c("[atcg]", "[ATCG]", "[N.]"), seed = 1)
+#'
+#' astr_rand_seq(3, 20, seed = 1)
+#' astr_rand_seq(3, 5:7, c("[arnd]", "[ARND]", "[X.]"), seed = 1)
 #'
 bstr_rand_seq <- function(n, length, pattern = "[A-Za-z]", seed) {
   if(!missing(seed)) {
@@ -17,13 +24,8 @@ bstr_rand_seq <- function(n, length, pattern = "[A-Za-z]", seed) {
     as_bstr()
 }
 
-#' Generate random dstr sequences of desired lengths.
-#' @inheritParams bstr_rand_seq
+#' @rdname random_seq
 #' @export
-#' @examples
-#' dstr_rand_seq(3, 20, seed = 1)
-#' dstr_rand_seq(3, 5:7, c("[atcg]", "[ATCG]", "[N.]"), seed = 1)
-#'
 dstr_rand_seq <-
   function(n, length, pattern = "[ATGC]", seed) {
     if(!missing(seed)) {
@@ -33,13 +35,8 @@ dstr_rand_seq <-
       as_dstr()
   }
 
-#' Generate random astr sequences of desired lengths.
-#' @inheritParams bstr_rand_seq
+#' @rdname random_seq
 #' @export
-#' @examples
-#' astr_rand_seq(3, 20, seed = 1)
-#' astr_rand_seq(3, 5:7, c("[arnd]", "[ARND]", "[X.]"), seed = 1)
-#'
 astr_rand_seq <-
   function(n, length, pattern = "[ARNDCQEGHILKMFPSTWYVX]", seed) {
     if(!missing(seed)) {

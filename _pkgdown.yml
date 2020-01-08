@@ -7,9 +7,7 @@ reference:
     - construct_bstr
     - is_valid_dna_character
     - is_valid_aa_character
-    - bstr_rand_seq
-    - dstr_rand_seq
-    - astr_rand_seq
+    - random_seq
   - title: S3 functions for bstr
     contents:
     - c.bstr
