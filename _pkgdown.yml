@@ -1,1 +1,63 @@
 destination: docs
+
+reference:
+  - title: bstr/dstr/astr class
+    desc:  Class for biological sequences.
+    contents:
+    - construct_bstr
+    - is_valid_dna_character
+    - is_valid_aa_character
+    - bstr_rand_seq
+    - dstr_rand_seq
+    - astr_rand_seq
+  - title: functions for bstr
+    contents:
+    - c.bstr
+    - sort.bstr
+    - "`[.bstr`"
+    - print.bstr
+    - starts_with("format_")
+    - bstr_length
+    - bstr_reverse
+    - bstr_replace
+    - case
+    - sub
+    - sub_all
+    - remove
+    - bstr_align
+    - bstr_multi_align
+    - bstr_sub_true
+  - title: functions for dstr
+    contents:
+    - dstr_remove_stop
+    - dstr_complement
+    - dstr_rev_comp
+    - dstr_find_orf
+    - dstr_find_orf_from_vector
+    - dstr_translate
+    - dstr_translate_from_vector
+    - dstr_align
+    - dstr_multi_align
+    - dstr_pcr
+    - dstr_primer_check
+    - dstr_iupac2regex
+    - dstr_TOPO
+    - dstr_LR
+    - dstr_TOPO
+    - dstr_TOPO_LR
+  - title: Calculate
+    contents:
+    - starts_with("calc_")
+  - title: File IO
+    contents:
+    - read_fasta
+    - write_fasta
+  - title: Misc
+    contents:
+    - Bio2bstr
+    - bstr2BioString
+    - bstr_add_attr_for_object
+    - bstr_add_attr_for_seq
+    - class_bstr
+    - compare
+    - mf

@@ -160,12 +160,12 @@ arguments provided will result in an unchanged input.</p></td>
   <span class='fu'>bstr_sub</span>(<span class='no'>temp</span>, <span class='fl'>1</span>:<span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>,<span class='fl'>2</span>))
 )</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 6 
-#&gt; [1]      no name 1      : QWuAiIHkYj                                              10 
-#&gt; [2]      no name 1      : QWuAi                                                    5 
-#&gt; [3]      no name 1      : iIHkYj                                                   6 
-#&gt; [4]      no name 1      : QWuAi                                                    5 
-#&gt; [5]      no name 1      : QWuAiI                                                   6 
-#&gt; [6]         &lt;NA&gt;        : W                                                        1 </div><div class='input'>
+#&gt; [1]      no name 1      : gZTNkfKZVQ                                              10 
+#&gt; [2]      no name 1      : gZTNk                                                    5 
+#&gt; [3]      no name 1      : kfKZVQ                                                   6 
+#&gt; [4]      no name 1      : gZTNk                                                    5 
+#&gt; [5]      no name 1      : gZTNkf                                                   6 
+#&gt; [6]         &lt;NA&gt;        : Z                                                        1 </div><div class='input'>
 <span class='co'># Negative indices</span>
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='no'>temp</span>,
@@ -174,13 +174,13 @@ arguments provided will result in an unchanged input.</p></td>
   <span class='fu'>bstr_sub</span>(<span class='no'>temp</span>, <span class='kw'>end</span> <span class='kw'>=</span> -<span class='fl'>7</span>)
 )</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 4 
-#&gt; [1]      no name 1      : QWuAiIHkYj                                              10 
-#&gt; [2]      no name 1      : j                                                        1 
-#&gt; [3]      no name 1      : AiIHkYj                                                  7 
-#&gt; [4]      no name 1      : QWuA                                                     4 </div><div class='input'>
+#&gt; [1]      no name 1      : gZTNkfKZVQ                                              10 
+#&gt; [2]      no name 1      : Q                                                        1 
+#&gt; [3]      no name 1      : NkfKZVQ                                                  7 
+#&gt; [4]      no name 1      : gZTN                                                     4 </div><div class='input'>
 <span class='co'># Alternatively, you can pass in a two colum matrix, as in the</span>
 <span class='co'># output from stringr::str_locate_all</span>
-<span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bstr.html'>bstr</a></span>(<span class='st'>"abcde fghij"</span>)
+<span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='construct_bstr.html'>bstr</a></span>(<span class='st'>"abcde fghij"</span>)
 <span class='no'>pos</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stringr</span><span class='kw ns'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_locate.html'>str_locate_all</a></span>(<span class='no'>temp</span>, <span class='st'>"[aefi]"</span>)<span class='kw'>[[</span><span class='fl'>1</span>]]
 <span class='fu'>bstr_sub</span>(<span class='no'>temp</span>, <span class='no'>pos</span>)</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 4 
@@ -222,7 +222,7 @@ arguments provided will result in an unchanged input.</p></td>
 #&gt; [1]      no name 1      : AK                                                      2 </div><div class='input'>
 <span class='co'># If you want to keep the original if some argument is NA,</span>
 <span class='co'># use omit_na = TRUE</span>
-<span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='no'>x3</span> <span class='kw'>&lt;-</span> <span class='no'>x4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bstr.html'>bstr</a></span>(<span class='st'>"AAA"</span>)
+<span class='no'>x1</span> <span class='kw'>&lt;-</span> <span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='no'>x3</span> <span class='kw'>&lt;-</span> <span class='no'>x4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='construct_bstr.html'>bstr</a></span>(<span class='st'>"AAA"</span>)
 <span class='fu'>bstr_sub</span>(<span class='no'>x1</span>, <span class='fl'>1</span>, <span class='fl'>NA</span>) <span class='kw'>&lt;-</span> <span class='st'>"B"</span>
 <span class='fu'>bstr_sub</span>(<span class='no'>x2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>) <span class='kw'>&lt;-</span> <span class='fl'>NA</span>
 <span class='fu'>bstr_sub</span>(<span class='no'>x3</span>, <span class='fl'>1</span>, <span class='fl'>NA</span>, <span class='kw'>omit_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>&lt;-</span> <span class='st'>"B"</span>

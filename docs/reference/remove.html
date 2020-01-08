@@ -143,7 +143,7 @@
     <p>A bstr object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bstr.html'>bstr</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ATGCCCTAG"</span>, <span class='st'>"aTGCcCtAg"</span>))
+    <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='construct_bstr.html'>bstr</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ATGCCCTAG"</span>, <span class='st'>"aTGCcCtAg"</span>))
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>temp</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fu'>bstr_remove</span>(<span class='no'>temp</span>, <span class='st'>"[aT]"</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 4 
 #&gt; [1]      no name 1      : ATGCCCTAG                                               9 
@@ -160,11 +160,11 @@
 #&gt; [2]      no name 2      : aTGCcCtAg                                               9 
 #&gt; [3]   remove.no name 1  : ATGCCCTAG                                               9 
 #&gt; [4]   remove.no name 2  : GCcCtAg                                                 7 </div><div class='input'>
-<span class='fu'>bstr_remove_num</span>(<span class='fu'><a href='bstr.html'>bstr</a></span>(<span class='st'>"ac12 -xe gg. "</span>))</div><div class='output co'>#&gt; class: bstr,character 
+<span class='fu'>bstr_remove_num</span>(<span class='fu'><a href='construct_bstr.html'>bstr</a></span>(<span class='st'>"ac12 -xe gg. "</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 1 
-#&gt; [1]      no name 1      : ac -xe gg.                                              11 </div><div class='input'><span class='fu'>bstr_remove_notalpha</span>(<span class='fu'><a href='bstr.html'>bstr</a></span>(<span class='st'>"ac12 -xe gg. "</span>))</div><div class='output co'>#&gt; class: bstr,character 
+#&gt; [1]      no name 1      : ac -xe gg.                                              11 </div><div class='input'><span class='fu'>bstr_remove_notalpha</span>(<span class='fu'><a href='construct_bstr.html'>bstr</a></span>(<span class='st'>"ac12 -xe gg. "</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 1 
-#&gt; [1]      no name 1      : acxegg                                                  6 </div><div class='input'><span class='fu'>bstr_remove_gap</span>(<span class='fu'><a href='bstr.html'>bstr</a></span>(<span class='st'>"ac12 -xe gg. "</span>))</div><div class='output co'>#&gt; class: bstr,character 
+#&gt; [1]      no name 1      : acxegg                                                  6 </div><div class='input'><span class='fu'>bstr_remove_gap</span>(<span class='fu'><a href='construct_bstr.html'>bstr</a></span>(<span class='st'>"ac12 -xe gg. "</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 1 
 #&gt; [1]      no name 1      : ac12 xe gg.                                             12 </div><div class='input'>
 </div></pre>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate protein molecular weight — calc_MW_peptide • bstringr</title>
+<title>Common bstr class augments — class_bstr • bstringr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Calculate protein molecular weight — calc_MW_peptide" />
-<meta property="og:description" content="Calculate protein molecular weight" />
+<meta property="og:title" content="Common bstr class augments — class_bstr" />
+<meta property="og:description" content="Common bstr class augments" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,49 +100,59 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate protein molecular weight</h1>
+    <h1>Common bstr class augments</h1>
     
-    <div class="hidden name"><code>calc_MW_peptide.Rd</code></div>
+    <div class="hidden name"><code>class_bstr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculate protein molecular weight</p>
+    <p>Common bstr class augments</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calc_MW_peptide</span>(<span class='no'>astrobj</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>x</th>
+      <td><p>A character vector which convert to a bstr object.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>A character vector which is name of x.</p></td>
+    </tr>
+    <tr>
+      <th>ucase</th>
+      <td><p>A logical. If TRUE the x is converted to upper case. (default: FALSE)</p></td>
+    </tr>
+    <tr>
+      <th>bstrobj</th>
+      <td><p>bstr class object or character vector</p></td>
+    </tr>
+    <tr>
+      <th>dstrobj</th>
+      <td><p>dstr class object or character vector</p></td>
+    </tr>
+    <tr>
       <th>astrobj</th>
-      <td><p>astr object.</p></td>
+      <td><p>astr class object or character vector</p></td>
+    </tr>
+    <tr>
+      <th>pattern</th>
+      <td><p>regex pattern</p></td>
+    </tr>
+    <tr>
+      <th>case_sensitive</th>
+      <td><p>sensitive to case in pattern (default:FALSE)</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='astr_rand_seq.html'>astr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>100</span>) <span class='kw'>%&gt;%</span> <span class='fu'>calc_MW_peptide</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 60 x 8</span><span>
-#&gt;      len name      aa    count percent aa_mw aa_mw_sum pep_mw
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>    93 no name 1 A        10   10.8   71.1      711. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'> 2</span><span>    93 no name 1 R         5    5.38 156.       781. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'> 3</span><span>    93 no name 1 N         5    5.38 114.       571. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'> 4</span><span>    93 no name 1 D         3    3.23 115.       345. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'> 5</span><span>    93 no name 1 C         2    2.15 103.       206. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'> 6</span><span>    93 no name 1 Q         4    4.30 128.       513. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'> 7</span><span>    93 no name 1 E         2    2.15 129.       258. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'> 8</span><span>    93 no name 1 G         5    5.38  57.1      285. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'> 9</span><span>    93 no name 1 H         4    4.30 137.       549. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'>10</span><span>    93 no name 1 I         4    4.30 113.       453. </span><span style='text-decoration: underline;'>11</span><span>103.
-#&gt; </span><span style='color: #555555;'># … with 50 more rows</span><span></div><div class='input'>
-</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

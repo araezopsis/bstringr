@@ -112,88 +112,28 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-bstr-dstr-astr-class" class="hasAnchor"><a href="#section-bstr-dstr-astr-class" class="anchor"></a>bstr/dstr/astr class</h2>
+          <p class="section-desc"><p>Class for biological sequences.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="Bio2bstr.html">Bio2bstr()</a></code> </p>
-        </td>
-        <td><p>Convert sequence to Biostrings::*StringSet object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="as_astr.html">as_astr()</a></code> </p>
-        </td>
-        <td><p>Convert character vector to dstr class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="as_bstr.html">as_bstr()</a></code> </p>
-        </td>
-        <td><p>Convert character vector to bstr class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="as_dstr.html">as_dstr()</a></code> </p>
-        </td>
-        <td><p>Convert character vector to dstr class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="astr.html">astr()</a></code> </p>
-        </td>
-        <td><p>Constructing astr class object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="astr_rand_seq.html">astr_rand_seq()</a></code> </p>
-        </td>
-        <td><p>Generate random astr sequences of desired lengths.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bstr.html">bstr()</a></code> </p>
+          <p><code><a href="construct_bstr.html">bstr()</a></code> <code><a href="construct_bstr.html">dstr()</a></code> <code><a href="construct_bstr.html">astr()</a></code> <code><a href="construct_bstr.html">is_bstr()</a></code> <code><a href="construct_bstr.html">is_dstr()</a></code> <code><a href="construct_bstr.html">is_astr()</a></code> <code><a href="construct_bstr.html">as_bstr()</a></code> <code><a href="construct_bstr.html">as_astr()</a></code> <code><a href="construct_bstr.html">as_dstr()</a></code> </p>
         </td>
         <td><p>Constructer of the bstr class object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="bstr2BioString.html">bstr2BioString()</a></code> </p>
+          <p><code><a href="is_valid_dna_character.html">is_valid_dna_character()</a></code> </p>
         </td>
-        <td><p>Convert sequence to Biostrings::*StringSet object</p></td>
+        <td><p>Detect invalid IUPAC DNA characters</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="bstr_add_attr_for_object.html">bstr_add_attr_for_object()</a></code> </p>
+          <p><code><a href="is_valid_aa_character.html">is_valid_aa_character()</a></code> </p>
         </td>
-        <td><p>Add object attribute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bstr_add_attr_for_seq.html">bstr_add_attr_for_seq()</a></code> </p>
-        </td>
-        <td><p>Add sequence attribute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bstr_align.html">bstr_align()</a></code> </p>
-        </td>
-        <td><p>Align bstr sequence</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bstr_length.html">bstr_length()</a></code> </p>
-        </td>
-        <td><p>Sequence length in the bstr sequences.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bstr_multi_align.html">bstr_multi_align()</a></code> </p>
-        </td>
-        <td><p>Align multiple bstr sequence</p></td>
+        <td><p>Detect invalid IUPAC Amino Acid characters</p></td>
       </tr><tr>
         
         <td>
@@ -203,9 +143,77 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="bstr_replace.html">bstr_replace()</a></code> </p>
+          <p><code><a href="dstr_rand_seq.html">dstr_rand_seq()</a></code> </p>
         </td>
-        <td><p>Replace matched patterns in bstr sequences by replacements</p></td>
+        <td><p>Generate random dstr sequences of desired lengths.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="astr_rand_seq.html">astr_rand_seq()</a></code> </p>
+        </td>
+        <td><p>Generate random astr sequences of desired lengths.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-functions-for-bstr" class="hasAnchor"><a href="#section-functions-for-bstr" class="anchor"></a>functions for bstr</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="c.bstr.html">c(<i>&lt;bstr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Combine Values into a bstr class object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sort.bstr.html">sort(<i>&lt;bstr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>sort bstr</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sub-.bstr.html">`[`(<i>&lt;bstr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>subsetting biostrings class object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.bstr.html">print(<i>&lt;bstr&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>print biostrings class object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="format_parts_length.html">format_parts_length()</a></code> </p>
+        </td>
+        <td><p>format bstr sequence length</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="format_parts_name.html">format_parts_name()</a></code> </p>
+        </td>
+        <td><p>format bstr name</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="format_parts_seq.html">format_parts_seq()</a></code> </p>
+        </td>
+        <td><p>format bstr sequence</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="format_row.html">format_row()</a></code> </p>
+        </td>
+        <td><p>format bstr</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bstr_length.html">bstr_length()</a></code> </p>
+        </td>
+        <td><p>Sequence length in the bstr sequences.</p></td>
       </tr><tr>
         
         <td>
@@ -215,22 +223,158 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="bstr_sub_all.html">bstr_sub_all()</a></code> <code><a href="bstr_sub_all.html">`bstr_sub_all<-`()</a></code> <code><a href="bstr_sub_all.html">bstr_sub_replace_all()</a></code> <code><a href="bstr_sub_all.html">bstr_sub_all_replace()</a></code> </p>
+          <p><code><a href="bstr_replace.html">bstr_replace()</a></code> </p>
+        </td>
+        <td><p>Replace matched patterns in bstr sequences by replacements</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="case.html">bstr_to_upper()</a></code> <code><a href="case.html">bstr_to_lower()</a></code> <code><a href="case.html">bstr_switch_case()</a></code> </p>
+        </td>
+        <td><p>Convert case of a bstring sequence.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sub.html">bstr_sub()</a></code> <code><a href="sub.html">`bstr_sub<-`()</a></code> <code><a href="sub.html">bstr_sub_replace()</a></code> </p>
+        </td>
+        <td><p>Extract and replace subsequences from a bstr sequences</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sub_all.html">bstr_sub_all()</a></code> <code><a href="sub_all.html">`bstr_sub_all<-`()</a></code> <code><a href="sub_all.html">bstr_sub_replace_all()</a></code> <code><a href="sub_all.html">bstr_sub_all_replace()</a></code> </p>
         </td>
         <td><p>Extract and replace all subsequences from a bstr sequences</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="remove.html">bstr_remove()</a></code> <code><a href="remove.html">bstr_remove_num()</a></code> <code><a href="remove.html">bstr_remove_notalpha()</a></code> <code><a href="remove.html">bstr_remove_gap()</a></code> </p>
+        </td>
+        <td><p>Remove all matched patterns in bstr sequences</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bstr_align.html">bstr_align()</a></code> </p>
+        </td>
+        <td><p>Align bstr sequence</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bstr_multi_align.html">bstr_multi_align()</a></code> </p>
+        </td>
+        <td><p>Align multiple bstr sequence</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="bstr_sub_true.html">bstr_sub_true()</a></code> </p>
         </td>
         <td><p>bstr_sub_true</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-functions-for-dstr" class="hasAnchor"><a href="#section-functions-for-dstr" class="anchor"></a>functions for dstr</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="dstr_remove_stop.html">dstr_remove_stop()</a></code> </p>
+        </td>
+        <td><p>Remove stop codon from DNA sequence</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="c.bstr.html">c(<i>&lt;bstr&gt;</i>)</a></code> </p>
+          <p><code><a href="dstr_complement.html">dstr_complement()</a></code> <code><a href="dstr_complement.html">dstr_complement_fast()</a></code> </p>
         </td>
-        <td><p>Combine Values into a bstr class object</p></td>
+        <td><p>Return complement sequences</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_rev_comp.html">dstr_rev_comp()</a></code> <code><a href="dstr_rev_comp.html">dstr_rev_comp_fast()</a></code> </p>
+        </td>
+        <td><p>Return reverse complement sequences</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_find_orf.html">dstr_find_orf()</a></code> </p>
+        </td>
+        <td><p>Find open reading frames from DNA</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_find_orf_from_vector.html">dstr_find_orf_from_vector()</a></code> </p>
+        </td>
+        <td><p>Find a main open reading frame from Gataway system vector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_translate.html">dstr_translate()</a></code> </p>
+        </td>
+        <td><p>Translate dna -&gt; protein</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_translate_from_vector.html">dstr_translate_from_vector()</a></code> </p>
+        </td>
+        <td><p>Find and translate ORF from expression vector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_align.html">dstr_align()</a></code> </p>
+        </td>
+        <td><p>Align dna sequence</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_multi_align.html">dstr_multi_align()</a></code> </p>
+        </td>
+        <td><p>Align multiple bstr sequence</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_pcr.html">dstr_pcr()</a></code> </p>
+        </td>
+        <td><p>Calculate PCR product length</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_primer_check.html">dstr_primer_check()</a></code> </p>
+        </td>
+        <td><p>Primer check</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_iupac2regex.html">dstr_iupac2regex()</a></code> </p>
+        </td>
+        <td><p>Convert IUPAC CODE to regular expression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_TOPO.html">dstr_TOPO()</a></code> </p>
+        </td>
+        <td><p>Return the product sequence of after TOPO reaction</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_LR.html">dstr_LR()</a></code> </p>
+        </td>
+        <td><p>Return product sequence after LR reaction</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dstr_TOPO_LR.html">dstr_TOPO_LR()</a></code> </p>
+        </td>
+        <td><p>TOPO and LR reaction</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-calculate" class="hasAnchor"><a href="#section-calculate" class="anchor"></a>Calculate</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="calc_GCper.html">calc_GCper()</a></code> </p>
@@ -284,16 +428,62 @@
           <p><code><a href="calc_oligoDNATm.html">calc_oligoDNATm()</a></code> </p>
         </td>
         <td><p>Calculate Oligo DNA Tm</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-file-io" class="hasAnchor"><a href="#section-file-io" class="anchor"></a>File IO</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
-          <p><code><a href="case.html">bstr_to_upper()</a></code> <code><a href="case.html">bstr_to_lower()</a></code> <code><a href="case.html">bstr_switch_case()</a></code> </p>
+          <p><code><a href="read_fasta.html">read_fasta()</a></code> </p>
         </td>
-        <td><p>Convert case of a bstring sequence.</p></td>
+        <td><p>Read fasta file</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="class_bstr_arg.html">class_bstr_arg()</a></code> </p>
+          <p><code><a href="write_fasta.html">write_fasta()</a></code> </p>
+        </td>
+        <td><p>write fasta file</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-misc" class="hasAnchor"><a href="#section-misc" class="anchor"></a>Misc</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="Bio2bstr.html">Bio2bstr()</a></code> </p>
+        </td>
+        <td><p>Convert sequence to Biostrings::*StringSet object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bstr2BioString.html">bstr2BioString()</a></code> </p>
+        </td>
+        <td><p>Convert sequence to Biostrings::*StringSet object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bstr_add_attr_for_object.html">bstr_add_attr_for_object()</a></code> </p>
+        </td>
+        <td><p>Add object attribute</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bstr_add_attr_for_seq.html">bstr_add_attr_for_seq()</a></code> </p>
+        </td>
+        <td><p>Add sequence attribute</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="class_bstr.html">class_bstr</a></code> </p>
         </td>
         <td><p>Common bstr class augments</p></td>
       </tr><tr>
@@ -305,201 +495,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dstr.html">dstr()</a></code> </p>
-        </td>
-        <td><p>Constructer of the dstr class object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_LR.html">dstr_LR()</a></code> </p>
-        </td>
-        <td><p>Return product sequence after LR reaction</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_TOPO.html">dstr_TOPO()</a></code> </p>
-        </td>
-        <td><p>Return the product sequence of after TOPO reaction</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_TOPO_LR.html">dstr_TOPO_LR()</a></code> </p>
-        </td>
-        <td><p>TOPO and LR reaction</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_align.html">dstr_align()</a></code> </p>
-        </td>
-        <td><p>Align dna sequence</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_complement.html">dstr_complement()</a></code> <code><a href="dstr_complement.html">dstr_complement_fast()</a></code> </p>
-        </td>
-        <td><p>Return complement sequences</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_find_orf.html">dstr_find_orf()</a></code> </p>
-        </td>
-        <td><p>Find open reading frames from DNA</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_find_orf_from_vector.html">dstr_find_orf_from_vector()</a></code> </p>
-        </td>
-        <td><p>Find a main open reading frame from Gataway system vector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_iupac2regex.html">dstr_iupac2regex()</a></code> </p>
-        </td>
-        <td><p>Convert IUPAC CODE to regular expression</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_multi_align.html">dstr_multi_align()</a></code> </p>
-        </td>
-        <td><p>Align multiple bstr sequence</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_pcr.html">dstr_pcr()</a></code> </p>
-        </td>
-        <td><p>Calculate PCR product length</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_primer_check.html">dstr_primer_check()</a></code> </p>
-        </td>
-        <td><p>Primer check</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_rand_seq.html">dstr_rand_seq()</a></code> </p>
-        </td>
-        <td><p>Generate random dstr sequences of desired lengths.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_remove_stop.html">dstr_remove_stop()</a></code> </p>
-        </td>
-        <td><p>Remove stop codon from DNA sequence</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_rev_comp.html">dstr_rev_comp()</a></code> <code><a href="dstr_rev_comp.html">dstr_rev_comp_fast()</a></code> </p>
-        </td>
-        <td><p>Return reverse complement sequences</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_translate.html">dstr_translate()</a></code> </p>
-        </td>
-        <td><p>Translate dna -&gt; protein</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dstr_translate_from_vector.html">dstr_translate_from_vector()</a></code> </p>
-        </td>
-        <td><p>Find and translate ORF from expression vector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="format_parts_length.html">format_parts_length()</a></code> </p>
-        </td>
-        <td><p>format bstr sequence length</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="format_parts_name.html">format_parts_name()</a></code> </p>
-        </td>
-        <td><p>format bstr name</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="format_parts_seq.html">format_parts_seq()</a></code> </p>
-        </td>
-        <td><p>format bstr sequence</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="format_row.html">format_row()</a></code> </p>
-        </td>
-        <td><p>format bstr</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_astr.html">is_astr()</a></code> </p>
-        </td>
-        <td><p>check class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_bstr.html">is_bstr()</a></code> </p>
-        </td>
-        <td><p>check class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_dstr.html">is_dstr()</a></code> </p>
-        </td>
-        <td><p>check dstr class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_valid_dna_character.html">is_valid_dna_character()</a></code> </p>
-        </td>
-        <td><p>Detect invalid IUPAC DNA characters</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="mf.html">mf()</a></code> </p>
         </td>
         <td><p>Calculate Oligo DNA Tm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.bstr.html">print(<i>&lt;bstr&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>print biostrings class object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_fasta.html">read_fasta()</a></code> </p>
-        </td>
-        <td><p>Read fasta file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="remove.html">bstr_remove()</a></code> <code><a href="remove.html">bstr_remove_num()</a></code> <code><a href="remove.html">bstr_remove_notalpha()</a></code> <code><a href="remove.html">bstr_remove_gap()</a></code> </p>
-        </td>
-        <td><p>Remove all matched patterns in bstr sequences</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sort.bstr.html">sort(<i>&lt;bstr&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>sort bstr</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sub-.bstr.html">`[`(<i>&lt;bstr&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>subsetting biostrings class object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sub.html">bstr_sub()</a></code> <code><a href="sub.html">`bstr_sub<-`()</a></code> <code><a href="sub.html">bstr_sub_replace()</a></code> </p>
-        </td>
-        <td><p>Extract and replace subsequences from a bstr sequences</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write_fasta.html">write_fasta()</a></code> </p>
-        </td>
-        <td><p>write fasta file</p></td>
       </tr>
     </tbody>
     </table>
@@ -508,7 +506,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-bstr-dstr-astr-class">bstr/dstr/astr class</a></li>
+      <li><a href="#section-functions-for-bstr">functions for bstr</a></li>
+      <li><a href="#section-functions-for-dstr">functions for dstr</a></li>
+      <li><a href="#section-calculate">Calculate</a></li>
+      <li><a href="#section-file-io">File IO</a></li>
+      <li><a href="#section-misc">Misc</a></li>
     </ul>
   </div>
 </div>
