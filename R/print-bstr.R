@@ -15,15 +15,29 @@
 #   }
 
 
-#' print biostrings class object
+#' print bstr class object
 #' @param x x
 #' @param ... ...
 #' @param n number of printing elements
 #' @param l_name max length of name
 #' @param l_seq max length of sequence
 #' @export
+#' @examples
+#' dstr_rand_seq(10, 20, seed = 1)
+#' astr_rand_seq(10, 20, seed = 1)
+#'
+#' test1 <- dstr_rand_seq(1, 20, seed = 1)
+#' test2 <- dstr_rand_seq(1, 21, seed = 1)
+#' print(test1, l_seq = 20L)
+#' print(test2, l_seq = 20L)
+#'
+#' print(test1, l_name = 9L)
+#' print(test1, l_name = 8L)
+#'
+#' dstr_rand_seq(10, 20, seed = 1) %>% print(n = 20L)
+#'
 print.bstr <-
-  function(x, ..., n = 6, l_name = 20, l_seq = 55){
+  function(x, ..., n = 6L, l_name = 20L, l_seq = 40L){
     lx <- length(x)
     n <- ifelse(n > lx, lx, n)
 
@@ -41,27 +55,21 @@ print.bstr <-
 
 # min(l_name) == 20
 #' format bstr name
-#' @importFrom stringr str_count
-#' @importFrom stringr str_sub
-#' @importFrom stringr str_pad
 #' @inheritParams print.bstr
 format_parts_name <-
   function(x, l_name){
     class(x) <- "character"
     x[is.na(x)] <- "<NA>"
     x <- ifelse(
-      test = str_count(x) > l_name,
-      yes = paste0(str_sub(x, end = l_name - 3), "..."),
+      test = stringr::str_count(x) > l_name,
+      yes = paste0(stringr::str_sub(x, end = l_name - 3), "..."),
       no = x
     )
-    str_pad(x, l_name, side = "both")
+    stringr::str_pad(x, l_name, side = "both")
   }
 
 # min(l_seq) == 6, (5 %/% 2 - 2) == 0
 #' format bstr sequence
-#' @importFrom stringr str_count
-#' @importFrom stringr str_sub
-#' @importFrom stringr str_pad
 #' @inheritParams print.bstr
 format_parts_seq <-
   function(x, l_seq){
@@ -71,27 +79,25 @@ format_parts_seq <-
     x[is.na(x)] <- "<NA>"
     x <-
       ifelse(
-        test = str_count(x) <= l_seq,
+        test = stringr::str_count(x) <= l_seq,
         yes = x,
         no = paste0(
-          str_sub(x, end = l_seq_half),
+          stringr::str_sub(x, end = l_seq_half),
           "....",
-          str_sub(x, start = -l_seq_half)
+          stringr::str_sub(x, start = -l_seq_half)
         )
       )
-    str_pad(x, l_seq, side = "right")
+    stringr::str_pad(x, l_seq, side = "right")
   }
 
 #' format bstr sequence length
-#' @importFrom stringr str_count
-#' @importFrom stringr str_pad
 #' @inheritParams print.bstr
 format_parts_length <-
   function(x){
     class(x) <- "character"
-    x <- str_count(x)
-    x_maxn <- max(str_count(x))
-    str_pad(x, width = x_maxn)
+    x <- stringr::str_count(x)
+    x_maxn <- max(stringr::str_count(x))
+    stringr::str_pad(x, width = x_maxn)
   }
 
 #' format bstr
@@ -102,7 +108,7 @@ format_row <-
     x <- x[seq_len(n)]
     paste0(
       "[",
-      seq_along(x) %>% {str_pad(., max(nchar(.)), "right")},
+      seq_along(x) %>% {stringr::str_pad(., max(nchar(.)), "right")},
       "] ",
       format_parts_name(names(x), l_name),
       ": ",
@@ -111,3 +117,5 @@ format_row <-
       format_parts_length(x)
     )
   }
+
+

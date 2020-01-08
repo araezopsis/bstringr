@@ -16,7 +16,6 @@ reference:
     - sort.bstr
     - "`[.bstr`"
     - print.bstr
-    - starts_with("format_")
     - bstr_length
     - bstr_reverse
     - bstr_replace

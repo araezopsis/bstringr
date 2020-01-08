@@ -2,9 +2,9 @@
 % Please edit documentation in R/print-bstr.R
 \name{print.bstr}
 \alias{print.bstr}
-\title{print biostrings class object}
+\title{print bstr class object}
 \usage{
-\method{print}{bstr}(x, ..., n = 6, l_name = 20, l_seq = 55)
+\method{print}{bstr}(x, ..., n = 6L, l_name = 20L, l_seq = 40L)
 }
 \arguments{
 \item{x}{x}
@@ -18,5 +18,20 @@
 \item{l_seq}{max length of sequence}
 }
 \description{
-print biostrings class object
+print bstr class object
+}
+\examples{
+dstr_rand_seq(10, 20, seed = 1)
+astr_rand_seq(10, 20, seed = 1)
+
+test1 <- dstr_rand_seq(1, 20, seed = 1)
+test2 <- dstr_rand_seq(1, 21, seed = 1)
+print(test1, l_seq = 20L)
+print(test2, l_seq = 20L)
+
+print(test1, l_name = 9L)
+print(test1, l_name = 8L)
+
+dstr_rand_seq(10, 20, seed = 1) \%>\% print(n = 20L)
+
 }
