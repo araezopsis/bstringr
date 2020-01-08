@@ -4,7 +4,7 @@
 \alias{dstr_rand_seq}
 \title{Generate random dstr sequences of desired lengths.}
 \usage{
-dstr_rand_seq(n, length, pattern = "[ATGC]")
+dstr_rand_seq(n, length, pattern = "[ATGC]", seed)
 }
 \arguments{
 \item{n}{single integer, nubmer of sequences}
@@ -12,12 +12,14 @@ dstr_rand_seq(n, length, pattern = "[ATGC]")
 \item{length}{integer vector, desired sequence lengths}
 
 \item{pattern}{character vector specifying character classes}
+
+\item{seed}{a single integer. specify seeds.}
 }
 \description{
 Generate random dstr sequences of desired lengths.
 }
 \examples{
-dstr_rand_seq(3, 20)
-dstr_rand_seq(3, 5:7, c("[atcg]", "[ATCG]", "[N.]"))
+dstr_rand_seq(3, 20, seed = 1)
+dstr_rand_seq(3, 5:7, c("[atcg]", "[ATCG]", "[N.]"), seed = 1)
 
 }

@@ -4,7 +4,7 @@
 \alias{astr_rand_seq}
 \title{Generate random astr sequences of desired lengths.}
 \usage{
-astr_rand_seq(n, length, pattern = "[ARNDCQEGHILKMFPSTWYVX]")
+astr_rand_seq(n, length, pattern = "[ARNDCQEGHILKMFPSTWYVX]", seed)
 }
 \arguments{
 \item{n}{single integer, nubmer of sequences}
@@ -12,12 +12,14 @@ astr_rand_seq(n, length, pattern = "[ARNDCQEGHILKMFPSTWYVX]")
 \item{length}{integer vector, desired sequence lengths}
 
 \item{pattern}{character vector specifying character classes}
+
+\item{seed}{a single integer. specify seeds.}
 }
 \description{
 Generate random astr sequences of desired lengths.
 }
 \examples{
-astr_rand_seq(3, 20)
-astr_rand_seq(3, 5:7, c("[arnd]", "[ARND]", "[X.]"))
+astr_rand_seq(3, 20, seed = 1)
+astr_rand_seq(3, 5:7, c("[arnd]", "[ARND]", "[X.]"), seed = 1)
 
 }

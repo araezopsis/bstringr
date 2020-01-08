@@ -4,7 +4,7 @@
 \alias{bstr_rand_seq}
 \title{Generate random bstr sequences of desired lengths.}
 \usage{
-bstr_rand_seq(n, length, pattern = "[A-Za-z]")
+bstr_rand_seq(n, length, pattern = "[A-Za-z]", seed)
 }
 \arguments{
 \item{n}{single integer, nubmer of sequences}
@@ -12,12 +12,14 @@ bstr_rand_seq(n, length, pattern = "[A-Za-z]")
 \item{length}{integer vector, desired sequence lengths}
 
 \item{pattern}{character vector specifying character classes}
+
+\item{seed}{a single integer. specify seeds.}
 }
 \description{
 Generate random bstr sequences of desired lengths.
 }
 \examples{
-bstr_rand_seq(3, 20)
-bstr_rand_seq(3, 5:7, c("[a-c]", "[A-C]", "[1-3]"))
+bstr_rand_seq(3, 20, seed = 1)
+bstr_rand_seq(3, 5:7, c("[a-c]", "[A-C]", "[1-3]"), seed = 1)
 
 }
