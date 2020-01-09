@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reverse bstr sequence — bstr_reverse • bstringr</title>
+<title>Reverse bstr sequence — reverse • bstringr</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Reverse bstr sequence — bstr_reverse" />
+<meta property="og:title" content="Reverse bstr sequence — reverse" />
 <meta property="og:description" content="Reverse bstr sequence" />
 <meta name="twitter:card" content="summary" />
 
@@ -102,14 +102,18 @@
     <div class="page-header">
     <h1>Reverse bstr sequence</h1>
     
-    <div class="hidden name"><code>bstr_reverse.Rd</code></div>
+    <div class="hidden name"><code>reverse.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Reverse bstr sequence</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bstr_reverse</span>(<span class='no'>bstrobj</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='bstr_reverse.html'>bstr_reverse</a></span>(<span class='no'>bstrobj</span>)
+
+<span class='fu'>dstr_reverse</span>(<span class='no'>bstrobj</span>)
+
+<span class='fu'>astr_reverse</span>(<span class='no'>bstrobj</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -122,13 +126,13 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random_seq.html'>bstr_rand_seq</a></span>(<span class='fl'>2</span>, <span class='fl'>6</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>temp</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fu'>bstr_reverse</span>(<span class='no'>temp</span>))</div><div class='output co'>#&gt; class: bstr,character 
+    <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random_seq.html'>bstr_rand_seq</a></span>(<span class='fl'>2</span>, <span class='fl'>6</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>temp</span>, <span class='kw'>reverse</span> <span class='kw'>=</span> <span class='fu'><a href='bstr_reverse.html'>bstr_reverse</a></span>(<span class='no'>temp</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 4 
-#&gt; [1]      no name 1      : ErfIAY                                   6 
-#&gt; [2]      no name 2      : ZPmotJ                                   6 
-#&gt; [3]  reverse.no name 1  : YAIfrE                                   6 
-#&gt; [4]  reverse.no name 2  : JtomPZ                                   6 </div><div class='input'>
+#&gt; [1]      no name 1      : NTdvKu                                   6 
+#&gt; [2]      no name 2      : xigDKJ                                   6 
+#&gt; [3]  reverse.no name 1  : uKvdTN                                   6 
+#&gt; [4]  reverse.no name 2  : JKDgix                                   6 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

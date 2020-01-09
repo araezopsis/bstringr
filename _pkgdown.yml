@@ -16,8 +16,8 @@ reference:
     - print.bstr
   - title: functions for bstr
     contents:
-    - bstr_length
-    - bstr_reverse
+    - length
+    - reverse
     - bstr_replace
     - case
     - sub
