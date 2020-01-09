@@ -123,22 +123,22 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='dstr_rand_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='fu'><a href='dstr_rand_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; class: bstr,character 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 5 
 #&gt; [1]      no name 1      : CCGTA                                    5 
 #&gt; [2]      no name 2      : TTGGA                                    5 
 #&gt; [3]      no name 1      : AGGAT                                    5 
 #&gt; [4]      no name 2      : TATCG                                    5 
-#&gt; [5]      no name 3      : GATAC                                    5 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='dstr_rand_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='fu'><a href='dstr_rand_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt; class: bstr,character 
+#&gt; [5]      no name 3      : GATAC                                    5 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 5 
 #&gt; [1]      no name 1      : AGGAT                                    5 
 #&gt; [2]      no name 2      : TATCG                                    5 
 #&gt; [3]      no name 3      : GATAC                                    5 
 #&gt; [4]      no name 1      : CCGTA                                    5 
 #&gt; [5]      no name 2      : TTGGA                                    5 </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"hoge"</span>, <span class='fu'><a href='dstr_rand_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt;           no name 1 no name 2 
+<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"hoge"</span>, <span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>2</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt;           no name 1 no name 2 
 #&gt;    "hoge"   "CCGTA"   "TTGGA" </div><div class='input'><span class='co'># c(dstr_rand_seq(3, 5, seed = 2), "hoge") # Error</span>
-<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='dstr_rand_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='fu'><a href='construct_bstr.html'>as_bstr</a></span>(<span class='st'>"hoge"</span>))</div><div class='output co'>#&gt; class: bstr,character 
+<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>2</span>), <span class='fu'><a href='construct_bstr.html'>as_bstr</a></span>(<span class='st'>"hoge"</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 4 
 #&gt; [1]      no name 1      : AGGAT                                    5 
 #&gt; [2]      no name 2      : TATCG                                    5 
