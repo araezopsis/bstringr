@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read fasta file — read_fasta • bstringr</title>
+<title>Read Genbank file — read_genbank • bstringr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Read fasta file — read_fasta" />
-<meta property="og:description" content="Read fasta file" />
+<meta property="og:title" content="Read Genbank file — read_genbank" />
+<meta property="og:description" content="Read Genbank file" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,23 +100,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read fasta file</h1>
+    <h1>Read Genbank file</h1>
     
-    <div class="hidden name"><code>read_fasta.Rd</code></div>
+    <div class="hidden name"><code>read_genbank.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Read fasta file</p>
+    <p>Read Genbank file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_fasta</span>(<span class='no'>fpath</span>, <span class='kw'>ucase</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+    <pre class="usage"><span class='fu'>read_genbank</span>(<span class='no'>fpath</span>, <span class='kw'>ucase</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fpath</th>
-      <td><p>A fasta file path.</p></td>
+      <td><p>A genbank file path.</p></td>
     </tr>
     <tr>
       <th>ucase</th>
@@ -126,13 +126,10 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>inf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"test.fas"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"bstringr"</span>)
-<span class='fu'>read_fasta</span>(<span class='no'>inf</span>)</div><div class='output co'>#&gt; class: bstr,character 
-#&gt; number of sequences: 4 
-#&gt; [1]         TEST        : This is test.                            13 
-#&gt; [2]        test1        : AAAAAAAAAA AAAAAAA....AAAAAAA AAAAAAAAAA 76 
-#&gt; [3]        test2        : AAAAAAAAAAAAAAAAAAAA                     20 
-#&gt; [4]        test3        : ATGC                                      4 </div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>inf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"sample.gb"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"bstringr"</span>)
+<span class='fu'>read_genbank</span>(<span class='no'>inf</span>)</div><div class='output co'>#&gt; class: bstr,character 
+#&gt; number of sequences: 1 
+#&gt; [1]      SCU49845       : gatcctccatatacaacg....ttcaatttctctttgatc 5028 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

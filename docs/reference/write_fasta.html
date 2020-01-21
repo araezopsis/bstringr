@@ -129,11 +129,28 @@
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>(<span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>60</span>, <span class='fl'>90</span>, <span class='fl'>200</span>), <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt; class: dstr,bstr,character 
+#&gt; number of sequences: 3 
+#&gt; [1]      no name 1      : CCGTATTGGAAAGCTCGT....TGGTACGGCTCAAACGGC  60 
+#&gt; [2]      no name 2      : TCCCGCCTATCTCCCTTC....AGTGGGTGGGACGCAGAT  90 
+#&gt; [3]      no name 3      : GGCCGAGACACTCTTCAC....CTACCAGTTAGCGCCACG 200 </div><div class='input'><span class='fu'>write_fasta</span>(<span class='no'>temp</span>)</div><div class='output co'>#&gt;  [1] "&gt;no name 1"                                                  
+#&gt;  [2] "CCGTATTGGAAAGCTCGTCTTAGACCACTCCGCATGTAGCTGTGGTACGGCTCAAACGGC"
+#&gt;  [3] "&gt;no name 2"                                                  
+#&gt;  [4] "TCCCGCCTATCTCCCTTCTTCGCCTAGAAAAAGTTTCCTGGCCTGAACTGTGCCAAGACG"
+#&gt;  [5] "TCCATCGAAGGAAGTGGGTGGGACGCAGAT"                              
+#&gt;  [6] "&gt;no name 3"                                                  
+#&gt;  [7] "GGCCGAGACACTCTTCACGCGTTCCTGGGTCATGTATGTGGCATCGATCTCAGCAGGACG"
+#&gt;  [8] "TATTTCGTTCCACGTGCACTCACGCGGGCCCGTACACACTTTCGCAACCTGCCTGAATGA"
+#&gt;  [9] "AACACACACTAGTCAACAAAAATCGGAAATGACCCTATACAATGCCACTGGCCTTTTTCT"
+#&gt; [10] "TCCTACCAGTTAGCGCCACG"                                        </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

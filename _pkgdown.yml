@@ -51,6 +51,8 @@ reference:
     contents:
     - read_fasta
     - write_fasta
+    - read_genbank
+    - starts_with("parse_")
   - title: Misc
     contents:
     - Bio2bstr
