@@ -66,7 +66,7 @@ dstr_multi_align <-
       li[[i]] <-
         list(
           align, # ifelse()で処理できず
-          orientation = if_else(score_f >= score_r, "forward", "reverse")
+          orientation = dplyr::if_else(score_f >= score_r, "forward", "reverse")
         )
     }
     li
