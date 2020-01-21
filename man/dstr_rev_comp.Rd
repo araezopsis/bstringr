@@ -16,7 +16,7 @@ dstr_rev_comp_fast(dstrobj)
 Return reverse complement sequences
 }
 \examples{
-temp <- dstr_rand_seq(3, 10, "[atgcATGC]")
+temp <- dstr_rand_seq(3, 10, "[atgcATGC]", seed = 1)
 c(temp, compl = dstr_rev_comp(temp))
 
 # Fast and memory efficient verstion of dstr_rev_comp with

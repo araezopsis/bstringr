@@ -17,7 +17,7 @@
 #' @rdname remove
 #' @export
 bstr_remove <-
-  function(bstrobj, pattern, case_sensitive = F){
+  function(bstrobj, pattern, case_sensitive = FALSE){
     bstrobj <- as_bstr(bstrobj)
     at <- attributes(bstrobj)
     if(!case_sensitive) pattern <- paste0("(?i)", pattern)

@@ -42,7 +42,24 @@ unchanged [replacement function only]}
 Extract and replace all subsequences from a bstr sequences
 }
 \examples{
-temp <- bstr_rand_seq(1, 10)
+(temp <- dstr_rand_seq(3, 20, "[AT]", seed = 1))
 
+(pos_A_trails <- stringr::str_locate_all(temp, "A{2,}"))
+
+# Extract all A trails
+bstr_sub_all(temp, pos_A_trails)
+
+# Substitute all A trails by x
+bstr_sub_all(temp, pos_A_trails) <- "x"
+temp
+
+# Substitute all A trails by case switched ones
+original <- change <- dstr_rand_seq(2, 10, "[AaT]", seed = 1)
+pos_A_trails <- stringr::str_locate_all(change, "[Aa]{2,}")
+switched_A_trails <-
+  bstr_sub_all(change, pos_A_trails) \%>\%
+  lapply(bstr_switch_case)
+bstr_sub_all(change, pos_A_trails) <- switched_A_trails
+c(original[1], change[1], original[2], change[2])
 
 }

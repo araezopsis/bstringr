@@ -3,7 +3,7 @@
 #' @param astrobj astr object.
 #' @export
 #' @examples
-#' astr_rand_seq(3, 100) %>% calc_MW_peptide()
+#' astr_rand_seq(3, 100, seed = 1) %>% calc_MW_peptide()
 #'
 calc_MW_peptide <-
   function(astrobj){

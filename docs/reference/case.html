@@ -126,7 +126,7 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>1</span>, <span class='fl'>10</span>, <span class='st'>"[atgcATGC]"</span>)
+    <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>1</span>, <span class='fl'>10</span>, <span class='st'>"[atgcATGC]"</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='no'>temp</span>,
   <span class='kw'>upper</span> <span class='kw'>=</span> <span class='fu'>bstr_to_upper</span>(<span class='no'>temp</span>),
@@ -134,10 +134,10 @@
   <span class='kw'>switch</span> <span class='kw'>=</span> <span class='fu'>bstr_switch_case</span>(<span class='no'>temp</span>)
 )</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 4 
-#&gt; [1]      no name 1      : ATcAgaccAA                               10 
-#&gt; [2]   upper.no name 1   : ATCAGACCAA                               10 
-#&gt; [3]   lower.no name 1   : atcagaccaa                               10 
-#&gt; [4]   switch.no name 1  : atCaGACCaa                               10 </div><div class='input'>
+#&gt; [1]      no name 1      : GGatCttccA                               10 
+#&gt; [2]   upper.no name 1   : GGATCTTCCA                               10 
+#&gt; [3]   lower.no name 1   : ggatcttcca                               10 
+#&gt; [4]   switch.no name 1  : ggATcTTCCa                               10 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

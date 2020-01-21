@@ -9,7 +9,7 @@ write_genbank(x, fpath)
 \arguments{
 \item{x}{x}
 
-\item{fpath}{A fasta file path.}
+\item{fpath}{A genbank file path.}
 }
 \description{
 Write Genbank file

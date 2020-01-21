@@ -18,7 +18,7 @@ read_genbank <-
 
 #' Write Genbank file
 #' @param x x
-#' @param fpath A fasta file path.
+#' @param fpath A genbank file path.
 #' @export
 #' @examples
 #' (temp <- dstr_rand_seq(1, 100, seed = 1))

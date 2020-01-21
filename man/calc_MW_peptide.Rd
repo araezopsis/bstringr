@@ -13,6 +13,6 @@ calc_MW_peptide(astrobj)
 Calculate protein molecular weight
 }
 \examples{
-astr_rand_seq(3, 100) \%>\% calc_MW_peptide()
+astr_rand_seq(3, 100, seed = 1) \%>\% calc_MW_peptide()
 
 }

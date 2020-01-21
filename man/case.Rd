@@ -20,7 +20,7 @@ bstr_switch_case(bstrobj)
 Convert case of a bstring sequence.
 }
 \examples{
-temp <- dstr_rand_seq(1, 10, "[atgcATGC]")
+temp <- dstr_rand_seq(1, 10, "[atgcATGC]", seed = 1)
 c(
   temp,
   upper = bstr_to_upper(temp),

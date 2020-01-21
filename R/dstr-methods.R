@@ -21,7 +21,7 @@ dstr_remove_stop <-
 #' @rdname dstr_complement
 #' @export
 #' @examples
-#' temp <- dstr_rand_seq(3, 10, "[atgcATGC]")
+#' temp <- dstr_rand_seq(3, 10, "[atgcATGC]", seed = 1)
 #' c(temp, compl = dstr_complement(temp))
 #'
 #' # Fast and memory efficient verstion of dstr_complement with
@@ -123,7 +123,7 @@ dstr_complement_fast <-
 #' @rdname dstr_rev_comp
 #' @export
 #' @examples
-#' temp <- dstr_rand_seq(3, 10, "[atgcATGC]")
+#' temp <- dstr_rand_seq(3, 10, "[atgcATGC]", seed = 1)
 #' c(temp, compl = dstr_rev_comp(temp))
 #'
 #' # Fast and memory efficient verstion of dstr_rev_comp with

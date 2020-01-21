@@ -10,8 +10,8 @@
 #' @export
 #' @examples
 #' calc_InFusion_vector_volume(
-#'   seq_i = dstr_rand_seq(1, 1000),
-#'   seq_v = dstr_rand_seq(1, 5000),
+#'   seq_i = dstr_rand_seq(1, 1000, seed = 1),
+#'   seq_v = dstr_rand_seq(1, 5000, seed = 1),
 #'   conc_i = 5, conc_v = 30,
 #'   uL_i = 3
 #' )
@@ -46,8 +46,8 @@ calc_InFusion_vector_volume <-
 #' @export
 #' @examples
 #' calc_InFusion_insert_volume(
-#'   seq_i = dstr_rand_seq(1, 1000),
-#'   seq_v = dstr_rand_seq(1, 5000),
+#'   seq_i = dstr_rand_seq(1, 1000, seed = 1),
+#'   seq_v = dstr_rand_seq(1, 5000, seed = 1),
 #'   conc_i = 5, conc_v = 30,
 #'   uL_v = 1.25
 #' )

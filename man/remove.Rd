@@ -8,7 +8,7 @@
 \alias{bstr_remove_gap}
 \title{Remove all matched patterns in bstr sequences}
 \usage{
-bstr_remove(bstrobj, pattern, case_sensitive = F)
+bstr_remove(bstrobj, pattern, case_sensitive = FALSE)
 
 bstr_remove_num(bstrobj)
 

@@ -33,7 +33,7 @@ arguments provided will result in an unchanged input.}
 Extract and replace subsequences from a bstr sequences
 }
 \examples{
-temp <- bstr_rand_seq(1, 10)
+temp <- bstr_rand_seq(1, 10, seed = 1)
 c(
   temp,
   bstr_sub(temp, 1, 5),

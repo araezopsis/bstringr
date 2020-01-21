@@ -124,25 +124,25 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>10</span>, <span class='st'>"[atgcATGC]"</span>)
+    <pre class="examples"><div class='input'><span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random_seq.html'>dstr_rand_seq</a></span>(<span class='fl'>3</span>, <span class='fl'>10</span>, <span class='st'>"[atgcATGC]"</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>temp</span>, <span class='kw'>compl</span> <span class='kw'>=</span> <span class='fu'>dstr_rev_comp</span>(<span class='no'>temp</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 6 
-#&gt; [1]      no name 1      : AGcCGGTtCg                               10 
-#&gt; [2]      no name 2      : tctcGTcGCg                               10 
-#&gt; [3]      no name 3      : tAGacGTTtC                               10 
-#&gt; [4]   compl.no name 1   : cGaACCGgCT                               10 
-#&gt; [5]   compl.no name 2   : cGCgACgaga                               10 
-#&gt; [6]   compl.no name 3   : GaAACgtCTa                               10 </div><div class='input'>
+#&gt; [1]      no name 1      : GGatCttccA                               10 
+#&gt; [2]      no name 2      : CCcTgTctTg                               10 
+#&gt; [3]      no name 3      : tCcCGTATgG                               10 
+#&gt; [4]   compl.no name 1   : TggaaGatCC                               10 
+#&gt; [5]   compl.no name 2   : cAagAcAgGG                               10 
+#&gt; [6]   compl.no name 3   : CcATACGgGa                               10 </div><div class='input'>
 <span class='co'># Fast and memory efficient verstion of dstr_rev_comp with</span>
 <span class='co'># case conversion</span>
 <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>temp</span>, <span class='kw'>compl</span> <span class='kw'>=</span> <span class='fu'>dstr_rev_comp_fast</span>(<span class='no'>temp</span>))</div><div class='output co'>#&gt; class: bstr,character 
 #&gt; number of sequences: 6 
-#&gt; [1]      no name 1      : AGcCGGTtCg                               10 
-#&gt; [2]      no name 2      : tctcGTcGCg                               10 
-#&gt; [3]      no name 3      : tAGacGTTtC                               10 
-#&gt; [4]   compl.no name 1   : CGAACCGGCT                               10 
-#&gt; [5]   compl.no name 2   : CGCGACGAGA                               10 
-#&gt; [6]   compl.no name 3   : GAAACGTCTA                               10 </div><div class='input'>
+#&gt; [1]      no name 1      : GGatCttccA                               10 
+#&gt; [2]      no name 2      : CCcTgTctTg                               10 
+#&gt; [3]      no name 3      : tCcCGTATgG                               10 
+#&gt; [4]   compl.no name 1   : TGGAAGATCC                               10 
+#&gt; [5]   compl.no name 2   : CAAGACAGGG                               10 
+#&gt; [6]   compl.no name 3   : CCATACGGGA                               10 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
