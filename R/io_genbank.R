@@ -16,6 +16,62 @@ read_genbank <-
     bstr(s, n, ucase = ucase)
   }
 
+#' Write Genbank file
+#' @param x x
+#' @param fpath A fasta file path.
+#' @export
+#' @examples
+#' (temp <- dstr_rand_seq(1, 100, seed = 1))
+#' write_genbank(temp)
+#'
+write_genbank <- function(x, fpath) {
+  . <- NULL
+  name <- names(x)
+  name_trunc <- name %>% stringr::str_sub(1, 10)
+  len <- bstringr::bstr_length(x)
+  Sys.setlocale("LC_TIME", "C")
+  today <- format(Sys.Date(), "%Y-%b-%d")
+  sequence <- x %>% stringr::str_extract_all(".{1,10}") %>% .[[1]]
+  seq_li <- character()
+  for(i in seq_along(sequence)) {
+    line <- (i %/% 7) + 1
+    if((i %% 7) == 1) {
+      seq_li[line] <- paste((i-1)*10+1, sequence[i])
+    } else {
+      seq_li[line] <- paste(seq_li[line], sequence[i])
+    }
+  }
+  max_col <- max(nchar(seq_li))
+  seq_li <-
+    c(
+      stringr::str_pad(seq_li[1:(length(seq_li)-1)], max_col+9, side = "left"),
+      stringr::str_c("         ", seq_li[length(seq_li)])
+    ) %>%
+    paste(collapse = "\n")
+  temp <-
+    stringr::str_glue(
+      "
+LOCUS       {name_trunc}        {len} bp ds-DNA     linear       {today}
+DEFINITION  .
+ACCESSION
+VERSION
+SOURCE      .
+  ORGANISM  .
+COMMENT     >{name}
+ORIGIN
+{seq_li}
+//
+    "
+    )
+  if(missing(fpath)){
+    return(temp)
+  }else{
+    readr::write_lines(temp, fpath)
+  }
+}
+
+
+
 #' Parse Genbank file LOCUS FIELD
 #' @param gb_line character vector of a Genbank file.
 #' @export
