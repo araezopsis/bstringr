@@ -9,7 +9,7 @@ dstr_remove_stop(dstrobj, stop_codon = "(?i)(TAA|TGA|TAG)$")
 \arguments{
 \item{dstrobj}{dstr class object or character vector}
 
-\item{stop_codon}{stop codon pattern}
+\item{stop_codon}{regular expression pattern of stop codon}
 }
 \description{
 Remove stop codon from DNA sequence
