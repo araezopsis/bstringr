@@ -4,7 +4,7 @@
 \alias{dstr_remove_stop}
 \title{Remove stop codon from DNA sequence}
 \usage{
-dstr_remove_stop(dstrobj, stop_codon = "(?i)(TAA|TGA|TAG)$")
+dstr_remove_stop(dstrobj, stop_codon = "(TAA|TGA|TAG)$")
 }
 \arguments{
 \item{dstrobj}{dstr class object or character vector}
@@ -13,4 +13,8 @@ dstr_remove_stop(dstrobj, stop_codon = "(?i)(TAA|TGA|TAG)$")
 }
 \description{
 Remove stop codon from DNA sequence
+}
+\examples{
+"ATGgtatAG" \%>\% {c(., dstr_remove_stop(.))} \%>\% bstr
+
 }

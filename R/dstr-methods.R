@@ -5,12 +5,16 @@
 #' @param dstrobj dstr class object or character vector
 #' @param stop_codon regular expression pattern of stop codon
 #' @export
+#' @examples
+#' "ATGgtatAG" %>% {c(., dstr_remove_stop(.))} %>% bstr
+#'
 dstr_remove_stop <-
-  function(dstrobj, stop_codon = "(?i)(TAA|TGA|TAG)$"){
+  function(dstrobj, stop_codon = "(TAA|TGA|TAG)$"){
     dstrobj <- as_dstr(dstrobj)
     at <- attributes(dstrobj)
 
-    dstrobj <- bstr_remove(dstrobj, pattern = stop_codon)
+    loc <- bstr_to_upper(dstrobj) %>% bstr_locate(stop_codon)
+    bstr_sub_all(dstrobj, loc) <- ""
 
     attributes(dstrobj) <- at
     dstrobj
