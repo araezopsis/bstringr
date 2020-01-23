@@ -12,3 +12,7 @@ dstr_translate(dstrobj)
 \description{
 Translate dna -> protein
 }
+\examples{
+"atgtga" \%>\% dstr_translate()
+
+}
