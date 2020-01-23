@@ -4,7 +4,7 @@
 \alias{dstr_pcr}
 \title{Calculate PCR product length}
 \usage{
-dstr_pcr(template, primerF, primerR, FRC = F, RRC = T)
+dstr_pcr(template, primerF, primerR, FRC = FALSE, RRC = TRUE)
 }
 \arguments{
 \item{template}{template DNA sequence}
@@ -19,4 +19,8 @@ dstr_pcr(template, primerF, primerR, FRC = F, RRC = T)
 }
 \description{
 Calculate PCR product length
+}
+\examples{
+dstr_pcr("ACAATGTGTGTATGATGGTAGTAGAC", "ATGTG", "TACTA")
+
 }

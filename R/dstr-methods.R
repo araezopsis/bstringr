@@ -138,72 +138,36 @@ dstr_primer_check <-
 
 
 #' Calculate PCR product length
-#' @importFrom dplyr data_frame
-#' @importFrom glue glue
-#' @importFrom Biostrings nchar
-#' @importFrom Biostrings pattern
-#' @importFrom Biostrings subject
-#' @importFrom Biostrings start
-#' @importFrom Biostrings end
 #' @param template template DNA sequence
 #' @param primerF left primer sequence
 #' @param primerR right primer sequence
 #' @param FRC logical. TRUE when reverse complemented primer F. default is FALSE.
 #' @param RRC logical. TRUE when reverse complemented primer R. default is TRUE.
 #' @export
+#' @examples
+#' dstr_pcr("ACAATGTGTGTATGATGGTAGTAGAC", "ATGTG", "TACTA")
+#'
 dstr_pcr <-
-  function(template, primerF, primerR, FRC = F, RRC = T){
-    template <- as_dstr(template)
-    primerF <- as_dstr(primerF)
-    primerR <- as_dstr(primerR)
+  function(template, primerF, primerR, FRC = FALSE, RRC = TRUE){
+    . <- NULL
+    template <- as_dstr(template, "template")
+    primerF <- as_dstr(primerF, "primerF")
+    primerR <- as_dstr(primerR, "primerR")
 
     alignF <- dstr_align(template, primerF, rc = FRC)
     alignR <- dstr_align(template, primerR, rc = RRC)
 
-    primerF_len <- nchar(primerF)
-    primerF_match_start <- subject(alignF) %>% start
-    primerF_match_end <- subject(alignF) %>% end
+    sub_start <- . %>% Biostrings::subject() %>% Biostrings::start()
+    sub_end <- . %>% Biostrings::subject() %>% Biostrings::end()
 
-    primerR_match_start <- subject(alignR) %>% start
-    primerR_match_end <- subject(alignR) %>% end
-    product_size <- primerR_match_end - primerF_match_start + 1
+    primerF_match_start <- sub_start(alignF)
+    primerR_match_end <- sub_end(alignR)
+    product <- bstr_sub(template, primerF_match_start, primerR_match_end)
 
-    pcr_result <-
-      data_frame(
-      primerF_seq = primerF,
-      primerF_Tm = calc_oligoDNATm(primerF),
-      match_templateF = subject(alignF) %>% as.character(),
-      match_primerF = Biostrings::pattern(alignF) %>% as.character(),
+    if(FRC) primerF <- dstr_rev_comp(primerF) %>% dstr("primerF RC")
+    if(RRC) primerR <- dstr_rev_comp(primerR) %>% dstr("primerR RC")
 
-      primerR_seq = primerR,
-      primerR_Tm = calc_oligoDNATm(primerR),
-      match_templateR = subject(alignR) %>% as.character(),
-      match_primerR = Biostrings::pattern(alignR) %>% as.character(),
-
-      size = product_size
-    )
-
-    with(pcr_result,
-         glue::glue("
-template: '{format_seq(template, 40)}'
-template length: {nchar(template)} bp
-
-primer F: '{primerF}', Tm = {primerF_Tm}
-template length: {nchar(primerF)} bp
-aligned template: '{match_templateF}'
-aligned primer F: '{match_primerF}'
-
-primer R: '{primerR}', Tm = {primerR_Tm}
-template length: {nchar(primerR)} bp
-aligned template: '{match_templateR}'
-aligned primer R: '{match_primerR}'
-
-product size: {product_size} bp
-              ") %>% cat
-    )
-
-    invisible(pcr_result)
+    c(template, primerF, primerR, dstr(product, "product"))
   }
 
-# dstr_pcr("ATGTGTGTATGATGGTAGTA", "ATGTG", "TAGTA", RRC = F)
 
