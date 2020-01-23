@@ -41,3 +41,20 @@ dstr_extract_orfs <- function(dstrobj, orf_pattern = REGEX_ORF[2]) {
     bstr_sub_all(dstrobj, .)
 }
 
+#' Check open reading frame validity
+#' @inheritParams class_bstr
+#' @param check_stop If TRUE, check the presence of stop codon.
+#' @param negate If TRUE, return non-matching elements.
+#' @export
+#' @examples
+#' (test <- dstr(c("ATGtga", "AAGTGA", "ATGGGGTGA", "ATGGGTGA", "ATGGGG","ATGGG")))
+#' is_valid_orf(test)
+#' is_valid_orf(test, check_stop = TRUE)
+#'
+is_valid_orf <- function(dstrobj, check_stop = FALSE, negate = FALSE) {
+    dstrobj <- as_dstr(dstrobj) %>% bstr_to_upper()
+
+    if(check_stop) bstr_detect(dstrobj, paste0("^", REGEX_ORF[2]))
+    else bstr_detect(dstrobj, paste0("^", REGEX_ORF[1]))
+}
+
