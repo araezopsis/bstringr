@@ -51,11 +51,10 @@ c(
 )
 
 # Alternatively, you can pass in a two colum matrix, as in the
-# output from stringr::str_locate_all
+# output from bstr_locate
 temp <- bstr("abcde fghij")
-pos <- stringr::str_locate_all(temp, "[aefi]")[[1]]
+pos <- bstr_locate(temp, "[aefi]")[[1]]
 bstr_sub(temp, pos)
-bstr_sub(temp, pos[, 1], pos[, 2])
 
 # Vectorisation
 bstr_sub(temp, seq_len(bstr_length(temp)))

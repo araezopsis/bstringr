@@ -41,7 +41,7 @@ dstr_find_orf <-
       )
 
     start_pos_li <-
-      stringr::str_locate_all(dstrobj, "ATG(.{3})*?((.{1,2})$|TAG|TGA|TAA)") %>%
+      bstr_locate(dstrobj, "ATG(.{3})*?((.{1,2})$|TAG|TGA|TAA)") %>%
       purrr::map(~ .x[,1])
 
     orf_li <- list()

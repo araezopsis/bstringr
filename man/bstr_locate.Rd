@@ -15,7 +15,8 @@ bstr_locate(bstrobj, pattern)
 Locate all positions of patterns in a bstr object
 }
 \examples{
+bstr_locate(c("ABCDE", "BCDE"), "A")
 bstr_locate(c("ABCDE"), c("A", "C"))
-bstr_locate(c("ABCDE", "BC"), c("A", "C"))
+bstr_locate(c("ABCDE", "BC"), c("A", "D", "F"))
 
 }

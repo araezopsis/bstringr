@@ -24,7 +24,7 @@ Find and extract all open reading frames in a dstr object
 \examples{
 (temp <- dstr_rand_seq(2, 200, seed = 1))
 temp \%>\% dstr_locate_orfs() \%>\% {bstr_sub_all(temp, .)}
-dstr_locate_orfs("atgatgtga")
+dstr_locate_orfs(c("atgatgtga", "aaa"))
 
 (temp <- dstr_rand_seq(2, 200, seed = 1))
 temp \%>\% dstr_extract_orfs()
