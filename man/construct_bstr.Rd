@@ -9,8 +9,8 @@
 \alias{is_dstr}
 \alias{is_astr}
 \alias{as_bstr}
-\alias{as_astr}
 \alias{as_dstr}
+\alias{as_astr}
 \title{Constructer of the bstr class object}
 \usage{
 bstr(x, n, ucase = FALSE)
@@ -27,9 +27,9 @@ is_astr(x)
 
 as_bstr(x, n, ucase = FALSE)
 
-as_astr(x, n, ucase = FALSE)
-
 as_dstr(x, n, ucase = FALSE)
+
+as_astr(x, n, ucase = FALSE)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
@@ -56,11 +56,9 @@ is_bstr(c("apple", "orange"))
 is_dstr(dstr("bad"))
 is_astr(astr("I.am.a.geek"))
 
-
 ### Convert character to bstr object
 as_dstr("bad", "good", ucase = TRUE)
 # as_dstr(c("good", "bad")) # Error
 as_astr("Wqrld", "HELLQ", ucase = TRUE)
-
 
 }

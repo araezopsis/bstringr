@@ -11,7 +11,6 @@
 #' @param pattern regex pattern
 #' @param case_sensitive sensitive to case in pattern (default:FALSE)
 #' @name class_bstr
-#' @rdname class_bstr
 NULL
 
 
@@ -19,7 +18,6 @@ NULL
 
 #' Constructer of the bstr class object
 #' @inheritParams class_bstr
-#' @rdname construct_bstr
 #' @name construct_bstr
 #' @export
 #' @examples
@@ -37,38 +35,32 @@ NULL
 #' is_dstr(dstr("bad"))
 #' is_astr(astr("I.am.a.geek"))
 #'
-#'
 #' ### Convert character to bstr object
 #' as_dstr("bad", "good", ucase = TRUE)
 #' # as_dstr(c("good", "bad")) # Error
 #' as_astr("Wqrld", "HELLQ", ucase = TRUE)
 #'
-#'
-bstr <-
-  function(x, n, ucase = FALSE){
-    if(!is.character(x)) stop("x must be a character vector.")
+bstr <- function(x, n, ucase = FALSE) {
+  if(!is.character(x)) stop("x must be a character vector.")
 
-    if(missing(n)){
-      n <- names(x)
-      if(is.null(n)){
-        n <- paste0(rep("no name ", length(x)), seq_along(x))
-      }
-    }else{
-      if(length(x) != length(n)) stop("The length of x and n are different.")
-    }
-
-    if(ucase) x <- stringr::str_to_upper(x)
-
-    names(x) <- n
-    class(x) <- c("bstr", "character")
-    x
+  if(missing(n)) {
+    n <- names(x)
+    if(is.null(n)) n <- paste0(rep("no name ", length(x)), seq_along(x))
+  } else {
+    if(length(x) != length(n)) stop("The length of x and n are different.")
   }
 
-#' @inheritParams class_bstr
+  if(ucase) x <- stringr::str_to_upper(x)
+
+  names(x) <- n
+  class(x) <- c("bstr", "character")
+  x
+}
+
 #' @rdname construct_bstr
 #' @export
 dstr <-
-  function(x, n, ucase = FALSE){
+  function(x, n, ucase = FALSE) {
     d <- bstr(x, n, ucase)
     if(any(is_valid_dna_character(d, negate = TRUE)))
       stop("input contains invalid DNA character")
@@ -76,11 +68,10 @@ dstr <-
     d
   }
 
-#' @inheritParams class_bstr
 #' @rdname construct_bstr
 #' @export
 astr <-
-  function(x, n, ucase = F){
+  function(x, n, ucase = F) {
     a <- bstr(x, n, ucase)
     if(any(is_valid_aa_character(a, negate = TRUE)))
       stop("input contains invalid Amino Acid character")
@@ -88,61 +79,51 @@ astr <-
     a
   }
 
-
 ### is_bstr(), is_dstr(), is_astr() -----------------------------------------
 
-#' @inheritParams class_bstr
 #' @rdname construct_bstr
 #' @export
 is_bstr <- function(x) inherits(x, "bstr")
 
-#' @inheritParams class_bstr
 #' @rdname construct_bstr
 #' @export
 is_dstr <- function(x) inherits(x, "dstr")
 
-#' @inheritParams class_bstr
 #' @rdname construct_bstr
 #' @export
 is_astr <- function(x) inherits(x, "astr")
 
 ### as_bstr(), as_dstr(), as_astr() -----------------------------------------
 
-#' @inheritParams class_bstr
 #' @rdname construct_bstr
 #' @export
-as_bstr <-
-  function(x, n, ucase = FALSE){
-    if(!is_bstr(x)){
-      bstr(x, n, ucase)
-    }else{
-      x
-    }
+as_bstr <- function(x, n, ucase = FALSE) {
+  if(!is_bstr(x)) {
+    bstr(x, n, ucase)
+  } else {
+    x
   }
+}
 
-#' @inheritParams class_bstr
 #' @rdname construct_bstr
 #' @export
-as_astr <-
-  function(x, n, ucase = FALSE){
-    if(!is_astr(x)){
-      return(astr(x, n, ucase))
-    }else{
-      x
-    }
+as_dstr <- function(x, n, ucase = FALSE) {
+  if(!is_dstr(x)) {
+    dstr(x, n, ucase)
+  } else {
+    x
   }
+}
 
-#' @inheritParams class_bstr
 #' @rdname construct_bstr
 #' @export
-as_dstr <-
-  function(x, n, ucase = FALSE){
-    if(!is_dstr(x)){
-      return(dstr(x, n, ucase))
-    }else{
-      x
-    }
+as_astr <- function(x, n, ucase = FALSE) {
+  if(!is_astr(x)) {
+    astr(x, n, ucase)
+  } else {
+    x
   }
+}
 
 ### Other ----------------------------------------------------------------
 
