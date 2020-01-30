@@ -21,69 +21,6 @@ dstr_remove_stop <-
   }
 
 
-
-#' Find open reading frames from DNA
-#' @param dstrobj a sequence you want to find orfs
-#' @param search_none_stop A logical. If TRUE, only search orfs with
-#'   a stop codon. defalut is FALSE
-#' @export
-dstr_find_orf <-
-  function(dstrobj, search_none_stop = T){
-    . <- NULL
-    dstrobj <- as_dstr(dstrobj)
-    n <- names(dstrobj)
-
-    search_pattern <-
-      ifelse(
-        search_none_stop,
-        "ATG(.{3})*?($|TAG|TGA|TAA)",
-        "ATG(.{3})*?(TAG|TGA|TAA)"
-      )
-
-    start_pos_li <-
-      bstr_locate(dstrobj, "ATG(.{3})*?((.{1,2})$|TAG|TGA|TAA)") %>%
-      purrr::map(~ .x[,1])
-
-    orf_li <- list()
-    for(i in seq_along(start_pos_li)){
-      if(length(start_pos_li[[i]]) > 0){
-        orf_end <-
-          purrr::map_int(.x = start_pos_li[[i]],
-                         .f = function(pos){
-                           stringr::str_sub(dstrobj[i], pos) %>%
-                             stringr::str_extract("ATG(.{3})*") %>%
-                             stringr::str_locate(search_pattern) %>%
-                             .[1L, 2L]
-                         })
-
-        # Exclude NA character from orf
-        not_na_orf_end <- !is.na(orf_end)
-
-        # Naming orf
-        lorf <- length(orf_end)
-        if(lorf > 1L){
-          names(orf_end) <- stringr::str_c("ORF", seq_len(lorf))
-        } else if(lorf == 1L){
-          names(orf_end) <- "ORF"
-        }
-
-        orf_li[[i]] <-
-          list(
-            "seq_name" = n[i],
-            "orf_name" = names(orf_end)[not_na_orf_end],
-            "orf_start" = start_pos_li[[i]][not_na_orf_end],
-            "orf_end" = start_pos_li[[i]][not_na_orf_end] +
-              orf_end[not_na_orf_end] - 1L
-          )
-      }
-    }
-    return(orf_li)
-  }
-
-
-#############################################
-
-
 #' Convert IUPAC CODE to regular expression
 #' @param dstrobj A character
 #' @export

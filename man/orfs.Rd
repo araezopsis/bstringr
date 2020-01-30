@@ -3,15 +3,15 @@
 \name{orfs}
 \alias{orfs}
 \alias{dstr_locate_orfs}
-\alias{dstr_find_orfs}
 \alias{dstr_extract_orfs}
+\alias{dstr_find_orfs}
 \title{Find and extract all open reading frames in a dstr object}
 \usage{
 dstr_locate_orfs(dstrobj, orf_pattern = REGEX_ORF[2])
 
-dstr_find_orfs(dstrobj, orf_pattern = REGEX_ORF[2])
-
 dstr_extract_orfs(dstrobj, orf_pattern = REGEX_ORF[2])
+
+dstr_find_orfs(dstrobj, orf_pattern = REGEX_ORF[2])
 }
 \arguments{
 \item{dstrobj}{dstr class object or character vector}

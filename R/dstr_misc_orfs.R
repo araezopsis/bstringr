@@ -24,10 +24,6 @@ dstr_locate_orfs <- function(dstrobj, orf_pattern = REGEX_ORF[2]) {
   bstr_locate(dstrobj, orf_pattern)
 }
 
-#' @rdname orfs
-#' @export
-dstr_find_orfs <- dstr_locate_orfs
-
 # dstr_locate_orfs("AGTTGA")
 # dstr_extract_orfs("AGTTGA")
 # dstr_locate_orfs("atgatgtga")
@@ -40,6 +36,10 @@ dstr_extract_orfs <- function(dstrobj, orf_pattern = REGEX_ORF[2]) {
   dstr_locate_orfs(dstrobj, orf_pattern) %>%
     bstr_sub_all(dstrobj, .)
 }
+
+#' @rdname orfs
+#' @export
+dstr_find_orfs <- dstr_extract_orfs
 
 #' Check open reading frame validity
 #' @inheritParams class_bstr

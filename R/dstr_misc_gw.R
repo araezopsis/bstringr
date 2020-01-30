@@ -1,4 +1,12 @@
 
+
+bstr_unlist <- function(list_bstrobj) {
+  list_bstrobj <- purrr::map(list_bstrobj, as_bstr)
+  purrr::reduce(list_bstrobj, c)
+}
+
+add_i_mod <- function(x) paste0("(?i)", x)
+
 #' TOPO reaction and LR reaction
 #' @param insert insert sequence. without 5'CACC
 #' @param pentr optional. pENTR D-TOPO sequence or the fasta file path
@@ -85,7 +93,6 @@ dstr_gw_lr <-
 
     if(distination_to_lower) distination <- bstr_to_lower(distination)
 
-    add_i_mod <- function(x) paste0("(?i)", x)
     attR1 <- "ACAAGTTTGTACAAAAAAGCTGAAC" #attR1 for distination
     attR2 <- "GTTCAGCTTTCTTGTACAAAGTGGT" #attR2 for distination
     pattern_attR12 <- paste0(attR1, ".*?", attR2) %>% add_i_mod
@@ -127,6 +134,61 @@ dstr_gw_lr_both <- function(entry, distination){
 dstr_gw_topo_lr <-
   function(insert, distination, pentr){
     dstr_gw_lr(dstr_gw_topo(insert, pentr), distination)
+  }
+
+#' Find open reading frames from Gateway system compatible vector
+#' @inheritParams class_bstr
+#' @export
+#' @examples
+#' attR1 <- "ACAAGTTTGTACAAAAAAGCTGAAC"
+#' attR2 <- "GTTCAGCTTTCTTGTACAAAGTGGT"
+#' A9 <- "AAAAAAAAA"
+#' dummy <- paste0(A9, attR1, A9, attR2, A9, collapse = "")
+#' dummy2 <- dstr_rev_comp(dummy)
+#' dummy3 <- paste0(dummy, dummy2, collapse = "")
+#' test_distination <- dstr(c(dummy, dummy2, dummy3), paste0("dummy", 1:3))
+#'
+#' vectors <-
+#'   dstr_gw_topo("atgtga") %>%
+#'   dstr_gw_lr_both(test_distination)
+#' vectors
+#'
+#' dstr_extract_orfs_from_vector(vectors)
+#' dstr_translate_from_vector(vectors)
+#' dstr_translate_from_vector(dstr_rev_comp_fast(vectors))
+#'
+dstr_extract_orfs_from_vector <- function(dstrobj) {
+    . <- NULL
+    dstrobj <- as_dstr(dstrobj)
+    n <- names(dstrobj)
+
+    attB1 <- "ACAAGTTTGTACAAAAAAGCAGGCT"
+    attB2 <- "ACCCAGCTTTCTTGTACAAAGTGGT"
+
+    subseq_attB12 <-
+      bstr_extract(dstrobj, add_i_mod(paste0(attB1, ".*?", attB2))) %>%
+      bstr_unlist() %>%
+      bstr_sub(25L + 21L, -(25L + 17L))
+
+    no_attB12 <- is.na(subseq_attB12)
+    orf_li <- dstr_extract_orfs(dstrobj)
+    main_orf <-
+      purrr::map2(
+        .x = orf_li[!no_attB12],
+        .y = subseq_attB12[!no_attB12],
+        .f = ~ .x[bstr_detect(.x, .y)]
+      )
+    main_orf %>% bstr_unlist()
+  }
+
+#' @rdname dstr_extract_orfs_from_vector
+#' @export
+dstr_find_orfs_from_vector <- dstr_extract_orfs_from_vector
+
+#' @rdname dstr_extract_orfs_from_vector
+#' @export
+dstr_translate_from_vector <- function(dstrobj) {
+    dstr_translate(dstr_find_orfs_from_vector(dstrobj))
   }
 
 
