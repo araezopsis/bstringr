@@ -2,30 +2,56 @@
 % Please edit documentation in R/dstr_misc_gw.R
 \name{gw}
 \alias{gw}
+\alias{get_pentr}
 \alias{dstr_gw_topo}
 \alias{dstr_gw_lr}
+\alias{dstr_gw_lr_both}
 \alias{dstr_gw_topo_lr}
 \title{TOPO reaction and LR reaction}
 \usage{
+get_pentr(pentr)
+
 dstr_gw_topo(insert, pentr)
 
-dstr_gw_lr(entry, distination)
+dstr_gw_lr(entry, distination, distination_to_lower = TRUE)
+
+dstr_gw_lr_both(entry, distination)
 
 dstr_gw_topo_lr(insert, distination, pentr)
 }
 \arguments{
-\item{insert}{insert sequence. without 5'CACC}
-
 \item{pentr}{optional. pENTR D-TOPO sequence or the fasta file path}
+
+\item{insert}{insert sequence. without 5'CACC}
 
 \item{entry}{Entry clone}
 
 \item{distination}{Distination vector}
+
+\item{distination_to_lower}{change distination vector to lower case}
 }
 \description{
 TOPO reaction and LR reaction
 }
 \examples{
 dstr_gw_topo("atgatgatgtga")
+
+attR1 <- "ACAAGTTTGTACAAAAAAGCTGAAC"
+attR2 <- "GTTCAGCTTTCTTGTACAAAGTGGT"
+A9 <- "AAAAAAAAA"
+dummy <- paste0(A9, attR1, A9, attR2, A9, collapse = "")
+dummy2 <- dstr_rev_comp(dummy)
+dummy3 <- paste0(dummy, dummy2, collapse = "")
+
+test_distination <- dstr(c(dummy, dummy2, dummy3), paste0("dummy", 1:3))
+test_distination
+
+dstr_gw_topo("atgtga") \%>\%
+  dstr_gw_lr(test_distination) \%>\%
+  write_fasta()
+
+dstr_gw_topo("atgtga") \%>\%
+  dstr_gw_lr_both(test_distination) \%>\%
+  write_fasta()
 
 }
