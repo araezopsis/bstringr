@@ -74,37 +74,4 @@ dstr_primer_check <-
   }
 
 
-#' Calculate PCR product length
-#' @param template template DNA sequence
-#' @param primerF left primer sequence
-#' @param primerR right primer sequence
-#' @param FRC logical. TRUE when reverse complemented primer F. default is FALSE.
-#' @param RRC logical. TRUE when reverse complemented primer R. default is TRUE.
-#' @export
-#' @examples
-#' dstr_pcr("ACAATGTGTGTATGATGGTAGTAGAC", "ATGTG", "TACTA")
-#'
-dstr_pcr <-
-  function(template, primerF, primerR, FRC = FALSE, RRC = TRUE){
-    . <- NULL
-    template <- as_dstr(template, "template")
-    primerF <- as_dstr(primerF, "primerF")
-    primerR <- as_dstr(primerR, "primerR")
-
-    alignF <- dstr_align(template, primerF, rc = FRC)
-    alignR <- dstr_align(template, primerR, rc = RRC)
-
-    sub_start <- . %>% Biostrings::subject() %>% Biostrings::start()
-    sub_end <- . %>% Biostrings::subject() %>% Biostrings::end()
-
-    primerF_match_start <- sub_start(alignF)
-    primerR_match_end <- sub_end(alignR)
-    product <- bstr_sub(template, primerF_match_start, primerR_match_end)
-
-    if(FRC) primerF <- dstr_rev_comp(primerF) %>% dstr("primerF RC")
-    if(RRC) primerR <- dstr_rev_comp(primerR) %>% dstr("primerR RC")
-
-    c(template, primerF, primerR, dstr(product, "product"))
-  }
-
 

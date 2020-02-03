@@ -1,4 +1,8 @@
 
+pairwise_alignment <- function(sub, pat, ...) {
+  Biostrings::pairwiseAlignment(subject = sub, pattern = pat, ...)
+}
+
 extract_aligned_sub <- function(align) {
   x <- Biostrings::alignedSubject(align) %>% as.character()
   bstr(x, n = paste0(seq_along(x), " subject"))
@@ -9,108 +13,147 @@ extract_aligned_pat <- function(align) {
   bstr(x, n = paste0(seq_along(x), " pattern"))
 }
 
-pairwisealignment <- function(sub, pat, ...) {
-  Biostrings::pairwiseAlignment(subject = sub, pattern = pat, ...)
+sort_bstr_with_subname <- function(bstrobj, pattern, start, end) {
+  bstrobj <- as_bstr(bstrobj)
+  n <- names(bstrobj)
+  if(!missing(pattern)) {
+    sub_n <- stringr::str_extract(n, pattern)
+  } else {
+    sub_n <- stringr::str_sub(n, start, end)
+  }
+  bstrobj[stringr::str_order(sub_n, numeric = TRUE)]
 }
 
 #' Align bstr sequence
-#' @param sub subject sequence
+#' @param sub a subject sequence
 #' @param pat pattern sequence
 #' @param type a character string
-#' @name align
+#' @name align_pairwise
 #' @export
 #' @examples
+#' bstr_align_pairwise("abcdefgh", "cde")
 #' bstr_align_pairwise("abcdefgh", "cde", type = "local")
-#' bstr_align_pairwise("abcdefgh", "cde", type = "global")
-#' bstr_align_pairwise("abcdefgh", c("cde", "befg"), type = "global")
+#' bstr_align_pairwise("abcdefgh", c("cde", "befg"))
 #'
-bstr_align_pairwise <-
-  function(sub, pat, type = "local") {
-    sub <- as_bstr(sub)
-    pat <- as_bstr(pat)
-    al <- pairwisealignment(sub, pat, type = type)
-    c(extract_aligned_sub(al), extract_aligned_pat(al)) %>% sort
-  }
+bstr_align_pairwise <- function(sub, pat, type = "global") {
+  if(length(sub) != 1L) stop("length sub must be 1")
+  sub <- as_bstr(sub); n_sub <- names(sub)
+  pat <- as_bstr(pat); n_pat <- names(pat)
+  n_pair <- paste0("pair", seq_along(pat), ": ")
 
-#' Align dna sequence
-#' @inheritParams align
+  al <- pairwise_alignment(sub, pat, type = type)
+  c(
+    bstr(extract_aligned_sub(al), paste0(n_pair, n_sub)) %>% sort,
+    bstr(extract_aligned_pat(al), paste0(n_pair, n_pat)) %>% sort
+  ) %>%
+    sort_bstr_with_subname(pattern = "^[^:]+")
+}
+
+#' @rdname align_pairwise
 #' @param rc logical value. if TRUE, the seq2 is aligned after reverse complemented. default is FALSE.
 #' @export
-dstr_align_pairwise <-
-  function(sub, pat, rc = F, type = "local") {
-    sub <- as_dstr(sub)
-    pat <- ifelse(rc, dstr_rev_comp(pat), as_dstr(pat))
-    al <- pairwisealignment(sub, pat, type = type)
-    c(extract_aligned_sub(al), extract_aligned_pat(al)) %>% sort
-  }
+#' @examples
+#' dstr_align_pairwise("aaaccctttggg", "gggaaa")
+#' dstr_align_pairwise("aaaccctttggg", "gggaaa", TRUE)
+#' dstr_align_pairwise("aaaccctttggg", c("gggaaa", "cccttt"), 1)
+#'
+dstr_align_pairwise <- function(sub, pat, rc, type = "global") {
+  if(length(sub) != 1L) stop("length sub must be 1")
+  sub <- as_dstr(sub); n_sub <- names(sub)
+  pat <- as_dstr(pat); n_pat <- names(pat)
+  n_pair <- paste0("pair", seq_along(pat), ": ")
 
-# dstr_align_multi_pats("AAACCCTTTGGG", c("AAA", "CCC", "TTT", "GGG"), rep(FALSE, 4))
-dstr_align_multi_pats <- function(ref, pats, rcs, type = "local-global") {
-  ref <- as_dstr(ref)
-  pats <- as_dstr(pats)
-  pats[rcs] <- dstr_rev_comp_fast(pats[rcs])
-  al <- pairwisealignment(ref, pats, type = type)
-  names(ref) <- "reference"
-  c(ref, extract_aligned_pat(al))
+  if(missing(rc)) rc <- rep(FALSE, length(pat))
+  pat[rc] <- dstr_rev_comp(pat[rc])
+  n_pat[rc] <- paste0(n_pat[rc], " RC")
+
+  al <- pairwise_alignment(sub, pat, type = type)
+  c(
+    dstr(extract_aligned_sub(al), paste0(n_pair, n_sub)) %>% sort,
+    dstr(extract_aligned_pat(al), paste0(n_pair, n_pat)) %>% sort
+  ) %>%
+    sort_bstr_with_subname(pattern = "^[^:]+")
+}
+
+#' Align multiple sequences to reference
+#' @name align_multi
+#' @inheritParams align_pairwise
+#' @export
+#' @examples
+#' ref <- c(reference = "abcdefghijk")
+#' patterns <- c(one = "abc", two = "d", three = "efgjk")
+#' bstr_align_multi(ref, patterns)
+#'
+bstr_align_multi <- function(sub, pat, type = "global") {
+  sub <- as_bstr(sub); n_sub <- names(sub)
+  pat <- as_bstr(pat); n_pat <- names(pat)
+  al <- pairwise_alignment(sub, pat, type = type)
+  c(
+    bstr(sub, n_sub),
+    bstr(extract_aligned_pat(al), n_pat)
+  )
+}
+
+#' @rdname align_multi
+#' @export
+#' @examples
+#' ref <- c(ref = "AAACCCTTTGGG")
+#' patterns <- c(A = "AAA", C = "CCC", T = "TTT", G = "GGG")
+#' dstr_align_multi(ref, patterns)
+#' dstr_align_multi(ref, patterns, 1:2)
+#' dstr_align_multi(ref, patterns, c("T", "G"))
+#'
+dstr_align_multi <- function(sub, pat, rc, type = "global") {
+  sub <- as_dstr(sub); n_sub <- names(sub)
+  pat <- as_dstr(pat); n_pat <- names(pat); names(n_pat) <- n_pat
+  if(missing(rc)) rc <- rep(FALSE, length(pat))
+  pat[rc] <- dstr_rev_comp_fast(pat[rc])
+  n_pat[rc] <- paste0(n_pat[rc], " RC")
+  al <- pairwise_alignment(sub, pat, type = type)
+  c(
+    dstr(sub, n_sub),
+    dstr(extract_aligned_pat(al), n_pat)
+  )
 }
 
 
+#' Calculate PCR product length
+#' @param template template DNA sequence
+#' @param primerF left primer sequence
+#' @param primerR right primer sequence
+#' @param FRC logical. TRUE when reverse complemented primer F. default is FALSE.
+#' @param RRC logical. TRUE when reverse complemented primer R. default is TRUE.
+#' @export
+#' @examples
+#' dstr_pcr("ACAATGTGTGTATGATGGTAGTAGAC", "ATGTG", "TACTA")
+#' dstr_pcr("ACAATGTGTGTATGATGGTAGTAGAC", "ATGTG", "TACTA") %>%
+#'   {dstr_align_multi(.[1], .[-1])}
+#'
+dstr_pcr <- function(template, primerF, primerR, FRC = FALSE, RRC = TRUE) {
+  . <- NULL
+  len <-
+    c(template, primerF, primerR) %>%
+    lapply(function(x) length(x) != 1L) %>%
+    unlist %>%
+    any
+  if(len) stop("template, primerF, primerR must be length 1.")
 
-align_2seq <- function(ref, sub, rc = F) {
-  bstringr::dstr_align(seq1  = ref, seq2 = sub, rc = rc) %>%
-    Biostrings::aligned() %>%
-    as.character() %>%
-    return
-  # bstringr::as_dstr(n = names(sub))
+  template <- as_dstr(template, "template")
+  primerF <- as_dstr(primerF, "primerF")
+  primerR <- as_dstr(primerR, "primerR")
+  if(FRC) primerF <- dstr_rev_comp(primerF) %>% dstr("primerF RC")
+  if(RRC) primerR <- dstr_rev_comp(primerR) %>% dstr("primerR RC")
+
+  primerF_match_start <-
+    pairwise_alignment(template, primerF, type = "local") %>%
+    Biostrings::subject() %>%
+    Biostrings::start()
+  primerR_match_end <-
+    pairwise_alignment(template, primerR, type = "local") %>%
+    Biostrings::subject() %>%
+    Biostrings::end()
+
+  product <- bstr_sub(template, primerF_match_start, primerR_match_end)
+  c(template, primerF, primerR, dstr(product, "product"))
 }
 
-
-#' Align multiple bstr sequence
-#' @inheritParams align
-#' @param pats pattern sequences
-#' @export
-bstr_multi_align <-
-  function(sub, pats){
-    sub <- as_bstr(sub)
-    pats <- as_bstr(pats)
-
-    li <- list()
-    for(i in names(pats)){
-      li[[i]] <-
-        list(
-          align = bstr_align(sub, pats[i])
-        )
-    }
-    li
-  }
-
-#' Align multiple bstr sequence
-#' @param subject subject sequence
-#' @param queries query sequences
-#' @export
-dstr_multi_align <-
-  function(subject, queries){
-    subject <- as_dstr(subject)
-    queries <- as_dstr(queries)
-
-    li <- list()
-    for(i in names(queries)){
-      align_f <- bstr_align(subject, queries[i])
-      align_r <- bstr_align(subject, dstr_rev_comp(queries[i]))
-      score_f <- Biostrings::score(align_f) %>% as.integer()
-      score_r <- Biostrings::score(align_r) %>% as.integer()
-
-      if(score_f >= score_r){
-        align <- align_f
-      }else{
-        align <- align_r
-      }
-
-      li[[i]] <-
-        list(
-          align, # ifelse()で処理できず
-          orientation = dplyr::if_else(score_f >= score_r, "forward", "reverse")
-        )
-    }
-    li
-  }
