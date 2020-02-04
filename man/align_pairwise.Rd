@@ -6,16 +6,21 @@
 \alias{dstr_align_pairwise}
 \title{Align bstr sequence}
 \usage{
-bstr_align_pairwise(sub, pat, type = "global")
+bstr_align_pairwise(sub, pat, type = "global", gapO = 10, gapE = 4)
 
-dstr_align_pairwise(sub, pat, rc, type = "global")
+dstr_align_pairwise(sub, pat, rc, type = "global", gapO = 10, gapE = 4)
 }
 \arguments{
 \item{sub}{a subject sequence}
 
 \item{pat}{pattern sequence}
 
-\item{type}{a character string}
+\item{type}{type of alignment. One of "global", "local", "overlap",
+"global-local", and "local-global".}
+
+\item{gapO}{gap opening penalty}
+
+\item{gapE}{gap extension penalty}
 
 \item{rc}{logical value. if TRUE, the seq2 is aligned after reverse complemented. default is FALSE.}
 }
@@ -26,6 +31,7 @@ Align bstr sequence
 bstr_align_pairwise("abcdefgh", "cde")
 bstr_align_pairwise("abcdefgh", "cde", type = "local")
 bstr_align_pairwise("abcdefgh", c("cde", "befg"))
+bstr_align_pairwise("abcdefgh", c("cde", "befg"), gapO = 0, gapE = 1)
 
 dstr_align_pairwise("aaaccctttggg", "gggaaa")
 dstr_align_pairwise("aaaccctttggg", "gggaaa", TRUE)

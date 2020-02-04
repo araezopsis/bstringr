@@ -16,21 +16,26 @@ extract_aligned_pat <- function(align) {
 #' Align bstr sequence
 #' @param sub a subject sequence
 #' @param pat pattern sequence
-#' @param type a character string
+#' @param type type of alignment. One of "global", "local", "overlap",
+#' "global-local", and "local-global".
+#' @param gapO gap opening penalty
+#' @param gapE gap extension penalty
 #' @name align_pairwise
 #' @export
 #' @examples
 #' bstr_align_pairwise("abcdefgh", "cde")
 #' bstr_align_pairwise("abcdefgh", "cde", type = "local")
 #' bstr_align_pairwise("abcdefgh", c("cde", "befg"))
+#' bstr_align_pairwise("abcdefgh", c("cde", "befg"), gapO = 0, gapE = 1)
 #'
-bstr_align_pairwise <- function(sub, pat, type = "global") {
+bstr_align_pairwise <- function(sub, pat, type = "global", gapO = 10, gapE = 4) {
   if(length(sub) != 1L) stop("length sub must be 1")
   sub <- as_bstr(sub); n_sub <- names(sub)
   pat <- as_bstr(pat); n_pat <- names(pat)
   n_pair <- paste0("pair", seq_along(pat), ": ")
 
-  al <- pairwise_alignment(sub, pat, type = type)
+  al <- pairwise_alignment(sub, pat, type = type,
+                           gapOpening = gapO, gapExtension = gapE)
   c(
     bstr(extract_aligned_sub(al), paste0(n_pair, n_sub)) %>% sort,
     bstr(extract_aligned_pat(al), paste0(n_pair, n_pat)) %>% sort
@@ -46,7 +51,7 @@ bstr_align_pairwise <- function(sub, pat, type = "global") {
 #' dstr_align_pairwise("aaaccctttggg", "gggaaa", TRUE)
 #' dstr_align_pairwise("aaaccctttggg", c("gggaaa", "cccttt"), 1)
 #'
-dstr_align_pairwise <- function(sub, pat, rc, type = "global") {
+dstr_align_pairwise <- function(sub, pat, rc, type = "global", gapO = 10, gapE = 4) {
   if(length(sub) != 1L) stop("length sub must be 1")
   sub <- as_dstr(sub); n_sub <- names(sub)
   pat <- as_dstr(pat); n_pat <- names(pat)
@@ -56,7 +61,8 @@ dstr_align_pairwise <- function(sub, pat, rc, type = "global") {
   pat[rc] <- dstr_rev_comp(pat[rc])
   n_pat[rc] <- paste0(n_pat[rc], " RC")
 
-  al <- pairwise_alignment(sub, pat, type = type)
+  al <- pairwise_alignment(sub, pat, type = type,
+                           gapOpening = gapO, gapExtension = gapE)
   c(
     dstr(extract_aligned_sub(al), paste0(n_pair, n_sub)) %>% sort,
     dstr(extract_aligned_pat(al), paste0(n_pair, n_pat)) %>% sort
@@ -73,10 +79,11 @@ dstr_align_pairwise <- function(sub, pat, rc, type = "global") {
 #' patterns <- c(one = "abc", two = "d", three = "efgjk")
 #' bstr_align_multi(ref, patterns)
 #'
-bstr_align_multi <- function(sub, pat, type = "global") {
+bstr_align_multi <- function(sub, pat, type = "global", gapO = 10, gapE = 4) {
   sub <- as_bstr(sub); n_sub <- names(sub)
   pat <- as_bstr(pat); n_pat <- names(pat)
-  al <- pairwise_alignment(sub, pat, type = type)
+  al <- pairwise_alignment(sub, pat, type = type,
+                           gapOpening = gapO, gapExtension = gapE)
   c(
     bstr(sub, n_sub),
     bstr(extract_aligned_pat(al), n_pat)
@@ -92,13 +99,14 @@ bstr_align_multi <- function(sub, pat, type = "global") {
 #' dstr_align_multi(ref, patterns, 1:2)
 #' dstr_align_multi(ref, patterns, c("T", "G"))
 #'
-dstr_align_multi <- function(sub, pat, rc, type = "global") {
+dstr_align_multi <- function(sub, pat, rc, type = "global", gapO = 10, gapE = 4) {
   sub <- as_dstr(sub); n_sub <- names(sub)
   pat <- as_dstr(pat); n_pat <- names(pat); names(n_pat) <- n_pat
   if(missing(rc)) rc <- rep(FALSE, length(pat))
   pat[rc] <- dstr_rev_comp_fast(pat[rc])
   n_pat[rc] <- paste0(n_pat[rc], " RC")
-  al <- pairwise_alignment(sub, pat, type = type)
+  al <- pairwise_alignment(sub, pat, type = type,
+                           gapOpening = gapO, gapExtension = gapE)
   c(
     dstr(sub, n_sub),
     dstr(extract_aligned_pat(al), n_pat)

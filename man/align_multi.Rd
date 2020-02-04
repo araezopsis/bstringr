@@ -6,16 +6,21 @@
 \alias{dstr_align_multi}
 \title{Align multiple sequences to reference}
 \usage{
-bstr_align_multi(sub, pat, type = "global")
+bstr_align_multi(sub, pat, type = "global", gapO = 10, gapE = 4)
 
-dstr_align_multi(sub, pat, rc, type = "global")
+dstr_align_multi(sub, pat, rc, type = "global", gapO = 10, gapE = 4)
 }
 \arguments{
 \item{sub}{a subject sequence}
 
 \item{pat}{pattern sequence}
 
-\item{type}{a character string}
+\item{type}{type of alignment. One of "global", "local", "overlap",
+"global-local", and "local-global".}
+
+\item{gapO}{gap opening penalty}
+
+\item{gapE}{gap extension penalty}
 
 \item{rc}{logical value. if TRUE, the seq2 is aligned after reverse complemented. default is FALSE.}
 }
