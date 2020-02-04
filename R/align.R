@@ -13,17 +13,6 @@ extract_aligned_pat <- function(align) {
   bstr(x, n = paste0(seq_along(x), " pattern"))
 }
 
-sort_bstr_with_subname <- function(bstrobj, pattern, start, end) {
-  bstrobj <- as_bstr(bstrobj)
-  n <- names(bstrobj)
-  if(!missing(pattern)) {
-    sub_n <- stringr::str_extract(n, pattern)
-  } else {
-    sub_n <- stringr::str_sub(n, start, end)
-  }
-  bstrobj[stringr::str_order(sub_n, numeric = TRUE)]
-}
-
 #' Align bstr sequence
 #' @param sub a subject sequence
 #' @param pat pattern sequence
@@ -46,7 +35,7 @@ bstr_align_pairwise <- function(sub, pat, type = "global") {
     bstr(extract_aligned_sub(al), paste0(n_pair, n_sub)) %>% sort,
     bstr(extract_aligned_pat(al), paste0(n_pair, n_pat)) %>% sort
   ) %>%
-    sort_bstr_with_subname(pattern = "^[^:]+")
+    bstr_sort_subname(pattern = "^[^:]+")
 }
 
 #' @rdname align_pairwise
@@ -72,7 +61,7 @@ dstr_align_pairwise <- function(sub, pat, rc, type = "global") {
     dstr(extract_aligned_sub(al), paste0(n_pair, n_sub)) %>% sort,
     dstr(extract_aligned_pat(al), paste0(n_pair, n_pat)) %>% sort
   ) %>%
-    sort_bstr_with_subname(pattern = "^[^:]+")
+    bstr_sort_subname(pattern = "^[^:]+")
 }
 
 #' Align multiple sequences to reference

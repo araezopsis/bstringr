@@ -2,18 +2,52 @@
 % Please edit documentation in R/general.R
 \name{sort.bstr}
 \alias{sort.bstr}
+\alias{bstr_sort}
+\alias{bstr_sort_subname}
 \title{sort bstr}
 \usage{
 \method{sort}{bstr}(x, decreasing = FALSE, ..., by = c("names", "length"))
+
+bstr_sort(
+  bstrobj,
+  by = c("names", "length"),
+  decreasing = FALSE,
+  na_last = TRUE,
+  numeric = TRUE
+)
+
+bstr_sort_subname(
+  bstrobj,
+  pattern,
+  start,
+  end,
+  decreasing = FALSE,
+  na_last = TRUE,
+  numeric = TRUE
+)
 }
 \arguments{
 \item{x}{x}
 
-\item{decreasing}{logical. FALSE}
+\item{decreasing}{A boolean. If FALSE, the default,
+sorts from lowest to highest; if TRUE sorts from highest to lowest.}
 
 \item{...}{...}
 
-\item{by}{c("names", "length")}
+\item{by}{sort bstr object by c("names", "length")}
+
+\item{bstrobj}{bstr class object or character vector}
+
+\item{na_last}{Where should NA go? TRUE at the end,
+FALSE at the beginning, NA dropped.}
+
+\item{numeric}{If TRUE, will sort digits numerically, instead of as strings.}
+
+\item{pattern}{regular expression to extract substrings of the name to sort}
+
+\item{start}{start position to extract substrings of the name}
+
+\item{end}{end position to extract substrings of the name}
 }
 \description{
 sort bstr
@@ -23,5 +57,12 @@ test <- bstr_rand_seq(6, c(10, 5, 10, 12, 13, 3), seed = 1)
 test
 sort(test, decreasing = TRUE)
 sort(test, by = "length")
+
+names(test) <- c("test1", "test10", "test10", "test20", "test3", "test100")
+sort(test)
+
+bstr_sort(test)
+bstr_sort_subname(test, "test.")
+bstr_sort_subname(test, start = 1, end = 4)
 
 }
