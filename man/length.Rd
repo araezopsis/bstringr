@@ -3,15 +3,9 @@
 \name{length}
 \alias{length}
 \alias{bstr_length}
-\alias{dstr_length}
-\alias{astr_length}
 \title{Sequence length in the bstr sequences.}
 \usage{
 bstr_length(bstrobj)
-
-dstr_length(bstrobj)
-
-astr_length(bstrobj)
 }
 \arguments{
 \item{bstrobj}{bstr class object or character vector}

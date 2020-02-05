@@ -14,7 +14,7 @@
 
 \item{dstrobj}{dstr class object or character vector}
 
-\item{astrobj}{astr class object or character vector}
+\item{pstrobj}{pstr class object or character vector}
 
 \item{pattern}{regex pattern}
 

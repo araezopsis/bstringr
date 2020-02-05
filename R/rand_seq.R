@@ -13,8 +13,8 @@
 #' dstr_rand_seq(3, 20, seed = 1)
 #' dstr_rand_seq(3, 5:7, c("[atcg]", "[ATCG]", "[N.]"), seed = 1)
 #'
-#' astr_rand_seq(3, 20, seed = 1)
-#' astr_rand_seq(3, 5:7, c("[arnd]", "[ARND]", "[X.]"), seed = 1)
+#' pstr_rand_seq(3, 20, seed = 1)
+#' pstr_rand_seq(3, 5:7, c("[arnd]", "[ARND]", "[X.]"), seed = 1)
 #'
 bstr_rand_seq <- function(n, length, pattern = "[A-Za-z]", seed) {
   if(!missing(seed)) {
@@ -37,12 +37,12 @@ dstr_rand_seq <-
 
 #' @rdname random_seq
 #' @export
-astr_rand_seq <-
+pstr_rand_seq <-
   function(n, length, pattern = "[ARNDCQEGHILKMFPSTWYVX]", seed) {
     if(!missing(seed)) {
       set.seed(seed)
     }
     stringi::stri_rand_strings(n = n, length = length, pattern = pattern) %>%
-      as_astr()
+      as_pstr()
   }
 

@@ -18,11 +18,3 @@ bstr_reverse <-
     bstrobj
   }
 
-#' @rdname reverse
-#' @export
-dstr_reverse <- bstr_reverse
-
-#' @rdname reverse
-#' @export
-astr_reverse <- bstr_reverse
-

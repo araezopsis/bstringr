@@ -6,7 +6,7 @@
 #'
 #' @param bstrobj bstr class object or character vector
 #' @param dstrobj dstr class object or character vector
-#' @param astrobj astr class object or character vector
+#' @param pstrobj pstr class object or character vector
 #'
 #' @param pattern regex pattern
 #' @param case_sensitive sensitive to case in pattern (default:FALSE)
@@ -14,7 +14,7 @@
 NULL
 
 
-### bstr(), dstr(), astr() ------------------------------------------------
+### bstr(), dstr(), pstr() ------------------------------------------------
 
 #' Constructer of the bstr class object
 #' @inheritParams class_bstr
@@ -27,18 +27,18 @@ NULL
 #' dstr("A.Bad.bat", "It is")
 #' dstr(c("A", "bad", "Bat"), ucase = TRUE)
 #'
-#' astr("Wqrld", "HELLQ", ucase = TRUE)
+#' pstr("Wqrld", "HELLQ", ucase = TRUE)
 #'
 #' ### Check class
 #' is_bstr(bstr("apple"))
 #' is_bstr(c("apple", "orange"))
 #' is_dstr(dstr("bad"))
-#' is_astr(astr("I.am.a.geek"))
+#' is_pstr(pstr("I.am.a.geek"))
 #'
 #' ### Convert character to bstr object
 #' as_dstr("bad", "good", ucase = TRUE)
 #' # as_dstr(c("good", "bad")) # Error
-#' as_astr("Wqrld", "HELLQ", ucase = TRUE)
+#' as_pstr("Wqrld", "HELLQ", ucase = TRUE)
 #'
 bstr <- function(x, n, ucase = FALSE) {
   if(!is.character(x)) stop("x must be a character vector.")
@@ -70,16 +70,16 @@ dstr <-
 
 #' @rdname construct_bstr
 #' @export
-astr <-
+pstr <-
   function(x, n, ucase = F) {
     a <- bstr(x, n, ucase)
     if(any(is_valid_aa_character(a, negate = TRUE)))
       stop("input contains invalid Amino Acid character")
-    class(a) <- c("astr", class(a))
+    class(a) <- c("pstr", class(a))
     a
   }
 
-### is_bstr(), is_dstr(), is_astr() -----------------------------------------
+### is_bstr(), is_dstr(), is_pstr() -----------------------------------------
 
 #' @rdname construct_bstr
 #' @export
@@ -91,9 +91,9 @@ is_dstr <- function(x) inherits(x, "dstr")
 
 #' @rdname construct_bstr
 #' @export
-is_astr <- function(x) inherits(x, "astr")
+is_pstr <- function(x) inherits(x, "pstr")
 
-### as_bstr(), as_dstr(), as_astr() -----------------------------------------
+### as_bstr(), as_dstr(), as_pstr() -----------------------------------------
 
 #' @rdname construct_bstr
 #' @export
@@ -117,9 +117,9 @@ as_dstr <- function(x, n, ucase = FALSE) {
 
 #' @rdname construct_bstr
 #' @export
-as_astr <- function(x, n, ucase = FALSE) {
-  if(!is_astr(x)) {
-    astr(x, n, ucase)
+as_pstr <- function(x, n, ucase = FALSE) {
+  if(!is_pstr(x)) {
+    pstr(x, n, ucase)
   } else {
     x
   }

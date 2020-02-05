@@ -13,11 +13,3 @@ bstr_length <-
     as_bstr(bstrobj) %>% stringr::str_length()
   }
 
-#' @rdname length
-#' @export
-dstr_length <- bstr_length
-
-#' @rdname length
-#' @export
-astr_length <- bstr_length
-

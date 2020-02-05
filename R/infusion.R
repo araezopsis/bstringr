@@ -18,8 +18,8 @@
 #'
 calc_InFusion_vector_volume <-
   function(seq_i, seq_v, conc_i, conc_v, uL_i, ratio_i = 2, ratio_v = 1) {
-    info_i <- dstr(seq_i, "insert") %>% calc_MW_dsDNA()
-    info_v <- dstr(seq_v, "vector") %>% calc_MW_dsDNA()
+    info_i <- dstr(seq_i, "insert") %>% calc_mw_dsDNA()
+    info_v <- dstr(seq_v, "vector") %>% calc_mw_dsDNA()
 
     ng_i <- conc_i * uL_i
     nmol_i <- ng_i / (info_i$applox_MW * 10^-9)
@@ -54,8 +54,8 @@ calc_InFusion_vector_volume <-
 #'
 calc_InFusion_insert_volume <-
   function(seq_i, seq_v, conc_i, conc_v, uL_v, ratio_i = 2, ratio_v = 1) {
-    info_i <- dstr(seq_i, "insert") %>% calc_MW_dsDNA()
-    info_v <- dstr(seq_v, "vector") %>% calc_MW_dsDNA()
+    info_i <- dstr(seq_i, "insert") %>% calc_mw_dsDNA()
+    info_v <- dstr(seq_v, "vector") %>% calc_mw_dsDNA()
 
     ng_v <- conc_v * uL_v
     nmol_v <- ng_v / (info_v$applox_MW * 10^-9)

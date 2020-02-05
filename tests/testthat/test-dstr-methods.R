@@ -29,6 +29,6 @@ test_that("dstr_rev_comp()", {
 test_that("dstr_traslate()", {
   expect_equal(
     dstr_translate(c("atgTGa")),
-    astr(c("M*"))
+    pstr(c("M*"))
   )
 })

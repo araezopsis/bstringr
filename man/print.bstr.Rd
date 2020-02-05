@@ -22,7 +22,7 @@ print bstr class object
 }
 \examples{
 dstr_rand_seq(10, 20, seed = 1)
-astr_rand_seq(10, 20, seed = 1)
+pstr_rand_seq(10, 20, seed = 1)
 
 test1 <- dstr_rand_seq(1, 20, seed = 1)
 test2 <- dstr_rand_seq(1, 21, seed = 1)

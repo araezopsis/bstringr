@@ -3,15 +3,9 @@
 \name{reverse}
 \alias{reverse}
 \alias{bstr_reverse}
-\alias{dstr_reverse}
-\alias{astr_reverse}
 \title{Reverse bstr sequence}
 \usage{
 bstr_reverse(bstrobj)
-
-dstr_reverse(bstrobj)
-
-astr_reverse(bstrobj)
 }
 \arguments{
 \item{bstrobj}{bstr class object or character vector}

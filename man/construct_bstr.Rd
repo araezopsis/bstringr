@@ -4,32 +4,32 @@
 \alias{construct_bstr}
 \alias{bstr}
 \alias{dstr}
-\alias{astr}
+\alias{pstr}
 \alias{is_bstr}
 \alias{is_dstr}
-\alias{is_astr}
+\alias{is_pstr}
 \alias{as_bstr}
 \alias{as_dstr}
-\alias{as_astr}
+\alias{as_pstr}
 \title{Constructer of the bstr class object}
 \usage{
 bstr(x, n, ucase = FALSE)
 
 dstr(x, n, ucase = FALSE)
 
-astr(x, n, ucase = F)
+pstr(x, n, ucase = F)
 
 is_bstr(x)
 
 is_dstr(x)
 
-is_astr(x)
+is_pstr(x)
 
 as_bstr(x, n, ucase = FALSE)
 
 as_dstr(x, n, ucase = FALSE)
 
-as_astr(x, n, ucase = FALSE)
+as_pstr(x, n, ucase = FALSE)
 }
 \arguments{
 \item{x}{A character vector which convert to a bstr object.}
@@ -48,17 +48,17 @@ bstr(c("Apple", "potato"), c("apple", "imo"), ucase = TRUE)
 dstr("A.Bad.bat", "It is")
 dstr(c("A", "bad", "Bat"), ucase = TRUE)
 
-astr("Wqrld", "HELLQ", ucase = TRUE)
+pstr("Wqrld", "HELLQ", ucase = TRUE)
 
 ### Check class
 is_bstr(bstr("apple"))
 is_bstr(c("apple", "orange"))
 is_dstr(dstr("bad"))
-is_astr(astr("I.am.a.geek"))
+is_pstr(pstr("I.am.a.geek"))
 
 ### Convert character to bstr object
 as_dstr("bad", "good", ucase = TRUE)
 # as_dstr(c("good", "bad")) # Error
-as_astr("Wqrld", "HELLQ", ucase = TRUE)
+as_pstr("Wqrld", "HELLQ", ucase = TRUE)
 
 }

@@ -4,14 +4,14 @@
 \alias{random_seq}
 \alias{bstr_rand_seq}
 \alias{dstr_rand_seq}
-\alias{astr_rand_seq}
+\alias{pstr_rand_seq}
 \title{Generate random bstr sequences of desired lengths.}
 \usage{
 bstr_rand_seq(n, length, pattern = "[A-Za-z]", seed)
 
 dstr_rand_seq(n, length, pattern = "[ATGC]", seed)
 
-astr_rand_seq(n, length, pattern = "[ARNDCQEGHILKMFPSTWYVX]", seed)
+pstr_rand_seq(n, length, pattern = "[ARNDCQEGHILKMFPSTWYVX]", seed)
 }
 \arguments{
 \item{n}{single integer, nubmer of sequences}
@@ -32,7 +32,7 @@ bstr_rand_seq(3, 5:7, c("[a-c]", "[A-C]", "[1-3]"), seed = 1)
 dstr_rand_seq(3, 20, seed = 1)
 dstr_rand_seq(3, 5:7, c("[atcg]", "[ATCG]", "[N.]"), seed = 1)
 
-astr_rand_seq(3, 20, seed = 1)
-astr_rand_seq(3, 5:7, c("[arnd]", "[ARND]", "[X.]"), seed = 1)
+pstr_rand_seq(3, 20, seed = 1)
+pstr_rand_seq(3, 5:7, c("[arnd]", "[ARND]", "[X.]"), seed = 1)
 
 }

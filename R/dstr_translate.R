@@ -17,7 +17,7 @@ dstr_translate <-
     if(any(is.na(pep))) warning("The sequence contained codon miss match.")
 
     attributes(pep) <- at
-    as_astr(pep)
+    as_pstr(pep)
   }
 
 # test_orf <-
