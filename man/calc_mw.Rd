@@ -33,8 +33,8 @@ Calculate peptide molecular weight
 calc_mw_dsDNA(test)
 calc_mw_ssRNA(test)
 
-(res <- pstr_rand_seq(3, 100, seed = 1) \%>\% calc_mw_peptide())
-barplot(percent ~ name + aa, legend.text = unique(res$name),
+(res <- pstr_rand_seq(3, 100, seed = 1)\%>\% calc_mw_peptide())
+barplot(aa_percent ~ name + aa, legend.text = unique(res$name),
   beside = TRUE, data = res)
 
 }
