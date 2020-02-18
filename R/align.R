@@ -128,18 +128,19 @@ dstr_align_multi <- function(sub, pat, rc, type = "global", gapO = 10, gapE = 4)
 #'
 dstr_pcr <- function(template, primerF, primerR, FRC = FALSE, RRC = TRUE) {
   . <- NULL
-  len <-
-    c(template, primerF, primerR) %>%
-    lapply(function(x) length(x) != 1L) %>%
-    unlist %>%
-    any
-  if(len) stop("template, primerF, primerR must be length 1.")
 
   template <- as_dstr(template, "template")
   primerF <- as_dstr(primerF, "primerF")
   primerR <- as_dstr(primerR, "primerR")
   if(FRC) primerF <- dstr_rev_comp(primerF) %>% dstr("primerF RC")
   if(RRC) primerR <- dstr_rev_comp(primerR) %>% dstr("primerR RC")
+
+  len <-
+    c(template, primerF, primerR) %>%
+    lapply(function(x) length(x) != 1L) %>%
+    unlist %>%
+    any
+  if(len) stop("template, primerF, primerR must be length 1.")
 
   primerF_match_start <-
     pairwise_alignment(template, primerF, type = "local") %>%
