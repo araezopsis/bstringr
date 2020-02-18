@@ -59,25 +59,24 @@ bstr <- function(x, n, ucase = FALSE) {
 
 #' @rdname construct_bstr
 #' @export
-dstr <-
-  function(x, n, ucase = FALSE) {
-    d <- bstr(x, n, ucase)
-    if(any(is_valid_dna_character(d, negate = TRUE)))
-      stop("input contains invalid DNA character")
-    class(d) <- c("dstr", class(d))
-    d
-  }
+dstr <- function(x, n, ucase = FALSE) {
+  d <- bstr(x, n, ucase)
+  if(any(is_valid_dna_character(d, negate = TRUE)))
+    stop("input contains invalid DNA character")
+  class(d) <- c("dstr", class(d))
+  d
+}
 
 #' @rdname construct_bstr
 #' @export
-pstr <-
-  function(x, n, ucase = F) {
-    a <- bstr(x, n, ucase)
-    if(any(is_valid_aa_character(a, negate = TRUE)))
-      stop("input contains invalid Amino Acid character")
-    class(a) <- c("pstr", class(a))
-    a
-  }
+pstr <- function(x, n, ucase = FALSE) {
+  a <- bstr(x, n, ucase)
+  if(any(is_valid_aa_character(a, negate = TRUE)))
+    stop("input contains invalid Amino Acid character")
+  class(a) <- c("pstr", class(a))
+  a
+}
+
 
 ### is_bstr(), is_dstr(), is_pstr() -----------------------------------------
 

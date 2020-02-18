@@ -17,7 +17,7 @@ bstr(x, n, ucase = FALSE)
 
 dstr(x, n, ucase = FALSE)
 
-pstr(x, n, ucase = F)
+pstr(x, n, ucase = FALSE)
 
 is_bstr(x)
 
