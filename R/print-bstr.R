@@ -79,7 +79,7 @@ format_parts_seq <-
     x[is.na(x)] <- "<NA>"
     x <-
       ifelse(
-        test = stringr::str_count(x) <= l_seq,
+        test = nchar(x) <= l_seq,
         yes = x,
         no = paste0(
           stringr::str_sub(x, end = l_seq_half),
@@ -95,8 +95,8 @@ format_parts_seq <-
 format_parts_length <-
   function(x){
     class(x) <- "character"
-    x <- stringr::str_count(x)
-    x_maxn <- max(stringr::str_count(x))
+    x <- nchar(x)
+    x_maxn <- max(nchar(x))
     stringr::str_pad(x, width = x_maxn)
   }
 
@@ -118,4 +118,10 @@ format_row <-
     )
   }
 
+### str_countよりncharの方がかなり早い
+# temp <- bstr_rand_seq(1000, 1000) # temp <- bstr_rand_seq(5, 10^8)
+# bench::mark(
+#   nchar(temp) %>% purrr::set_names(NULL),
+#   stringr::str_count(temp)
+# )
 

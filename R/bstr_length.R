@@ -10,6 +10,7 @@
 #'
 bstr_length <-
   function(bstrobj) {
-    as_bstr(bstrobj) %>% stringr::str_length()
+    # as_bstr(bstrobj) %>% stringr::str_length() # str_lengthはちょっと遅い
+    as_bstr(bstrobj) %>% nchar(keepNA = TRUE) %>% purrr::set_names(NULL)
   }
 
