@@ -3,7 +3,6 @@
 #' @param x A character vector which convert to a bstr object.
 #' @param n A character vector which is name of x.
 #' @param ucase A logical. If TRUE the x is converted to upper case. (default: FALSE)
-#'
 #' @param bstrobj bstr class object or character vector
 #' @param dstrobj dstr class object or character vector
 #' @param pstrobj pstr class object or character vector
@@ -127,46 +126,60 @@ as_pstr <- function(x, n, ucase = FALSE) {
 ### Other ----------------------------------------------------------------
 
 #' Add object attribute
-#' @param bstrobj bstring object
-#' @param attr_name A character. attribute names
-#' @param attrs attrs
+#' @inheritParams class_bstr
+#' @param attr_name one string. an attribute name.
+#' @param attrs object attribute
 #' @export
-bstr_add_attr_for_object <-
-  function(bstrobj, attr_name, attrs){
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
+#' @examples
+#' temp <- bstr("hogehogehoge")
+#' temp <- temp %>% bstr_add_obj_at("hige", "hage")
+#' temp
+#' str(temp)
+#' temp %>% bstr_add_obj_at("hige", NA) %>% str
+#'
+bstr_add_obj_at <- function(bstrobj, attr_name, attrs) {
+  bstrobj <- as_bstr(bstrobj)
+  at <- attributes(bstrobj)
 
-    if(!any(names(at) %in% "attr_obj")){
-      at[["attr_obj"]] <- list()
-    }
+  if(!any(names(at) %in% "attr_obj")) at[["attr_obj"]] <- list()
 
-    at[["attr_obj"]][[attr_name]] <- attrs
+  if(any(names(at[["attr_obj"]]) %in% attr_name))
+    message(paste0("object attribute '", attr_name, "' were overwritten."))
+  at[["attr_obj"]][[attr_name]] <- attrs
 
-    attributes(bstrobj) <- at
-    return(bstrobj)
-  }
+  attributes(bstrobj) <- at
+  return(bstrobj)
+}
 
 #' Add sequence attribute
-#' @param bstrobj bstring object
-#' @param attr_name A character. attribute names
-#' @param attrs attrs
+#' @inheritParams class_bstr
+#' @param attr_name one string. an attribute name.
+#' @param attrs sequence attributes. its length must equal to the length object
 #' @export
-bstr_add_attr_for_seq <-
-  function(bstrobj, attr_name, attrs){
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
+#' @examples
+#' temp <- dstr_rand_seq(3, 200, seed = 1) %>%
+#'   bstr_add_seq_at("circle", c(TRUE, FALSE, TRUE))
+#' temp
+#' temp %>% str
+#' # dstr_rand_seq(3, 200) %>% bstr_add_seq_at("circle", TRUE)
+#' temp %>% bstr_add_seq_at("circle", c(FALSE, TRUE, TRUE))
+#'
+bstr_add_seq_at <- function(bstrobj, attr_name, attrs) {
+  bstrobj <- as_bstr(bstrobj)
+  at <- attributes(bstrobj)
 
-    if(check_attr_seq(bstrobj, attrs)) stop()
-    if(!any(names(at) %in% "attr_seq")) at[["attr_seq"]] <- list()
+  if(length(bstrobj) != length(attrs))
+    stop("length of bstrobj and attrs must be same.")
+  if(!any(names(at) %in% "attr_seq")) at[["attr_seq"]] <- list()
 
-    at[["attr_seq"]][[attr_name]] <- attrs
-    attributes(bstrobj) <- at
-    return(bstrobj)
-  }
+  if(any(names(at[["attr_seq"]]) %in% attr_name))
+    message(paste0("sequence attribute '", attr_name, "' were overwritten."))
+  at[["attr_seq"]][[attr_name]] <- attrs
 
-check_attr_seq <-
-  function(bstrobj, attrs){
-    return(!any(
-      (length(bstrobj) != length(attrs))
-    ))
-  }
+  attributes(bstrobj) <- at
+  return(bstrobj)
+}
+
+
+
+
