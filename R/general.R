@@ -41,17 +41,29 @@ subset_at <- function(at, ...) {
 #' c(dstr_rand_seq(2, 5, seed = 1), dstr_rand_seq(3, 5, seed = 2))
 #' c(dstr_rand_seq(3, 5, seed = 2), dstr_rand_seq(2, 5, seed = 1))
 #'
-#' c("hoge", dstr_rand_seq(2, 5, seed = 1))
-#' # c(dstr_rand_seq(3, 5, seed = 2), "hoge") # Error
-#' c(dstr_rand_seq(3, 5, seed = 2), as_bstr("hoge"))
+#' c("hoge", dstr("atg"))
+#' c(dstr("atg"), "hoge")
+#' c(dstr("atg"), bstr("hoge"))
+#' c(dstr("atg"), dstr("ccc"))
+#' c(dstr("atg"), pstr("ccc"))
+#' c(pstr("atg"), pstr("ccc"))
 #'
 "c.bstr" <- function(...) {
-  if(all(unlist(lapply(list(...), is_bstr)))) {
-    y <- c(unlist(lapply(list(...), unclass)))
+  li <- list(...)
+  all_class <- lapply(li, class)
+  flag_d <- lapply(all_class, function(x) any(x %in% "dstr")) %>% unlist %>% all
+  flag_p <- lapply(all_class, function(x) any(x %in% "pstr")) %>% unlist %>% all
+
+  y <- c(unlist(lapply(li, unclass)))
+
+  if((flag_d & flag_p) | (!flag_d & !flag_p)) {
     y <- as_bstr(y)
-  } else {
-    stop("input contains not bstr class object")
+  } else if(flag_d) {
+    y <- as_dstr(y)
+  } else if(flag_p) {
+    y <- as_pstr(y)
   }
+  y
 }
 
 #' sort bstr

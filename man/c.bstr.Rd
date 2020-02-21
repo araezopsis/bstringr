@@ -16,8 +16,11 @@ Combine Values into a bstr class object
 c(dstr_rand_seq(2, 5, seed = 1), dstr_rand_seq(3, 5, seed = 2))
 c(dstr_rand_seq(3, 5, seed = 2), dstr_rand_seq(2, 5, seed = 1))
 
-c("hoge", dstr_rand_seq(2, 5, seed = 1))
-# c(dstr_rand_seq(3, 5, seed = 2), "hoge") # Error
-c(dstr_rand_seq(3, 5, seed = 2), as_bstr("hoge"))
+c("hoge", dstr("atg"))
+c(dstr("atg"), "hoge")
+c(dstr("atg"), bstr("hoge"))
+c(dstr("atg"), dstr("ccc"))
+c(dstr("atg"), pstr("ccc"))
+c(pstr("atg"), pstr("ccc"))
 
 }
