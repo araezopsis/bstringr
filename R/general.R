@@ -1,4 +1,19 @@
 
+subset_at <- function(at, ...) {
+  n <- at[["names"]]
+  if(any(names(at) %in% "attr_seq")) {
+    seq_at <- at[["attr_seq"]]
+    for(i in seq_along(seq_at)) {
+      names(seq_at[[i]]) <- n
+    }
+    at[["attr_seq"]] <- lapply(seq_at, function(x) x[...])
+  }
+  names(n) <- n
+  at[["names"]] <- n[...]
+  names(at[["names"]]) <- NULL
+  at
+}
+
 #' subsetting bstr class object
 #' @param x x
 #' @param ... ...
@@ -14,7 +29,8 @@
 #'
 "[.bstr" <- function(x, ..., drop = F) {
   y <- NextMethod("[", "character")
-  class(y) <- class(x)
+  at <- attributes(x)
+  attributes(y) <- subset_at(at, ...)
   y
 }
 
