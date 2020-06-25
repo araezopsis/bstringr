@@ -1,6 +1,6 @@
 
 #' Return complement sequences
-#' @param dstrobj dstr object
+#' @inheritParams class_bstr
 #' @rdname dstr_complement
 #' @export
 #' @examples
@@ -12,47 +12,46 @@
 #' c(temp, compl = dstr_complement_fast(temp))
 #'
 dstr_complement <- function(dstrobj) {
-    dstrobj <- as_dstr(dstrobj)
-    at <- attributes(dstrobj)
+  dstrobj <- as_dstr(dstrobj)
+  at <- attributes(dstrobj)
 
-    pos_a <- stringr::str_locate_all(dstrobj, "a")
-    pos_t <- stringr::str_locate_all(dstrobj, "t")
-    pos_g <- stringr::str_locate_all(dstrobj, "g")
-    pos_c <- stringr::str_locate_all(dstrobj, "c")
-    pos_A <- stringr::str_locate_all(dstrobj, "A")
-    pos_T <- stringr::str_locate_all(dstrobj, "T")
-    pos_G <- stringr::str_locate_all(dstrobj, "G")
-    pos_C <- stringr::str_locate_all(dstrobj, "C")
+  pos_a <- stringr::str_locate_all(dstrobj, "a")
+  pos_t <- stringr::str_locate_all(dstrobj, "t")
+  pos_g <- stringr::str_locate_all(dstrobj, "g")
+  pos_c <- stringr::str_locate_all(dstrobj, "c")
+  pos_A <- stringr::str_locate_all(dstrobj, "A")
+  pos_T <- stringr::str_locate_all(dstrobj, "T")
+  pos_G <- stringr::str_locate_all(dstrobj, "G")
+  pos_C <- stringr::str_locate_all(dstrobj, "C")
 
-    bstr_sub_all(dstrobj, pos_a) <- "t"
-    bstr_sub_all(dstrobj, pos_t) <- "a"
-    bstr_sub_all(dstrobj, pos_g) <- "c"
-    bstr_sub_all(dstrobj, pos_c) <- "g"
-    bstr_sub_all(dstrobj, pos_A) <- "T"
-    bstr_sub_all(dstrobj, pos_T) <- "A"
-    bstr_sub_all(dstrobj, pos_G) <- "C"
-    bstr_sub_all(dstrobj, pos_C) <- "G"
+  bstr_sub_all(dstrobj, pos_a) <- "t"
+  bstr_sub_all(dstrobj, pos_t) <- "a"
+  bstr_sub_all(dstrobj, pos_g) <- "c"
+  bstr_sub_all(dstrobj, pos_c) <- "g"
+  bstr_sub_all(dstrobj, pos_A) <- "T"
+  bstr_sub_all(dstrobj, pos_T) <- "A"
+  bstr_sub_all(dstrobj, pos_G) <- "C"
+  bstr_sub_all(dstrobj, pos_C) <- "G"
 
-    attributes(dstrobj) <- at
-    dstrobj
+  attributes(dstrobj) <- at
+  dstrobj
 }
 
 #' @rdname dstr_complement
 #' @export
-dstr_complement_fast <-
-  function(dstrobj){
-    dstrobj <- as_dstr(dstrobj)
-    at <- attributes(dstrobj)
+dstr_complement_fast <- function(dstrobj) {
+  dstrobj <- as_dstr(dstrobj)
+  at <- attributes(dstrobj)
 
-    comp_map <- c("a" = "T", "t" = "A", "g" = "C", "c" = "G")
-    dstrobj <-
-      stringr::str_to_lower(dstrobj) %>%
-      stringr::str_replace_all(comp_map) %>%
-      stringr::str_to_upper()
+  comp_map <- c("a" = "T", "t" = "A", "g" = "C", "c" = "G")
+  dstrobj <-
+    stringr::str_to_lower(dstrobj) %>%
+    stringr::str_replace_all(comp_map) %>%
+    stringr::str_to_upper()
 
-    attributes(dstrobj) <- at
-    dstrobj
-  }
+  attributes(dstrobj) <- at
+  dstrobj
+}
 
 
 # old_dstr_complement <-
@@ -101,7 +100,7 @@ dstr_complement_fast <-
 # ) %>% dplyr::glimpse()
 
 #' Return reverse complement sequences
-#' @param dstrobj dstr object
+#' @inheritParams class_bstr
 #' @rdname dstr_rev_comp
 #' @export
 #' @examples
@@ -112,16 +111,14 @@ dstr_complement_fast <-
 #' # case conversion
 #' c(temp, compl = dstr_rev_comp_fast(temp))
 #'
-dstr_rev_comp <-
-  function(dstrobj){
-    dstr_complement(dstrobj) %>% bstr_reverse()
-  }
+dstr_rev_comp <- function(dstrobj) {
+  dstr_complement(dstrobj) %>% bstr_reverse()
+}
 
 #' @rdname dstr_rev_comp
 #' @export
-dstr_rev_comp_fast <-
-  function(dstrobj){
-    dstr_complement_fast(dstrobj) %>% bstr_reverse()
-  }
+dstr_rev_comp_fast <- function(dstrobj) {
+  dstr_complement_fast(dstrobj) %>% bstr_reverse()
+}
 
 
