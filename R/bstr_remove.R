@@ -16,37 +16,33 @@
 
 #' @rdname remove
 #' @export
-bstr_remove <-
-  function(bstrobj, pattern, case_sensitive = FALSE){
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
-    if(!case_sensitive) pattern <- paste0("(?i)", pattern)
+bstr_remove <- function(bstrobj, pattern, case_sensitive = FALSE) {
+  bstrobj <- as_bstr(bstrobj)
+  at <- attributes(bstrobj)
 
-    bstrobj <- stringr::str_remove_all(string = bstrobj, pattern = pattern)
+  if(!case_sensitive) pattern <- paste0("(?i)", pattern)
+  bstrobj <- stringr::str_remove_all(string = bstrobj, pattern = pattern)
 
-    attributes(bstrobj) <- at
-    bstrobj
-  }
-
-#' @rdname remove
-#' @export
-bstr_remove_num <-
-  function(bstrobj){
-    bstr_remove(bstrobj = bstrobj, pattern = "[[:digit:]]")
-  }
+  attributes(bstrobj) <- at
+  bstrobj
+}
 
 #' @rdname remove
 #' @export
-bstr_remove_notalpha <-
-  function(bstrobj){
-    bstr_remove(bstrobj = bstrobj, pattern = "[^[:alpha:]]")
-  }
+bstr_remove_num <- function(bstrobj) {
+  bstr_remove(bstrobj = bstrobj, pattern = "[[:digit:]]")
+}
+
+#' @rdname remove
+#' @export
+bstr_remove_notalpha <- function(bstrobj) {
+  bstr_remove(bstrobj = bstrobj, pattern = "[^[:alpha:]]")
+}
 
 #' @rdname remove
 #' @param gap_chr a gap character
 #' @export
-bstr_remove_gap <-
-  function(bstrobj, gap_chr = "-"){
-    bstr_remove(bstrobj = bstrobj, pattern = gap_chr)
-  }
+bstr_remove_gap <- function(bstrobj, gap_chr = "-") {
+  bstr_remove(bstrobj = bstrobj, pattern = gap_chr)
+}
 
