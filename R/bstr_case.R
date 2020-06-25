@@ -15,48 +15,45 @@ NULL
 
 #' @rdname case
 #' @export
-bstr_to_upper <-
-  function(bstrobj) {
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
+bstr_to_upper <- function(bstrobj) {
+  bstrobj <- as_bstr(bstrobj)
+  at <- attributes(bstrobj)
 
-    bstrobj <- stringr::str_to_upper(bstrobj)
+  bstrobj <- stringr::str_to_upper(bstrobj)
 
-    attributes(bstrobj) <- at
-    bstrobj
-  }
-
-#' @rdname case
-#' @export
-bstr_to_lower <-
-  function(bstrobj) {
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
-
-    bstrobj <- stringr::str_to_lower(bstrobj)
-
-    attributes(bstrobj) <- at
-    bstrobj
-  }
+  attributes(bstrobj) <- at
+  bstrobj
+}
 
 #' @rdname case
 #' @export
-bstr_switch_case <-
-  function(bstrobj) {
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
+bstr_to_lower <- function(bstrobj) {
+  bstrobj <- as_bstr(bstrobj)
+  at <- attributes(bstrobj)
 
-    bstrobj <- bstrobj %>% stringr::str_extract_all(".")
-    lower_c <- bstrobj %>% purrr::map(~ stringr::str_detect(.x, "[[:lower:]]"))
-    upper_c <- bstrobj %>% purrr::map(~ stringr::str_detect(.x, "[[:upper:]]"))
+  bstrobj <- stringr::str_to_lower(bstrobj)
 
-    bstrobj <-
-      bstrobj %>%
-      purrr::map2(lower_c, ~ ifelse(.y, stringr::str_to_upper(.x), .x)) %>%
-      purrr::map2(upper_c, ~ ifelse(.y, stringr::str_to_lower(.x), .x)) %>%
-      purrr::map_chr(~ paste0(.x, collapse = ""))
+  attributes(bstrobj) <- at
+  bstrobj
+}
 
-    attributes(bstrobj) <- at
-    bstrobj
-  }
+#' @rdname case
+#' @export
+bstr_switch_case <- function(bstrobj) {
+  bstrobj <- as_bstr(bstrobj)
+  at <- attributes(bstrobj)
+
+  bstrobj <- bstrobj %>% stringr::str_extract_all(".")
+  lower_c <- bstrobj %>% purrr::map(~ stringr::str_detect(.x, "[[:lower:]]"))
+  upper_c <- bstrobj %>% purrr::map(~ stringr::str_detect(.x, "[[:upper:]]"))
+
+  bstrobj <-
+    bstrobj %>%
+    purrr::map2(lower_c, ~ ifelse(.y, stringr::str_to_upper(.x), .x)) %>%
+    purrr::map2(upper_c, ~ ifelse(.y, stringr::str_to_lower(.x), .x)) %>%
+    purrr::map_chr(~ paste0(.x, collapse = ""))
+
+  attributes(bstrobj) <- at
+  bstrobj
+}
 
