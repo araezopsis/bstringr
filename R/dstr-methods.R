@@ -2,49 +2,47 @@
 # MW = (numA * 313.2) + (numC * 289.2 ) + (numG * 329.2 )+ (numT * 304.2) - 61.9
 
 #' Remove stop codon from DNA sequence
-#' @param dstrobj dstr class object or character vector
+#' @inheritParams class_bstr
 #' @param stop_codon regular expression pattern of stop codon
 #' @export
 #' @examples
 #' "ATGgtatAG" %>% {c(., dstr_remove_stop(.))} %>% bstr
 #'
-dstr_remove_stop <-
-  function(dstrobj, stop_codon = "(TAA|TGA|TAG)$"){
-    dstrobj <- as_dstr(dstrobj)
-    at <- attributes(dstrobj)
+dstr_remove_stop <- function(dstrobj, stop_codon = "(TAA|TGA|TAG)$") {
+  dstrobj <- as_dstr(dstrobj)
+  at <- attributes(dstrobj)
 
-    loc <- bstr_to_upper(dstrobj) %>% bstr_locate(stop_codon)
-    bstr_sub_all(dstrobj, loc) <- ""
+  loc <- bstr_to_upper(dstrobj) %>% bstr_locate(stop_codon)
+  bstr_sub_all(dstrobj, loc) <- ""
 
-    attributes(dstrobj) <- at
-    dstrobj
-  }
+  attributes(dstrobj) <- at
+  dstrobj
+}
 
 
 #' Convert IUPAC CODE to regular expression
-#' @param dstrobj A character
+#' @inheritParams class_bstr
 #' @export
 #' @examples
 #' dstr_iupac2regex("MRWSYKVHDBNNN")
 #'
-dstr_iupac2regex <-
-  function(dstrobj){
-    dstrobj <- as_dstr(dstrobj) %>% bstr_to_upper()
+dstr_iupac2regex <- function(dstrobj) {
+  dstrobj <- as_dstr(dstrobj) %>% bstr_to_upper()
 
-    dstrobj %>%
-      stringr::str_replace_all("M", "[AC]") %>%
-      stringr::str_replace_all("R", "[AG]") %>%
-      stringr::str_replace_all("W", "[AT]") %>%
-      stringr::str_replace_all("S", "[CG]") %>%
-      stringr::str_replace_all("Y", "[CT]") %>%
-      stringr::str_replace_all("K", "[GT]") %>%
-      stringr::str_replace_all("V", "[ACG]") %>%
-      stringr::str_replace_all("H", "[ACT]") %>%
-      stringr::str_replace_all("D", "[AGT]") %>%
-      stringr::str_replace_all("B", "[CGT]") %>%
-      stringr::str_replace_all("N", "[ACGT]") %>%
-      as.character()
-  }
+  dstrobj %>%
+    stringr::str_replace_all("M", "[AC]") %>%
+    stringr::str_replace_all("R", "[AG]") %>%
+    stringr::str_replace_all("W", "[AT]") %>%
+    stringr::str_replace_all("S", "[CG]") %>%
+    stringr::str_replace_all("Y", "[CT]") %>%
+    stringr::str_replace_all("K", "[GT]") %>%
+    stringr::str_replace_all("V", "[ACG]") %>%
+    stringr::str_replace_all("H", "[ACT]") %>%
+    stringr::str_replace_all("D", "[AGT]") %>%
+    stringr::str_replace_all("B", "[CGT]") %>%
+    stringr::str_replace_all("N", "[ACGT]") %>%
+    as.character()
+}
 
 
 #' Primer check
