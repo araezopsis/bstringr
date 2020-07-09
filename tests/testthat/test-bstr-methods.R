@@ -3,7 +3,7 @@ context("test-bstr-methods")
 test_that("bstr_sub()", {
   expect_equal(
     bstr_sub(c("ABCDE", "A"), 2, 5),
-    bstr(c("BCDE", ""))
+    bstr(c("BCDE", ""), paste0("no name ", c("1 2-5", "2 2-2")))
     )
 })
 

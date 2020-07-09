@@ -1,8 +1,10 @@
 
 #' Extract and replace subsequences from a bstr sequences
 #' @inheritParams class_bstr
-#' @param start start
-#' @param end end
+#' @param from an integer vector giving the start indexes or
+#'   a two-column matrix of type cbind(from, to)
+#' @param to an integer vector giving the end indexes;
+#'   mutually exclusive with length and from being a matrix
 #' @param omit_na Single logical value. If `TRUE`, missing values in any of the
 #'   arguments provided will result in an unchanged input.
 #' @param value replacement string
@@ -15,27 +17,20 @@
 #'   temp,
 #'   bstr_sub(temp, 1, 5),
 #'   bstr_sub(temp, 5),
-#'   bstr_sub(temp, end = 5),
+#'   bstr_sub(temp, to = 5),
 #'   bstr_sub(temp, 1:2, c(6,2))
 #' )
 #'
-#' # Negative indices
-#' c(
-#'   temp,
-#'   bstr_sub(temp, -1),
-#'   bstr_sub(temp, -7),
-#'   bstr_sub(temp, end = -7)
-#' )
+#' # Vectorisation and negative indices
+#' bstr_sub("abc", -4:4) %>% print(n = Inf)
+#' bstr_sub("abc", to = -4:4) %>% print(n = Inf)
 #'
 #' # Alternatively, you can pass in a two colum matrix, as in the
 #' # output from bstr_locate
-#' temp <- bstr("abcde fghij")
-#' pos <- bstr_locate(temp, "[aefi]")[[1]]
+#' temp <- bstr("abcdef")
+#' pos <- bstr_locate(temp, "[aef]")[[1]]
 #' bstr_sub(temp, pos)
 #'
-#' # Vectorisation
-#' bstr_sub(temp, seq_len(bstr_length(temp)))
-#' bstr_sub(temp, end = seq_len(bstr_length(temp)))
 #'
 #' # Replacement form
 #' x <- "BBCDEF"
@@ -43,6 +38,16 @@
 #' bstr_sub(x, -1, -1) <- "K"; x
 #' bstr_sub(x, -2, -2) <- "GHIJ"; x
 #' bstr_sub(x, 2, -2) <- ""; x
+#'
+#' x <- "BBCDEF"
+#' loc <- bstr_locate(x, "[BE]")[[1]]
+#' bstr_sub(x, loc) <- "X"
+#' x
+#'
+#' x <- "BBCDEF"
+#' loc <- bstr_locate(x, "[BE]")
+#' bstr_sub_all(x, loc) <- "X"
+#' x
 #'
 #' # If you want to keep the original if some argument is NA,
 #' # use omit_na = TRUE
@@ -56,31 +61,60 @@
 #' @name sub
 NULL
 
+return_pos_range <- function(l, from, to) {
+  r <- NULL
+  if(is.matrix(from)) {
+    f <- from[,1]
+    t <- from[,2]
+  } else {
+    f <- from
+    t <- to
+  }
+  l <- as.integer(l)
+  f <- as.integer(f)
+  t <- as.integer(t)
+  suppressWarnings(
+    data.frame(l, f, t) %>%
+      dplyr::mutate(f = dplyr::if_else(abs(f) > l, as.integer(sign(f) * (l + 1)), f)) %>%
+      dplyr::mutate(f = dplyr::if_else(f < 0, l + f + 1L, f)) %>%
+      dplyr::mutate(t = dplyr::if_else(abs(t) > l, as.integer(sign(t) * (l + 1)), t)) %>%
+      dplyr::mutate(t = dplyr::if_else(t < 0, l + t + 1L, t)) %>%
+      dplyr::mutate(r = paste0(f, "-", t)) %>%
+      dplyr::pull(r)
+  )
+}
+
 #' @rdname sub
 #' @export
-bstr_sub <-
-  function(bstrobj, start = 1L, end = -1L) {
-    bstrobj <- as_bstr(bstrobj)
-    at <- attributes(bstrobj)
+bstr_sub <- function(bstrobj, from = 1L, to = -1L) {
+  bstrobj <- as_bstr(bstrobj)
+  at <- attributes(bstrobj)
 
-    bstrobj <- stringr::str_sub(bstrobj, start = start, end = end)
+  pos_range <- return_pos_range(nchar(bstrobj), from, to)
+  nm <- paste(names(bstrobj), pos_range)
 
-    attributes(bstrobj) <- at
-    bstrobj
-  }
+  bstrobj <- stringi::stri_sub(bstrobj, from = from, to = to)
+
+  attributes(bstrobj) <- at
+  names(bstrobj) <- nm
+  bstrobj
+}
+
+# temp <- dstr(c("aaattt", "tttccc"))
+# bstr_locate(temp, "ttt") %>% purrr::reduce(rbind) %>% bstr_sub(temp, .) # Error
+# bstr_locate(temp, "ttt") %>% bstr_sub_all(temp, .)
+# bstr_locate(temp, "ttt") %>% bstr_sub_all(temp, .) %>% unlist_bstr()
+
 
 #' @rdname sub
 #' @export
 "bstr_sub<-" <-
-  function(bstrobj, start = 1L, end = -1L, omit_na = FALSE, value) {
+  function(bstrobj, from = 1L, to = -1L, omit_na = FALSE, value) {
     bstrobj <- as_bstr(bstrobj)
     at <- attributes(bstrobj)
 
-    if (is.matrix(start)) {
-      stringi::stri_sub(bstrobj, from = start, omit_na = omit_na) <- value
-    } else {
-      stringi::stri_sub(bstrobj, from = start, to = end, omit_na = omit_na) <- value
-    }
+    stringi::stri_sub(bstrobj, from = from, to = to, omit_na = omit_na) <- value
+
     attributes(bstrobj) <- at
     bstrobj
   }
@@ -128,20 +162,19 @@ bstr_sub_replace <- function(..., replacement, value = replacement)
 #' bstr_sub_all(change, pos_A_trails) <- switched_A_trails
 #' c(original[1], change[1], original[2], change[2])
 #'
-bstr_sub_all <-
-  function(bstrobj, from = list(1L), to = list(-1L), length) {
-    bstrobj <- as_bstr(bstrobj)
+bstr_sub_all <- function(bstrobj, from = list(1L), to = list(-1L), length) {
+  bstrobj <- as_bstr(bstrobj)
 
-    nm <- names(bstrobj)
-    cls <- class(bstrobj)
-    bstrobj <-
-      stringi::stri_sub_all(str = bstrobj, from = from, to = to, length = length) %>%
-      purrr::map2(nm, ~ bstr(.x, paste(.y, seq_along(.x))))
-    for(i in bstrobj) class(i) <- cls
+  nm <- names(bstrobj)
+  cls <- class(bstrobj)
+  bstrobj <-
+    stringi::stri_sub_all(str = bstrobj, from = from, to = to, length = length) %>%
+    purrr::map2(nm, ~ bstr(.x, paste(.y, seq_along(.x))))
+  for(i in bstrobj) class(i) <- cls
 
-    names(bstrobj) <- nm
-    bstrobj
-  }
+  names(bstrobj) <- nm
+  bstrobj
+}
 
 #' @rdname sub_all
 #' @export
