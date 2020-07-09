@@ -155,7 +155,7 @@ bstr2BioString <- function(x) {
     switch(x_class[1],
            "bstr" = BStringSet(x, use.names = T),
            "dstr" = DNAStringSet(x, use.names = T),
-           "astr" = AAStringSet(x, use.names = T)
+           "pstr" = AAStringSet(x, use.names = T)
     )
   x
 }
