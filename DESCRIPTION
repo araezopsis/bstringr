@@ -8,9 +8,11 @@ Authors@R: person(given = "Toshihiro", family = "Arae",
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: GPL-3
+URL: https://t-arae.github.io/bstringr,
+    https://github.com/t-arae/bstringr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Imports: 
     Biostrings,
     devtools,
