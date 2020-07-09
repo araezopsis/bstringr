@@ -6,7 +6,7 @@
 #' @param stop_codon regular expression pattern of stop codon
 #' @export
 #' @examples
-#' "ATGgtatAG" %>% {c(., dstr_remove_stop(.))} %>% bstr
+#' dstr("ATGgtatAG") %>% {c(., dstr_remove_stop(.))}
 #'
 dstr_remove_stop <- function(dstrobj, stop_codon = "(TAA|TGA|TAG)$") {
   dstrobj <- as_dstr(dstrobj)
@@ -46,7 +46,7 @@ dstr_iupac2regex <- function(dstrobj) {
 
 
 #' Primer check
-#' @param dstrobj A primer sequence
+#' @inheritParams class_bstr
 #' @export
 dstr_primer_check <-
   function(dstrobj){
