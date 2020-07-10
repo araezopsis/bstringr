@@ -1,10 +1,4 @@
 
-
-bstr_unlist <- function(list_bstrobj) {
-  list_bstrobj <- purrr::map(list_bstrobj, as_bstr)
-  purrr::reduce(list_bstrobj, c)
-}
-
 add_i_mod <- function(x) paste0("(?i)", x)
 
 #' TOPO reaction and LR reaction
@@ -167,7 +161,7 @@ dstr_extract_orfs_from_vector <- function(dstrobj) {
 
     subseq_attB12 <-
       bstr_extract(dstrobj, add_i_mod(paste0(attB1, ".*?", attB2))) %>%
-      bstr_unlist() %>%
+      bstr_unlist(omit_na = FALSE) %>%
       bstr_sub(25L + 21L, -(25L + 17L))
 
     no_attB12 <- is.na(subseq_attB12)
