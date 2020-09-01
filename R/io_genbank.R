@@ -34,8 +34,8 @@ write_genbank <- function(x, fpath) {
   sequence <- x %>% stringr::str_extract_all(".{1,10}") %>% .[[1]]
   seq_li <- character()
   for(i in seq_along(sequence)) {
-    line <- (i %/% 7) + 1
-    if((i %% 7) == 1) {
+    line <- ((i - 1L) %/% 6) + 1
+    if((i %% 6) == 1L) {
       seq_li[line] <- paste((i-1)*10+1, sequence[i])
     } else {
       seq_li[line] <- paste(seq_li[line], sequence[i])
