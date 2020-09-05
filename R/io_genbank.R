@@ -41,27 +41,27 @@ write_genbank <- function(x, fpath) {
       seq_li[line] <- paste(seq_li[line], sequence[i])
     }
   }
-  max_col <- max(nchar(seq_li))
+  # max_col <- max(nchar(seq_li))
+  x <- stringr::str_extract(seq_li[length(seq_li)], "\\d+") %>% nchar
   seq_li <-
     c(
-      stringr::str_pad(seq_li[1:(length(seq_li)-1)], max_col+9, side = "left"),
-      stringr::str_c("         ", seq_li[length(seq_li)])
-    ) %>%
-    paste(collapse = "\n")
+      # stringr::str_pad(seq_li[1:(length(seq_li)-1)], max_col+9, side = "left"),
+      stringr::str_pad(seq_li[1:(length(seq_li)-1)], 75L, side = "left"),
+      stringr::str_c(paste(rep(" ", 9L-x), collapse = ""),
+                     seq_li[length(seq_li)])
+    )
   temp <-
-    stringr::str_glue(
-      "
-LOCUS       {name_trunc}        {len} bp ds-DNA     linear       {today}
-DEFINITION  .
-ACCESSION
-VERSION
-SOURCE      .
-  ORGANISM  .
-COMMENT     >{name}
-ORIGIN
-{seq_li}
-//
-    "
+    c(
+      stringr::str_glue("LOCUS       {name_trunc}        {len} bp ds-DNA     linear       {today}"),
+      "DEFINITION  .",
+      "ACCESSION",
+      "VERSION",
+      "SOURCE      .",
+      "  ORGANISM  .",
+      stringr::str_glue("COMMENT     >{name}"),
+      "ORIGIN      ",
+      seq_li,
+      "//"
     )
   if(missing(fpath)){
     return(temp)
@@ -70,7 +70,65 @@ ORIGIN
   }
 }
 
+#' Create and Insert FEATURE field to a Genbank file
+#' @name gb_feature
+#' @param feature_key string
+#' @param loc_start integer or string
+#' @param loc_end integer or string
+#' @param locus_tag string
+#' @param feature_key string
+#' @param gb_line character vector of a Genbank file.
+#' @param features line of FEATURES, constructed by create_FEATURE() and add_FEATURES_FIELD_HEADER()
+#' @param ... ...
+#' @export
+#' @examples
+#' create_FEATURE("CDS", 10, 100, "CDS 1")
+#'
+#' f <-
+#'   create_FEATURE("CDS", 10, 100, "CDS 1") %>%
+#'   add_FEATURES_FIELD_HEADER()
+#' cat(f, sep = "\n")
+#'
+#' (temp <- dstr_rand_seq(1, 100, seed = 1))
+#' write_genbank(temp) %>%
+#'   insert_FEATURES(features = f) %>%
+#'   cat(sep = "\n")
+#'
 
+#' @rdname gb_feature
+#' @export
+create_FEATURE <- function(feature_key, loc_start, loc_end, locus_tag) {
+  feature_key <-
+    paste0("     ", stringr::str_pad(feature_key, width = 16, side = "right"))
+  c(
+    stringr::str_glue('{feature_key}{loc_start}..{loc_end}'),
+    stringr::str_glue('                     /locus_tag="{locus_tag}"')
+  )
+}
+
+#' @rdname gb_feature
+#' @export
+add_FEATURES_FIELD_HEADER <- function(...) {
+  header <-
+    paste0(
+      stringr::str_pad("FEATURES", width = 21, side = "right"),
+      "Location/Qualifiers"
+    )
+  body <- c(...)
+  c(header, body)
+}
+
+#' @rdname gb_feature
+#' @export
+insert_FEATURES <- function(gb_line, features) {
+  gb_line <- as.character(gb_line)
+  origin_ln <- stringr::str_which(gb_line, "^ORIGIN      $")
+  c(
+    gb_line[1:(origin_ln-1L)],
+    features,
+    gb_line[origin_ln:length(gb_line)]
+  )
+}
 
 #' Parse Genbank file LOCUS FIELD
 #' @param gb_line character vector of a Genbank file.
