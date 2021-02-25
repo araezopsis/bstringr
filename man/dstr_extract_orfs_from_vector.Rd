@@ -34,6 +34,5 @@ vectors
 
 dstr_extract_orfs_from_vector(vectors)
 dstr_translate_from_vector(vectors)
-dstr_translate_from_vector(dstr_rev_comp_fast(vectors))
 
 }

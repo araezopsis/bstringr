@@ -62,7 +62,7 @@ dstr_gw_topo <- function(insert, pentr) {
 
   insert <- as_dstr(insert)
   n <- names(insert)
-  has_3_cacc <- dstr_rev_comp_fast(insert) %>% bstr_detect("^CACC")
+  has_3_cacc <- dstr_rev_comp(insert) %>% bstr_detect("^CACC")
   if(has_3_cacc) stop("3' terminal of insert sequence has 'CACC'.")
 
   loc_topo <- paste0(topo_3term, ".*?", topo_5term) %>% bstr_locate(pentr, .)
@@ -149,7 +149,6 @@ dstr_gw_topo_lr <-
 #'
 #' dstr_extract_orfs_from_vector(vectors)
 #' dstr_translate_from_vector(vectors)
-#' dstr_translate_from_vector(dstr_rev_comp_fast(vectors))
 #'
 dstr_extract_orfs_from_vector <- function(dstrobj) {
     . <- NULL

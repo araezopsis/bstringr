@@ -103,7 +103,7 @@ dstr_align_multi <- function(sub, pat, rc, type = "global", gapO = 10, gapE = 4)
   sub <- as_dstr(sub); n_sub <- names(sub)
   pat <- as_dstr(pat); n_pat <- names(pat); names(n_pat) <- n_pat
   if(missing(rc)) rc <- rep(FALSE, length(pat))
-  pat[rc] <- dstr_rev_comp_fast(pat[rc])
+  pat[rc] <- dstr_rev_comp(pat[rc])
   n_pat[rc] <- paste0(n_pat[rc], " RC")
   al <- pairwise_alignment(sub, pat, type = type,
                            gapOpening = gapO, gapExtension = gapE)
